@@ -1,10 +1,33 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+interface BlogPost {
+  slug: string;
+  data: {
+    title: string;
+    description: string;
+    language: string;
+  };
+}
+
+const allBlogPosts = await getCollection('blog') as BlogPost[];
 ---
 
 <Layout title="Welcome to Astro.">
 	<main>
 		<h1>Blog</h1>
+		{
+			allBlogPosts.map(post => {
+				return (
+					<a href={`${post.slug}`}>
+						<h2>{ post.data.title }</h2>
+						<p>{ post.data.description }</p>
+						<p>{ post.data.language }</p>
+					</a>
+				)
+			})
+		}
 	</main>
 </Layout>
 
@@ -18,15 +41,6 @@ import Layout from '../layouts/Layout.astro';
 		font-size: 20px;
 		line-height: 1.6;
 	}
-	.astro-a {
-		position: absolute;
-		top: -32px;
-		left: 50%;
-		transform: translatex(-50%);
-		width: 220px;
-		height: auto;
-		z-index: -1;
-	}
 	h1 {
 		font-size: 4rem;
 		font-weight: 700;
@@ -34,35 +48,12 @@ import Layout from '../layouts/Layout.astro';
 		text-align: center;
 		margin-bottom: 1em;
 	}
-	.text-gradient {
-		background-image: var(--accent-gradient);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-size: 400%;
-		background-position: 0%;
+	a {
+		color: white;
+		text-decoration: none;
 	}
-	.instructions {
-		margin-bottom: 2rem;
-		border: 1px solid rgba(var(--accent-light), 25%);
-		background: linear-gradient(rgba(var(--accent-dark), 66%), rgba(var(--accent-dark), 33%));
-		padding: 1.5rem;
-		border-radius: 8px;
-	}
-	.instructions code {
-		font-size: 0.8em;
-		font-weight: bold;
-		background: rgba(var(--accent-light), 12%);
-		color: rgb(var(--accent-light));
-		border-radius: 4px;
-		padding: 0.3em 0.4em;
-	}
-	.instructions strong {
-		color: rgb(var(--accent-light));
-	}
-	.link-card-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
-		gap: 2rem;
-		padding: 0;
+
+	a:hover h2{
+		text-decoration: underline;
 	}
 </style>

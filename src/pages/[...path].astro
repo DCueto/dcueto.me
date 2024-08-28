@@ -1,0 +1,58 @@
+---
+
+import Layout from "@layouts/Layout.astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+
+interface BlogPost {
+  slug: string;
+  data: {
+    title: string;
+    description: string;
+    language: string;
+  };
+}
+
+interface Props {
+  blogPost: CollectionEntry<'blog'>;
+}
+
+export async function getStaticPaths() {
+  const blogPosts = await getCollection("blog") as CollectionEntry<'blog'>[];
+
+  const paths = blogPosts.map((blogPost) => {
+    const url = `${blogPost.slug}`;
+
+    return {
+      params: {
+        path: url,
+      },
+      props: {
+        blogPost
+      }
+    }
+  });
+
+  return paths;
+}
+
+const { path } = Astro.params;
+const { blogPost } = Astro.props as Props;
+
+const { Content } = await blogPost.render();
+
+---
+
+<Layout title={ blogPost.data.title }>
+  <main>
+    <h1>{ blogPost.data.title }</h1>
+    <p>{ blogPost.data.description }</p>
+
+    <Content />
+  </main>
+</Layout>
+
+<style>
+  main {
+    color: white;
+  }
+</style>
