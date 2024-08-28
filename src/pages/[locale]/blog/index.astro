@@ -1,0 +1,61 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+export const locales = ['en', 'es'];
+
+export async function getStaticPaths() {
+  return locales.map(locale => {
+    return {
+      params: { locale },
+    }
+  });
+}
+
+const allBlogPosts = await getCollection('blog');
+const { locale } = Astro.params;
+---
+
+<Layout title="Welcome to Astro.">
+	<main>
+		<h1>Blog</h1>
+		{
+			allBlogPosts.map(post => {
+				return (
+					<a href={`blog/${post.slug}`}>
+						<h2>{ post.data.title }</h2>
+						<p>{ post.data.description }</p>
+						<p>{ post.data.language }</p>
+					</a>
+				)
+			})
+		}
+	</main>
+</Layout>
+
+<style>
+	main {
+		margin: auto;
+		padding: 1rem;
+		width: 800px;
+		max-width: calc(100% - 2rem);
+		color: white;
+		font-size: 20px;
+		line-height: 1.6;
+	}
+	h1 {
+		font-size: 4rem;
+		font-weight: 700;
+		line-height: 1;
+		text-align: center;
+		margin-bottom: 1em;
+	}
+	a {
+		color: white;
+		text-decoration: none;
+	}
+
+	a:hover h2{
+		text-decoration: underline;
+	}
+</style>
