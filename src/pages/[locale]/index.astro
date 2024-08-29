@@ -1,9 +1,18 @@
 ---
-import Layout from '@layouts/Layout.astro';
+import BaseLayout from '@layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
-export const locales = ['en', 'es'];
+import Hero from "@components/portfolio/astro/Hero.astro";
+import LatestsArticles from "@components/portfolio/astro/LatestsArticles.astro";
+import AboutMe from "@components/portfolio/astro/AboutMe.astro";
+import Projects from "@components/portfolio/astro/Projects.astro";
+import WorkExperience from "@components/portfolio/astro/WorkExperience.astro";
+import Education from "@components/portfolio/astro/Education.astro";
 
+import SocialButtons from "@components/shared/astro/SocialButtons.astro";
+import ContactMe from "@components/shared/astro/ContactMe.astro";
+
+export const locales = ['en', 'es'];
 export async function getStaticPaths() {
   return locales.map(locale => {
     return {
@@ -11,16 +20,23 @@ export async function getStaticPaths() {
     }
   });
 }
+const { locale } = Astro.params;
 
 // const allBlogPosts = await getCollection('blog');
-const { locale } = Astro.params;
 ---
 
-<Layout title="Welcome to Astro.">
-	<main>
-		<h1>Portfolio</h1>
-	</main>
-</Layout>
+<BaseLayout title="dcueto.me - Portfolio">
+	<Hero></Hero>
+	<LatestsArticles></LatestsArticles>
+	<AboutMe></AboutMe>
+	<Projects></Projects>
+	<WorkExperience></WorkExperience>
+	<Education></Education>
+	<aside>
+		<SocialButtons></SocialButtons>
+		<ContactMe></ContactMe>
+	</aside>
+</BaseLayout>
 
 <style>
 	main {

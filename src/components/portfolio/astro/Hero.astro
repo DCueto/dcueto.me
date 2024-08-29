@@ -1,0 +1,24 @@
+---
+import DynamicText from "@components/shared/astro/DynamicText.astro";
+const profilePicture = 'images/profilePicture.jpg';
+---
+
+<section class="hero">
+  <div class="first-column">
+    <h5>Hola, soy</h5>
+    <h1>Daniel <br>Cueto</h1>
+
+    <DynamicText />
+
+    <div class="command-info">
+      <p>Presiona <i class="command-icon key">⌘</i> <span class="key-icon key">B</span> para empezar</p>
+    </div>
+  </div>
+
+  <!-- <div class="second-column">
+    <figure class="hero-picture">
+      <img src={ profilePicture } />
+    </figure>
+  </div> -->
+
+</section>

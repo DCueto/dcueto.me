@@ -1,5 +1,5 @@
 ---
-import Layout from '@layouts/Layout.astro';
+import BaseLayout from '@layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
 export const locales = ['en', 'es'];
@@ -12,26 +12,25 @@ export async function getStaticPaths() {
   });
 }
 
-const allBlogPosts = await getCollection('blog');
 const { locale } = Astro.params;
+
+const allBlogPosts = await getCollection('blog', (post) => post.data.language === locale);
 ---
 
-<Layout title="Welcome to Astro.">
-	<main>
-		<h1>Blog</h1>
-		{
-			allBlogPosts.map(post => {
-				return (
-					<a href={`blog/${post.slug}`}>
-						<h2>{ post.data.title }</h2>
-						<p>{ post.data.description }</p>
-						<p>{ post.data.language }</p>
-					</a>
-				)
-			})
-		}
-	</main>
-</Layout>
+<BaseLayout title="Welcome to Astro.">
+	<h1>Blog</h1>
+	{
+		allBlogPosts.map(post => {
+			return (
+				<a href={`blog/${post.slug}`}>
+					<h2>{ post.data.title }</h2>
+					<p>{ post.data.description }</p>
+					<p>{ post.data.language }</p>
+				</a>
+			)
+		})
+	}
+</BaseLayout>
 
 <style>
 	main {

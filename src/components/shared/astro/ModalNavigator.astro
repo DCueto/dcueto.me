@@ -1,0 +1,70 @@
+---
+---
+
+<div class="modal hidden">
+  <nav class="modal-navigator">
+    <i class="close-icon fa-solid fa-xmark"></i>
+    <input type="text" id="modal-search" placeholder="Inserta el comando o tu búsqueda" />
+    <div class="modal-nav-content">
+      <h5>NAVIGATION</h5>
+      <ul>
+        <li class="modal-nav-item"><a href="#"><i class="modal-nav-item__icon fa-solid fa-house"></i>HOME</a></li>
+        <li class="modal-nav-item"><a href="#"><i class="modal-nav-item__icon fa-solid fa-book"></i>BLOG</a></li>
+        <li class="modal-nav-item"><a href="#"><i class="modal-nav-item__icon fa-solid fa-folder-open"></i>PORTFOLIO</a></li>
+        <li class="modal-nav-item"><a href="#"><i class="modal-nav-item__icon fa-solid fa-id-card-clip"></i>CONTACTO</a></li>
+      </ul>
+      <h5>BLOG</h5>
+      <ul>
+        <li class="modal-nav-item"><a href="#"><i class="modal-nav-item__icon fa-solid fa-square-pen"></i>Usar Notion como CMS para tu sitio web</a></li>
+
+      </ul>
+    </div>
+  </nav>
+</div>
+
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', loadModal);
+
+  function loadModal() {
+    // TOGGLE MODAL NAV
+
+    const commandStart = document.querySelector('.command-info');
+    const searchIcon = document.querySelector('.search-icon');
+    const modal = document.querySelector('.modal');
+    const closeModalIcon = document.querySelector('.modal .close-icon');
+
+    const showsModal = () => {
+      if( modal.classList.contains('hidden') ){
+        modal.classList.remove('hidden');
+      }
+    }
+
+    const hideModal = () => {
+      if( !modal.classList.contains('hidden') ){
+        modal.classList.add('hidden');
+      }
+    }
+
+    if ( commandStart ) commandStart.addEventListener( 'click', showsModal );
+    
+    searchIcon.addEventListener( 'click', showsModal );
+    closeModalIcon.addEventListener( 'click', hideModal );
+
+    modal.addEventListener('click', ( e ) => {
+      e.stopPropagation();
+      if( e.target.classList.contains('modal') ){
+        modal.classList.add('hidden');
+      }
+    });
+
+
+    window.addEventListener('keydown', ( e ) => {
+
+      if(e.metaKey && e.code == 'KeyB'){
+        showsModal();
+      }
+    });
+  }
+
+</script>

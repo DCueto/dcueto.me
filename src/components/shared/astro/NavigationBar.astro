@@ -1,0 +1,75 @@
+---
+import ThemeToggler from "./ThemeToggler.astro";
+const logoImage = "images/logo.svg";
+const locale = Astro.currentLocale;
+---
+
+<header>
+  <nav class="top-nav">
+
+    <a href={`/${locale}/`}>
+      <img src={logoImage} class="logo-dcueto" alt="logo dcueto" />
+    </a>
+    <div class="top-nav__right ">
+      <ul>
+        <li class="nav-item active"><a href={`/${locale}/`}>Portfolio</a></li>
+        <li class="nav-item"><a href={`/${locale}/blog`}>Blog</a></li>
+      </ul>
+      <div class="top-nav__icons">
+        <i class="search-icon fa-solid fa-magnifying-glass"></i>
+        <!-- <i class="shift-mode-icon fa-solid fa-moon"></i> -->
+        <ThemeToggler />
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- <style>
+  nav{
+    display: flex;
+    align-items: flex-start;
+    padding: 2rem 0;
+    max-width: 40rem;
+    margin: 0 auto;
+  }
+
+  ul{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0 auto 0 0;
+  }
+
+  nav li {
+    opacity: .8;
+    list-style: none;
+    font-size: 0.95rem;
+  }
+
+  a{
+    color: var(--grey-400);
+    padding: .5rem 1rem;
+    border-radius: 10px;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: var(--grey-900);
+  }
+
+  a.active {
+    background: var(--grey-900);
+    color: var(--background);
+  }
+
+</style> -->
+
+<script>
+  const { pathname } = window.location;
+  console.log( pathname );
+  const activeNavigationElement = document.querySelector(`nav a[href="${pathname}"]`);
+
+  if (activeNavigationElement) {
+    activeNavigationElement.classList.add("active");
+  }
+</script>
