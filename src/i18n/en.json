@@ -1,0 +1,85 @@
+{
+  "nav": {
+    "home": "Home",
+    "blog": "Blog",
+    "projects": "Projects",
+    "contact": "Contact Me",
+    "about": "About",
+    "modalNav": {
+      "navigationLabel": "Navigation",
+      "articlesLabel": "Articles",
+      "inputSearch": "Insert a command or your search..."
+    }
+  },
+  "hero": {
+    "greeting": "Hello, I'm",
+    "name": "Daniel Cueto",
+    "descriptions": [
+      "Software Developer",
+      "Code Enthusiast",
+      "Frontend Developer",
+      "Software Engineering Studuent"
+    ],
+    "commandButton": {
+      "textBefore": "Press",
+      "textAfter": "to start"
+    }
+  },
+  "articles": {
+    "title": "Articles",
+    "subtitle": "Here you can find some of my articles",
+    "readMore": "Read more",
+    "buttonAllArticles": "See all articles"
+  },
+  "about": {
+    "title": "About Me",
+    "subtitle": "Here you can find some information about me",
+    "description": "Web developer with over 1 year of experience. Specializing in frontend development with a strong understanding of UX/UI design best practices. My curiosity and initiative led me to a self-taught passion for programming, providing me with great adaptability to new technologies. The training acquired through bootcamps has given me a robust foundation to tackle technical challenges and highlight my skills in analysis and problem-solving. Methodical and focused on developing refined products through testing, with a great emphasis on detail. My previous experience in iOS application development provided me with a comprehensive view of software architecture. I enjoy making team decisions and taking risks if the situation requires it to find better solutions. I am an empathetic person who likes to connect with people. I enjoy working on projects that can positively contribute to people. All this allows me to translate user needs into software."
+  },
+  "projects": {
+    "title": "Projects",
+    "subtitle": "Here you can find some of my projects",
+    "buttonAllProjects": "See all projects"
+  },
+  "experience": {
+    "title": "Experience",
+    "subtitle": "Here you can find some of my experience"
+  },
+  "education": {
+    "title": "Education",
+    "subtitle": "Here you can find some of my education"
+  },
+  "socialButtons": {
+    "github": "Github",
+    "linkedin": "Linkedin",
+    "x": "X",
+    "email": "Email"
+  },
+  "contact": {
+    "title": "Contact",
+    "formName": {
+      "label": "Name",
+      "placeholder": "What's your name?"
+    },
+    "formEmail": {
+      "label": "Email",
+      "placeholder": "What's your email?"
+    },
+    "formSubject": {
+      "label": "Subject",
+      "placeholder": "What's the subject?"
+    },
+    "formMessage": {
+      "label": "Message",
+      "placeholder": "Write your message"
+    },
+    "formButton": "Send"
+  },
+  "footer": {
+    "message1": "If you've made it this far, I'd love for you to say 'Hello' back by {{tweeting}} me or sending me an {{email}}",
+    "message2": "© 2024 — Website designed and coded by {{name}} using Astro, MDX and React.",
+    "tweeting": "tweeting",
+    "email": "email",
+    "name": "Daniel Cueto"
+  }
+}
