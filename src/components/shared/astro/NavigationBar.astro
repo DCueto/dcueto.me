@@ -1,7 +1,16 @@
 ---
 import ThemeToggler from "./ThemeToggler.astro";
+import NavBarItem from "@components/shared/astro/NavBarItem.astro";
 const logoImage = "images/logo.svg";
 const locale = Astro.currentLocale;
+
+const { pathname } = new URL(Astro.request.url);
+const currentPath = pathname.split("/").pop();
+
+const navItems = [
+  { text: "Home", href: `/${locale}/`, path: "" },
+  { text: "Blog", href: `/${locale}/blog`, path: "blog" },
+];
 ---
 
 <header>
@@ -10,59 +19,116 @@ const locale = Astro.currentLocale;
     <a href={`/${locale}/`}>
       <img src={logoImage} class="logo-dcueto" alt="logo dcueto" />
     </a>
-    <div class="top-nav__right ">
+    <div class="top-nav__right">
       <ul>
-        <li class="nav-item active"><a href={`/${locale}/`}>Portfolio</a></li>
-        <li class="nav-item"><a href={`/${locale}/blog`}>Blog</a></li>
+        {
+          navItems.map((item) => (
+            <NavBarItem text={item.text} href={item.href} path={item.path} />
+          ))
+        }
       </ul>
       <div class="top-nav__icons">
         <i class="search-icon fa-solid fa-magnifying-glass"></i>
-        <!-- <i class="shift-mode-icon fa-solid fa-moon"></i> -->
         <ThemeToggler />
       </div>
     </div>
   </nav>
 </header>
 
-<!-- <style>
-  nav{
-    display: flex;
-    align-items: flex-start;
-    padding: 2rem 0;
-    max-width: 40rem;
-    margin: 0 auto;
+<style lang="scss">
+
+  @mixin light-theme {
+    --color-background__header: var(--color-yellow-js);
+    --color-text__nav-item__icon--default: black;
+    --color-text__nav-item__icon--hover: white;
   }
 
-  ul{
-    display: flex;
-    flex-wrap: wrap;
-    padding: 0;
-    margin: 0 auto 0 0;
+  @mixin dark-theme {
+    --color-background__header: var(--color-yellow-js);
+    --color-text__nav-item__icon--default: black;
+    --color-text__nav-item__icon--hover: white;
   }
 
-  nav li {
-    opacity: .8;
-    list-style: none;
-    font-size: 0.95rem;
+  :root{
+    @include light-theme;
   }
 
-  a{
-    color: var(--grey-400);
-    padding: .5rem 1rem;
-    border-radius: 10px;
-    text-decoration: none;
+  :root.dark{
+    @include dark-theme;
   }
 
-  a:hover {
-    color: var(--grey-900);
+  @media ( prefers-color-scheme: dark ) {
+    :root{
+      @include light-theme;
+    }
+
+    :root.dark{
+      @include dark-theme;
+    }
   }
 
-  a.active {
-    background: var(--grey-900);
-    color: var(--background);
-  }
 
-</style> -->
+
+header{
+  width: 100%;
+  background-color: var(--color-background__header);
+  height: 4.875rem;
+}
+
+header .top-nav{
+  margin: 0 auto;
+  padding: 0 10%;
+  width: 100%;
+  height: inherit;
+  /* max-width: 1200px; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.top-nav .logo-dcueto, .top-nav a{
+  height: 96%;
+}
+
+.top-nav .top-nav__right{
+  display: flex;
+  justify-content: space-evenly;
+  gap: 0.9375rem;
+  align-items: center;
+}
+
+.top-nav .top-nav__right ul{
+  display: flex;
+  justify-content: space-evenly;
+  gap: 0.9375rem;
+}
+
+.top-nav .top-nav__icons {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.top-nav i{
+  font-size: 1.25rem;
+  margin: 0 0.5rem;
+  cursor: pointer;
+  transition: all .1s ease-in;
+  color: var(--color-text__nav-item__icon--default);
+}
+
+.top-nav i:hover{
+  color: var(--color-text__nav-item__icon--hover);
+  font-size: 1.25rem;
+}
+
+@media screen and ( width <= 500px ) {
+  .top-nav .top-nav__right ul{
+    display: none !important;
+  }
+}
+
+</style>
 
 <script>
   const { pathname } = window.location;

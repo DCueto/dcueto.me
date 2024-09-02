@@ -44,10 +44,6 @@
   --color-text__default: black;
   --color-text--bold-1: var(--color-yellow-darker);
 
-  /*  Key Component  */
-  --color-key-background: black;
-  --color-key-text: white;
-
   /* Default Button Component */
   --color-background__default-button--default: white;
   --color-text__default-button--default: black;
@@ -72,19 +68,6 @@
   --color-text__tab-rounded-active: black;
 
 
-  /*  Header Colors  */
-
-  --color-background__header: var(--color-yellow-js);
-
-  --color-text__nav-item__anchor--active: black;
-  --color-text__nav-item__anchor--default: black;
-  --color-border__nav-item__anchor--hover: black;
-  --color-background__nav-item__anchor--hover: black;
-  --color-text__nav-item__anchor--hover: white;
-
-  --color-text__nav-item__icon--default: black;
-  --color-text__nav-item__icon--hover: white;
-
   /*  Modal Colors  */
   
   --color-background__modal--outside-transparency: rgba(12, 12, 12, .3);
@@ -95,28 +78,6 @@
   --color-background__modal-navigator__search-input: rgba(12, 12, 12, .3);
   --color-border__modal-navigator__search-input--focus: black;
   --color-background__modal-navigator__modal-nav-item--hover: rgba(100, 100, 100, .3);
-
-  /*  Hero Colors  */
-
-  --color-background__hero: var(--color-yellow-main);
-  --color-text__hero: black;
-  --color-background__dinamic-role-text: black;
-  --color-text__dinamic-role-text: white;
-  --color-text__dinamic-label: var(--color-yellow-js);
-  --color-background__dinamic-role-text__cursor: #b0ff95;
-
-  --color-background__dinamic-role-text__cursor--keyframe1: var(--color-yellow-js);
-  --color-background__dinamic-role-text__cursor--keyframe2: transparent;
-  --color-background__dinamic-role-text__cursor--keyframe3: var(--color-yellow-js);
-
-  --color-background__command-info--hover: var(--color-yellow-soft);
-
-
-  /*  Latests Articles Colors  */
-
-  --color-background__latests-articles: white;
-  --color-background__blog-post--hover: var(--color-gray-light);
-  --color-text__blog-post--hover__h4: var(--color-yellow-darker);
 
 
   /*  About Me / Projects Colors  */
@@ -198,9 +159,6 @@
   --color-background__body: var(--color-black-obsidian);
   --color-background__main: var(--color-black-obsidian);
 
-  /*  Key Component  */
-  --color-key-background: black;
-  --color-key-text: white;
 
   /* Default Button Component */
   --color-background__default-button--default: black;
@@ -225,20 +183,6 @@
   --color-border__tab-rounded--active: black;
   --color-text__tab-rounded-active: black;
 
-
-  /*  Header Colors  */
-
-  --color-background__header: var(--color-yellow-js);
-
-  --color-text__nav-item__anchor--active: black;
-  --color-text__nav-item__anchor--default: black;
-  --color-border__nav-item__anchor--hover: black;
-  --color-background__nav-item__anchor--hover: black;
-  --color-text__nav-item__anchor--hover: white;
-
-  --color-text__nav-item__icon--default: black;
-  --color-text__nav-item__icon--hover: white;
-
   /*  Modal Colors  */
   
   --color-background__modal--outside-transparency: rgba(12, 12, 12, .3);
@@ -249,29 +193,6 @@
   --color-background__modal-navigator__search-input: rgba(12, 12, 12, .3);
   --color-border__modal-navigator__search-input--focus: black;
   --color-background__modal-navigator__modal-nav-item--hover: rgba(100, 100, 100, .3);
-
-  /*  Hero Colors  */
-
-  --color-background__hero: var(--color-yellow-main);
-  --color-text__hero: black;
-  --color-background__dinamic-role-text: black;
-  --color-text__dinamic-role-text: white;
-  --color-text__dinamic-label: var(--color-yellow-js);
-  --color-background__dinamic-role-text__cursor: #b0ff95;
-
-  --color-background__dinamic-role-text__cursor--keyframe1: var(--color-yellow-js);
-  --color-background__dinamic-role-text__cursor--keyframe2: transparent;
-  --color-background__dinamic-role-text__cursor--keyframe3: var(--color-yellow-js);
-
-  --color-background__command-info--hover: #F4DC1B;
-
-
-  /*  Latests Articles Colors  */
-
-  --color-background__latests-articles: var(--color-black-obsidian);
-  --color-background__blog-post--hover: var(--color-gray-dark);
-  --color-text__blog-post--hover__h4: var(--color-yellow-darker);
-
 
   /*  About Me / Projects Colors  */
 
@@ -356,9 +277,6 @@
     --color-background__body: var(--color-black-obsidian);
     --color-background__main: var(--color-black-obsidian);
 
-    /*  Key Component  */
-    --color-key-background: black;
-    --color-key-text: white;
 
     /* Default Button Component */
     --color-background__default-button--default: black;
@@ -384,19 +302,6 @@
     --color-text__tab-rounded-active: black;
 
 
-    /*  Header Colors  */
-
-    --color-background__header: var(--color-yellow-js);
-
-    --color-text__nav-item__anchor--active: black;
-    --color-text__nav-item__anchor--default: black;
-    --color-border__nav-item__anchor--hover: black;
-    --color-background__nav-item__anchor--hover: black;
-    --color-text__nav-item__anchor--hover: white;
-
-    --color-text__nav-item__icon--default: black;
-    --color-text__nav-item__icon--hover: white;
-
     /*  Modal Colors  */
     
     --color-background__modal--outside-transparency: rgba(12, 12, 12, .3);
@@ -407,28 +312,6 @@
     --color-background__modal-navigator__search-input: rgba(12, 12, 12, .3);
     --color-border__modal-navigator__search-input--focus: black;
     --color-background__modal-navigator__modal-nav-item--hover: rgba(100, 100, 100, .3);
-
-    /*  Hero Colors  */
-
-    --color-background__hero: var(--color-yellow-main);
-    --color-text__hero: black;
-    --color-background__dinamic-role-text: black;
-    --color-text__dinamic-role-text: white;
-    --color-text__dinamic-label: var(--color-yellow-js);
-    --color-background__dinamic-role-text__cursor: #b0ff95;
-
-    --color-background__dinamic-role-text__cursor--keyframe1: var(--color-yellow-js);
-    --color-background__dinamic-role-text__cursor--keyframe2: transparent;
-    --color-background__dinamic-role-text__cursor--keyframe3: var(--color-yellow-js);
-
-    --color-background__command-info--hover: #F4DC1B;
-
-
-    /*  Latests Articles Colors  */
-
-    --color-background__latests-articles: var(--color-black-obsidian);
-    --color-background__blog-post--hover: var(--color-gray-dark);
-    --color-text__blog-post--hover__h4: var(--color-yellow-darker);
 
 
     /*  About Me / Projects Colors  */
@@ -503,9 +386,6 @@
     --color-text__default: black;
     --color-text--bold-1: var(--color-yellow-darker);
 
-    /*  Key Component  */
-    --color-key-background: black;
-    --color-key-text: white;
 
     /* Default Button Component */
     --color-background__default-button--default: white;
@@ -531,19 +411,6 @@
     --color-text__tab-rounded-active: black;
 
 
-    /*  Header Colors  */
-
-    --color-background__header: var(--color-yellow-js);
-
-    --color-text__nav-item__anchor--active: black;
-    --color-text__nav-item__anchor--default: black;
-    --color-border__nav-item__anchor--hover: black;
-    --color-background__nav-item__anchor--hover: black;
-    --color-text__nav-item__anchor--hover: white;
-
-    --color-text__nav-item__icon--default: black;
-    --color-text__nav-item__icon--hover: white;
-
     /*  Modal Colors  */
     
     --color-background__modal--outside-transparency: rgba(12, 12, 12, .3);
@@ -554,28 +421,6 @@
     --color-background__modal-navigator__search-input: rgba(12, 12, 12, .3);
     --color-border__modal-navigator__search-input--focus: black;
     --color-background__modal-navigator__modal-nav-item--hover: rgba(100, 100, 100, .3);
-
-    /*  Hero Colors  */
-
-    --color-background__hero: var(--color-yellow-main);
-    --color-text__hero: black;
-    --color-background__dinamic-role-text: black;
-    --color-text__dinamic-role-text: white;
-    --color-text__dinamic-label: var(--color-yellow-js);
-    --color-background__dinamic-role-text__cursor: #b0ff95;
-
-    --color-background__dinamic-role-text__cursor--keyframe1: var(--color-yellow-js);
-    --color-background__dinamic-role-text__cursor--keyframe2: transparent;
-    --color-background__dinamic-role-text__cursor--keyframe3: var(--color-yellow-js);
-
-    --color-background__command-info--hover: var(--color-yellow-soft);
-
-
-    /*  Latests Articles Colors  */
-
-    --color-background__latests-articles: white;
-    --color-background__blog-post--hover: var(--color-gray-light);
-    --color-text__blog-post--hover__h4: var(--color-yellow-darker);
 
 
     /*  About Me / Projects Colors  */
@@ -763,15 +608,6 @@ a:hover{
 
 /*#region COMPONENTS STYLES */
 
-.key{
-  font-family: 'Oxygen Mono';
-  font-size: 1rem;
-  padding: 0.125rem 0.375rem;
-  background-color: var(--color-key-background);
-  color: var(--color-key-text);
-  border-radius: 0.3125rem;
-}
-
 .tag{
   border: 0.09rem solid white;
   font-weight: 600;
@@ -833,82 +669,6 @@ button.default-button:hover{
 
 /*#endregion */
 
-
-
-/*#region HEADER */
-
-header{
-  width: 100%;
-  background-color: var(--color-background__header);
-  height: 4.875rem;
-}
-
-header .top-nav{
-  margin: 0 auto;
-  padding: 0 10%;
-  width: 100%;
-  height: inherit;
-  /* max-width: 1200px; */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-header .top-nav .logo-dcueto, header .top-nav a{
-  height: 96%;
-}
-
-header .top-nav .top-nav__right{
-  display: flex;
-  justify-content: space-evenly;
-  gap: 0.9375rem;
-  align-items: center;
-}
-
-header .top-nav .top-nav__right ul{
-  display: flex;
-  justify-content: space-evenly;
-  gap: 0.9375rem;
-}
-
-header .top-nav .nav-item a{
-  font-size: 0.875rem;
-  padding: 0.625rem;
-  text-decoration: none;
-  color: var(--color-text__nav-item__anchor--default);
-  transition: all .2s ease-in-out;
-}
-
-.top-nav .nav-item.active a{
-  border: 0.125rem solid var(--color-text__nav-item__anchor--active);
-}
-
-.top-nav .nav-item a:hover{
-  background-color: var(--color-background__nav-item__anchor--hover);
-  border: 0.125rem solid var(--color-border__nav-item__anchor--hover);
-  color: var(--color-text__nav-item__anchor--hover);
-}
-
-.top-nav .top-nav__icons {
-  display: flex;
-  align-items: center;
-  gap: .5rem;
-}
-
-header .top-nav i{
-  font-size: 1.25rem;
-  margin: 0 0.5rem;
-  cursor: pointer;
-  transition: all .1s ease-in;
-  color: var(--color-text__nav-item__icon--default);
-}
-
-header .top-nav i:hover{
-  color: var(--color-text__nav-item__icon--hover);
-  font-size: 1.25rem;
-}
-
-/*#endregion*/
 
 /*#region  MODAL NAVIGATOR  */
 
@@ -1024,120 +784,9 @@ body:not(:has( .modal.hidden )){
 /*#endregion*/
 
 
-/*#region  HERO  */
-
-.hero{
-  padding: 3.125rem 10%;
-  background-color: var(--color-background__hero);
-  display: flex;
-  justify-content: space-between;
-  color: var(--color-text__hero);
-}
-
-.hero .dinamic-role-text{
-  max-width: 26.25rem;
-  background-color: var(--color-background__dinamic-role-text);
-  color: var(--color-text__dinamic-role-text);
-  margin: 1.25rem 0;
-  padding: 0.625rem 1.25rem;
-}
-
-.hero .dinamic-role-text p{
-  text-align: left;
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin: 0;
-}
-
-#dinamic-label {
-  font-weight: bold;
-  color: var(--color-text__dinamic-label);
-  font-size: 1.5rem;
-}
-
-.cursor {
-  display: inline-block;
-  background-color: var(--color-background__dinamic-role-text__cursor);
-  animation: blinker 800ms infinite;
-}
-
-.cursor.typing-true {
-  animation: none;
-}
-
-@keyframes blinker {
-	0% { background-color: var(--color-background__dinamic-role-text__cursor--keyframe1); }
-	50% { background-color: transparent; }
-	100% { background-color: var(--color-background__dinamic-role-text__cursor--keyframe3); }
-}
-
-.hero .command-info p{
-  font-weight: bold;
-  font-size: 1.25rem;
-}
-
-.hero .command-info{
-  cursor: pointer;
-  padding: 0.0625rem 0.625rem;
-  border-radius: 0.3125rem;
-  transition: all .3s ease;
-
-  &:hover{
-    background-color: var(--color-background__command-info--hover)
-  }
-}
-
-.hero .second-column{
-  flex-grow: 1;
-}
-
-.hero figure{
-  max-width: 18.75rem;
-  margin-left: auto;
-}
-
-.hero figure img{
-  width: 100%;
-  border-radius: 50%;
-}
-
-/*#endregion*/
-
 
 /*#region  LATESTS ARTICLES  */
 
-.latests-articles{
-  padding-top: 1.875rem ;
-  padding-bottom: 5.625rem;
-  background-color: var(--color-background__latests-articles);
-}
-
-.latests-articles .articles-container{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 3%;
-}
-
-.latests-articles .blog-post{
-  max-width: 45%;
-  margin: 0.625rem 0;
-  padding: 1.25rem;
-  cursor: pointer;
-  transition: all .3s ease;
-}
-
-.latests-articles .blog-post:hover{
-  background-color: var(--color-background__blog-post--hover);
-}
-
-.latests-articles .blog-post h4{
-  transition: all .3s ease;
-}
-
-.latests-articles .blog-post:hover h4{
-  color: var(--color-text__blog-post--hover__h4);
-}
 
 .latests-articles button.load-more-btn{
   display: block;
@@ -1668,17 +1317,6 @@ footer p{
     grid-column: 4 / 6;
     grid-row-start: 3;
     grid-row-end: 4;
-  }
-
-
-
-}
-
-
-@media screen and ( width <= 500px ) {
-
-  header .top-nav .top-nav__right ul{
-    display: none !important;
   }
 
 }

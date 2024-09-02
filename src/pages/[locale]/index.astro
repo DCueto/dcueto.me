@@ -22,12 +22,23 @@ export async function getStaticPaths() {
 }
 const { locale } = Astro.params;
 
+const MAX_POSTS = 4;
+const latestsPosts = (
+	// select all posts by language
+	await getCollection('blog', (post) => post.data.language === locale)
+)
+// sort by publication date
+.sort((a, b) => b.data.publication_date.valueOf() - a.data.publication_date.valueOf())
+//limit to 4 posts max
+.slice(0, MAX_POSTS);
+
+
 // const allBlogPosts = await getCollection('blog');
 ---
 
 <BaseLayout title="dcueto.me - Portfolio">
 	<Hero></Hero>
-	<LatestsArticles></LatestsArticles>
+	<LatestsArticles articles={latestsPosts}></LatestsArticles>
 	<AboutMe></AboutMe>
 	<Projects></Projects>
 	<WorkExperience></WorkExperience>

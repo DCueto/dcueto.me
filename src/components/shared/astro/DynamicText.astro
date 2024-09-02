@@ -1,31 +1,109 @@
 ---
+type Props = {
+  content: string[],
+}
+
+const { content } = Astro.props;
+const serializedContent = JSON.stringify(content);
 ---
 
-<div class="dinamic-role-text">
+<div class="dinamic-role-text" data-content={serializedContent}>
   <p>Un <span id="dinamic-label"></span><span class="cursor">&nbsp;</span></p>
 </div>
 
-<script is:inline>
+<style lang="scss">
+  @mixin light-theme {
+    --color-background__dinamic-role-text: black;
+    --color-text__dinamic-role-text: white;
+    --color-text__dinamic-label: var(--color-yellow-js);
+    --color-background__dinamic-role-text__cursor: #b0ff95;
+    --color-background__dinamic-role-text__cursor--keyframe1: var(--color-yellow-js);
+    --color-background__dinamic-role-text__cursor--keyframe2: transparent;
+    --color-background__dinamic-role-text__cursor--keyframe3: var(--color-yellow-js);
+  }
+
+  @mixin dark-theme {
+    --color-background__dinamic-role-text: black;
+    --color-text__dinamic-role-text: white;
+    --color-text__dinamic-label: var(--color-yellow-js);
+    --color-background__dinamic-role-text__cursor: #b0ff95;
+    --color-background__dinamic-role-text__cursor--keyframe1: var(--color-yellow-js);
+    --color-background__dinamic-role-text__cursor--keyframe2: transparent;
+    --color-background__dinamic-role-text__cursor--keyframe3: var(--color-yellow-js);
+  }
+
+  :root{
+    @include light-theme;
+  }
+
+  :root.dark{
+    @include dark-theme;
+  }
+
+  @media ( prefers-color-scheme: dark ) {
+    :root{
+      @include light-theme;
+    }
+
+    :root.dark{
+      @include dark-theme;
+    }
+  }
+
+  .dinamic-role-text{
+    max-width: 26.25rem;
+    background-color: var(--color-background__dinamic-role-text);
+    color: var(--color-text__dinamic-role-text);
+    margin: 1.25rem 0;
+    padding: 0.625rem 1.25rem;
+  }
+
+  .dinamic-role-text p{
+    text-align: left;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0;
+  }
+
+  #dinamic-label {
+    font-weight: bold;
+    color: var(--color-text__dinamic-label);
+    font-size: 1.5rem;
+  }
+
+  .cursor {
+    display: inline-block;
+    background-color: var(--color-background__dinamic-role-text__cursor);
+    animation: blinker 800ms infinite;
+  }
+
+  .cursor.typing-true {
+    animation: none;
+  }
+
+  @keyframes blinker {
+    0% { background-color: var(--color-background__dinamic-role-text__cursor--keyframe1); }
+    50% { background-color: transparent; }
+    100% { background-color: var(--color-background__dinamic-role-text__cursor--keyframe3); }
+  }
+</style>
+
+<script>
   // DINAMIC TEXT ROLE
 
-  const toBeTyped = [
-    'Desarrollador de Software',
-    'Entusiasta por el código',
-    'Desarrollador Frontend',
-    'Estudiante de Ingeniería de Software'
-  ];
+  const dinamicRoleText = document.querySelector('.dinamic-role-text') as HTMLElement;
+  const toBeTyped = JSON.parse(dinamicRoleText.dataset.content as string) as string[];
   
   const delayTypingChar = 200;
   const delayErasingText = 150;
   const delayTypingText = 3000;
   
-  const dinamicLabel = document.querySelector('.dinamic-role-text span');
+  const dinamicLabel = document.querySelector('.dinamic-role-text span') as HTMLElement;
   
   let toTypeIndex = 0;
   let charIndex = 0;
   
   function typeText(){
-  
     if( charIndex < toBeTyped[ toTypeIndex ].length ) {
       dinamicLabel.textContent += toBeTyped[ toTypeIndex ].charAt( charIndex );
       charIndex++;
@@ -34,9 +112,8 @@
       setTimeout( eraseText, delayTypingText );
     }
   }
-  
+
   function eraseText(){
-  
     if( charIndex > 0 ){
       dinamicLabel.textContent = toBeTyped[ toTypeIndex ].substring(0, charIndex-1);
       charIndex = charIndex-1;
@@ -50,7 +127,6 @@
         setTimeout( typeText, delayTypingText );
       }
     }
-  
   }
 
 

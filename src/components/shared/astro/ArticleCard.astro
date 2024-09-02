@@ -1,0 +1,74 @@
+---
+  type Props = {
+    date: string;
+    title: string;
+    description: string;
+    href: string;
+  };
+
+  const { date, title, description, href } = Astro.props;
+---
+
+<!-- <a href={href}> -->
+  <article class="blog-post">
+    <span>{ date }</span>
+    <h4>{ title }</h4>
+    <p>{ description }</p>
+  </article>
+<!-- </a> -->
+
+<style lang="scss">
+  @mixin light-theme {
+    --color-background__blog-post--hover: var(--color-gray-light);
+    --color-text__blog-post--hover__h4: var(--color-yellow-darker);
+  }
+
+  @mixin dark-theme {
+    --color-background__blog-post--hover: var(--color-gray-dark);
+    --color-text__blog-post--hover__h4: var(--color-yellow-darker);
+  }
+
+  :root{
+    @include light-theme;
+  }
+
+  :root.dark{
+    @include dark-theme;
+  }
+
+  @media ( prefers-color-scheme: dark ) {
+    :root{
+      @include light-theme;
+    }
+
+    :root.dark{
+      @include dark-theme;
+    }
+  }
+  
+  .blog-post{
+    max-width: 45%;
+    margin: 0.625rem 0;
+    padding: 1.25rem;
+    cursor: pointer;
+    transition: all .3s ease;
+  }
+
+  .blog-post:hover{
+    background-color: var(--color-background__blog-post--hover);
+  }
+
+  .blog-post h4{
+    transition: all .3s ease;
+  }
+
+  .blog-post:hover h4{
+    color: var(--color-text__blog-post--hover__h4);
+  }
+
+  @media screen and ( width <= 850px ) {
+    .blog-post{
+      max-width: 100%;
+    }
+  }
+</style>

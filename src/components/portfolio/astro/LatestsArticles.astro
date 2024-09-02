@@ -1,30 +1,90 @@
 ---
+import ArticleCard from '@components/shared/astro/ArticleCard.astro';
+import type { InferEntrySchema } from 'astro:content';
+
+type Article = {
+  id: string;
+  slug: string;
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+};
+
+type Props = {
+  articles: Article[]
+};
+
+const { articles } = Astro.props;
+const dateOptions: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'short', year: 'numeric' };
 ---
 
 <section class="latests-articles wrap">
   <h2>Artículos</h2>
   <div class="articles-container">
-    <article class="blog-post">
-      <span>18 Oct ‘23</span>
-      <h4>Usar Notion como CMS para tu sitio web</h4>
-      <p>Aprenderás a usar la plataforma de Notion para poder publicar tus propias entradas sin necesidad de usar un CMS.</p>
-    </article>
-    <article class="blog-post">
-      <span>18 Oct ‘23</span>
-      <h4>Usar Notion como CMS para tu sitio web</h4>
-      <p>Aprenderás a usar la plataforma de Notion para poder publicar tus propias entradas sin necesidad de usar un CMS.</p>
-    </article>
-    <article class="blog-post">
-      <span>18 Oct ‘23</span>
-      <h4>Usar Notion como CMS para tu sitio web</h4>
-      <p>Aprenderás a usar la plataforma de Notion para poder publicar tus propias entradas sin necesidad de usar un CMS.</p>
-    </article>
-    <article class="blog-post">
-      <span>18 Oct ‘23</span>
-      <h4>Usar Notion como CMS para tu sitio web</h4>
-      <p>Aprenderás a usar la plataforma de Notion para poder publicar tus propias entradas sin necesidad de usar un CMS.</p>
-    </article>
+    {
+      articles.map((article) => (
+        <ArticleCard
+          date={
+            article.data.language === 'en'
+            ? article.data.publication_date.toLocaleDateString('en-US', dateOptions) :
+            article.data.language === 'es'
+            ? article.data.publication_date.toLocaleDateString('es-ES', dateOptions) :
+            article.data.publication_date.toLocaleDateString('en-GB', dateOptions)
+          }
+          title={article.data.title}
+          description={article.data.description}
+          href={`blog/${article.slug}`}
+        />
+      ))
+    }
   </div>
 
   <button class="load-more-btn default-button">CARGAR MÁS</button>
 </section>
+
+<style lang="scss">
+  @mixin light-theme {
+    --color-background__latests-articles: white;
+  }
+
+  @mixin dark-theme {
+    --color-background__latests-articles: var(--color-black-obsidian);
+  }
+
+  :root{
+    @include light-theme;
+  }
+
+  :root.dark{
+    @include dark-theme;
+  }
+
+  @media ( prefers-color-scheme: dark ) {
+    :root{
+      @include light-theme;
+    }
+
+    :root.dark{
+      @include dark-theme;
+    }
+  }
+
+  .latests-articles{
+    padding-top: 1.875rem ;
+    padding-bottom: 5.625rem;
+    background-color: var(--color-background__latests-articles);
+  }
+
+  .latests-articles .articles-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 3%;
+  }
+
+  @media screen and ( width <= 850px ) {
+    .articles-container{
+      flex-direction: column;
+    }
+  }
+</style>

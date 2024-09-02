@@ -1,6 +1,16 @@
 ---
 import DynamicText from "@components/shared/astro/DynamicText.astro";
+import CommandButton from "@components/shared/astro/CommandButton.astro";
+import KeyboardKey from "@components/shared/astro/KeyboardKey.astro";
 const profilePicture = 'images/profilePicture.jpg';
+
+const toBeTyped = [
+    'Desarrollador de Software',
+    'Entusiasta por el código',
+    'Desarrollador Frontend',
+    'Estudiante de Ingeniería de Software'
+  ];
+
 ---
 
 <section class="hero">
@@ -8,11 +18,12 @@ const profilePicture = 'images/profilePicture.jpg';
     <h5>Hola, soy</h5>
     <h1>Daniel <br>Cueto</h1>
 
-    <DynamicText />
+    <DynamicText content={toBeTyped} />
 
-    <div class="command-info">
-      <p>Presiona <i class="command-icon key">⌘</i> <span class="key-icon key">B</span> para empezar</p>
-    </div>
+    <CommandButton textBefore="Presiona" textAfter="para empezar">
+      <KeyboardKey iconClass="command-icon" key="⌘"></KeyboardKey>
+      <KeyboardKey iconClass="key-icon" key="B"></KeyboardKey>
+    </CommandButton>
   </div>
 
   <!-- <div class="second-column">
@@ -22,3 +33,57 @@ const profilePicture = 'images/profilePicture.jpg';
   </div> -->
 
 </section>
+
+
+<style lang="scss">
+
+  @mixin light-theme {
+    --color-background__hero: var(--color-yellow-main);
+    --color-text__hero: black;
+  }
+
+  @mixin dark-theme {
+    --color-background__hero: var(--color-yellow-main);
+    --color-text__hero: black;
+  }
+
+  :root{
+    @include light-theme;
+  }
+
+  :root.dark{
+    @include dark-theme;
+  }
+
+  @media ( prefers-color-scheme: dark ) {
+    :root{
+      @include light-theme;
+    }
+
+    :root.dark{
+      @include dark-theme;
+    }
+  }
+
+  .hero{
+    padding: 3.125rem 10%;
+    background-color: var(--color-background__hero);
+    display: flex;
+    justify-content: space-between;
+    color: var(--color-text__hero);
+  }
+  .hero .second-column{
+    flex-grow: 1;
+  }
+
+  .hero figure{
+    max-width: 18.75rem;
+    margin-left: auto;
+  }
+
+  .hero figure img{
+    width: 100%;
+    border-radius: 50%;
+  }
+
+</style>
