@@ -1,0 +1,154 @@
+---
+
+type Props = {
+  title: string;
+  description?: string;
+  tags?: string[];
+  image?: {
+    url: string;
+    alt?: string;
+  };
+  href: string;
+}
+
+const { title, description, tags, image = { url: 'images/mobdalaImg.jpeg', alt: 'project image' }, href } = Astro.props;
+---
+
+<a href={ href } class="project-card">
+  <article>
+    <h3 class="project-title">{ title }</h3>
+    <img src={ image.url } alt={ image.alt } class="project-img">
+    <div class="project-details">
+      <h4>{ title }</h4>
+      <p>{ description }</p>
+      <div class="project-tags">
+        {
+          tags?.map((tag) => (
+            <span class="tag">{ tag }</span>
+          ))
+        }
+      </div>
+    </div>
+    <div class="project-card-transition"></div>
+  </article>
+</a>
+
+
+<style lang="scss">
+  @mixin light-theme {
+    --color-text__project-details: white;
+    --color-background__project-details: var(--color-black-oil);
+    --color-background__project-card--transition: var(--color-yellow-main);
+    --color-text__project-card__h3: var(--color-yellow-js);
+    --color-background__project-card__h3: rgba(12, 12, 12, .7);
+  }
+
+  @mixin dark-theme {
+    --color-text__project-details: white;
+    --color-background__project-details: var(--color-black-oil);
+    --color-background__project-card--transition: var(--color-yellow-main);
+    --color-text__project-card__h3: var(--color-yellow-js);
+    --color-background__project-card__h3: rgba(12, 12, 12, .7);
+  }
+
+  :root{
+    @include light-theme;
+  }
+
+  :root.dark{
+    @include dark-theme;
+  }
+
+  @media ( prefers-color-scheme: dark ) {
+    :root{
+      @include light-theme;
+    }
+
+    :root.dark{
+      @include dark-theme;
+    }
+  }
+
+  .project-card{
+    width: auto;
+    margin: 0.625rem 0;
+    min-width: 300px;
+    height: 12.5rem;
+    position: relative;
+    flex-grow: 1;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .project-card .project-details{
+    color: var(--color-text__project-details);
+    position: absolute;
+    z-index: 20;
+    transform: translateX(100%);
+    transition: transform .6s ease;
+    height: 100%;
+    width: 100%;
+    background-color: var(--color-background__project-details);
+    padding: 1.25rem;
+  }
+
+  .project-card:hover .project-details{
+    transform: translate(0%);
+
+    h4{
+      color: var(--color-yellow-js);
+    }
+  }
+
+  .project-card .project-card-transition{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 11;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-background__project-card--transition);
+    transform: translateX(100%);
+    transition: all .4s ease-out;
+  }
+
+  .project-card:hover .project-card-transition{
+    transform: translate(0%);
+  }
+
+
+  .project-card h3{
+    position: absolute;
+    z-index: 2;
+    font-size: 3rem;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    color: var(--color-text__project-card__h3);
+    background-color: var(--color-background__project-card__h3);
+    backdrop-filter: blur(2px);
+  }
+
+  .project-card img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .project-card .project-tags{
+    display: flex;
+    gap: 0.625rem;
+  }
+
+  .tag {
+    padding: 0.3rem .8rem;
+    font-size: .8rem;
+  }
+</style>

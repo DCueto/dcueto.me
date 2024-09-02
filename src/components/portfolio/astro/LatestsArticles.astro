@@ -1,6 +1,9 @@
 ---
 import ArticleCard from '@components/shared/astro/ArticleCard.astro';
+import Button from '@components/shared/astro/Button.astro';
 import type { InferEntrySchema } from 'astro:content';
+import { generateLink } from '@services/routing';
+import type { Locale } from '@services/routing';
 
 type Article = {
   id: string;
@@ -16,6 +19,16 @@ type Props = {
 
 const { articles } = Astro.props;
 const dateOptions: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'short', year: 'numeric' };
+const locale = Astro.params.locale as Locale;
+const { pathname } = Astro.url;
+
+// const generateLink2 = (slug: string): string => {
+// 	if (pathname.startsWith(`/${locale}`)) {
+// 		return `${pathname}blog/${slug}`;
+// 	}
+
+// 	return `/${locale}/blog/${slug}`;
+// }
 ---
 
 <section class="latests-articles wrap">
@@ -33,13 +46,13 @@ const dateOptions: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'short'
           }
           title={article.data.title}
           description={article.data.description}
-          href={`blog/${article.slug}`}
+          href={generateLink('blog', article.slug, pathname, locale)}
         />
       ))
     }
   </div>
 
-  <button class="load-more-btn default-button">CARGAR MÁS</button>
+  <Button size="default" text="VIEW BLOG ->" align='center'/>
 </section>
 
 <style lang="scss">
@@ -71,7 +84,7 @@ const dateOptions: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'short'
 
   .latests-articles{
     padding-top: 1.875rem ;
-    padding-bottom: 5.625rem;
+    padding-bottom: 2rem;
     background-color: var(--color-background__latests-articles);
   }
 

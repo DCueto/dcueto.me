@@ -36,21 +36,15 @@
   /*  Element Variables  */
 
   --color-h2-underline: black;
-  --color-text-selection: var(--color-yellow-js);
+  --color-text-selection: var(--color-black-obsidian);
+  --color-background-text-selection: var(--color-yellow-js);
   --color-span-default: var(--color-gray-brownie);
   --color-anchor-default: var(--color-yellow-darker);
   --color-anchor-selection: black;
-  --color-anchor-hover: var(--color-yellow-light);
+  --color-anchor-hover: var(--color-black-night);
   --color-text__default: black;
   --color-text--bold-1: var(--color-yellow-darker);
 
-  /* Default Button Component */
-  --color-background__default-button--default: white;
-  --color-text__default-button--default: black;
-  --color-border__default-button--default: black;
-  --color-background__default-button--hover: var(--color-yellow-js);
-  --color-text__default-button--hover: black;
-  --color-border__default-button--hover: black;
 
   /* Label 1 Component */
   --color-background__label-1--default: #0B1215;
@@ -69,7 +63,7 @@
 
 
   /*  Modal Colors  */
-  
+
   --color-background__modal--outside-transparency: rgba(12, 12, 12, .3);
   --color-background__modal--inner-transparency: rgba(29, 26, 30, .9);
   --color-text__modal-navigator--default: white;
@@ -78,17 +72,6 @@
   --color-background__modal-navigator__search-input: rgba(12, 12, 12, .3);
   --color-border__modal-navigator__search-input--focus: black;
   --color-background__modal-navigator__modal-nav-item--hover: rgba(100, 100, 100, .3);
-
-
-  /*  About Me / Projects Colors  */
-
-  --color-background__about-me: var(--color-gray-light3);
-  --color-background__projects: var(--color-gray-light3);
-  --color-text__project-details: white;
-  --color-background__project-details: var(--color-black-oil);
-  --color-background__project-card--transition: var(--color-yellow-main);
-  --color-text__project-card__h3: var(--color-yellow-js);
-  --color-background__project-card__h3: rgba(12, 12, 12, .7);
 
 
   /*  Experience Colors  */
@@ -145,11 +128,12 @@
   /*  Element Variables  */
 
   --color-h2-underline: white;
-  --color-text-selection: var(--color-yellow-js);
+  --color-text-selection: var(--color-black-obsidian);
+  --color-background-text-selection: var(--color-yellow-js);
   --color-span-default: var(--color-gray-light3);
   --color-anchor-default: var(--color-yellow-darker);
   --color-anchor-selection: black;
-  --color-anchor-hover: var(--color-yellow-light);
+  --color-anchor-hover: var(--color-black-night);
   --color-text__default: white;
   --color-text--bold-1: var(--color-yellow-js);
 
@@ -159,14 +143,6 @@
   --color-background__body: var(--color-black-obsidian);
   --color-background__main: var(--color-black-obsidian);
 
-
-  /* Default Button Component */
-  --color-background__default-button--default: black;
-  --color-text__default-button--default: white;
-  --color-border__default-button--default: white;
-  --color-background__default-button--hover: var(--color-yellow-js);
-  --color-text__default-button--hover: black;
-  --color-border__default-button--hover: black;
 
   /* Label 1 Component */
   --color-background__label-1--default: var(--color-yellow-main);
@@ -193,16 +169,6 @@
   --color-background__modal-navigator__search-input: rgba(12, 12, 12, .3);
   --color-border__modal-navigator__search-input--focus: black;
   --color-background__modal-navigator__modal-nav-item--hover: rgba(100, 100, 100, .3);
-
-  /*  About Me / Projects Colors  */
-
-  --color-background__about-me: var(--color-gray-dark);
-  --color-background__projects: var(--color-gray-dark);
-  --color-text__project-details: white;
-  --color-background__project-details: var(--color-black-oil);
-  --color-background__project-card--transition: var(--color-yellow-main);
-  --color-text__project-card__h3: var(--color-yellow-js);
-  --color-background__project-card__h3: rgba(12, 12, 12, .7);
 
 
   /*  Experience Colors  */
@@ -260,15 +226,16 @@
 /*#region MEDIA QUERY - THEME COLORS  */
 
 @media ( prefers-color-scheme: dark ) {
-  :root{
+  :root.dark{
     /*  Element Variables  */
 
     --color-h2-underline: white;
-    --color-text-selection: var(--color-yellow-js);
+    --color-text-selection: var(--color-black-obsidian);
+    --color-background-text-selection: var(--color-yellow-js);
     --color-span-default: var(--color-gray-light3);
     --color-anchor-default: var(--color-yellow-darker);
     --color-anchor-selection: black;
-    --color-anchor-hover: var(--color-yellow-light);
+    --color-anchor-hover: var(--color-black-night);
     --color-text__default: white;
     --color-text--bold-1: var(--color-yellow-js);
 
@@ -312,17 +279,6 @@
     --color-background__modal-navigator__search-input: rgba(12, 12, 12, .3);
     --color-border__modal-navigator__search-input--focus: black;
     --color-background__modal-navigator__modal-nav-item--hover: rgba(100, 100, 100, .3);
-
-
-    /*  About Me / Projects Colors  */
-
-    --color-background__about-me: var(--color-gray-dark);
-    --color-background__projects: var(--color-gray-dark);
-    --color-text__project-details: white;
-    --color-background__project-details: var(--color-black-oil);
-    --color-background__project-card--transition: var(--color-yellow-main);
-    --color-text__project-card__h3: var(--color-yellow-js);
-    --color-background__project-card__h3: rgba(12, 12, 12, .7);
 
 
     /*  Experience Colors  */
@@ -378,22 +334,15 @@
     /*  Element Variables  */
 
     --color-h2-underline: black;
-    --color-text-selection: var(--color-yellow-js);
+    --color-text-selection: var(--color-black-obsidian);
+    --color-background-text-selection: var(--color-yellow-js);
     --color-span-default: var(--color-gray-brownie);
     --color-anchor-default: var(--color-yellow-darker);
     --color-anchor-selection: black;
-    --color-anchor-hover: var(--color-yellow-light);
+    --color-anchor-hover: var(--color-black-night);
     --color-text__default: black;
     --color-text--bold-1: var(--color-yellow-darker);
 
-
-    /* Default Button Component */
-    --color-background__default-button--default: white;
-    --color-text__default-button--default: black;
-    --color-border__default-button--default: black;
-    --color-background__default-button--hover: var(--color-yellow-js);
-    --color-text__default-button--hover: black;
-    --color-border__default-button--hover: black;
 
     /* Label 1 Component */
     --color-background__label-1--default: #0B1215;
@@ -421,17 +370,6 @@
     --color-background__modal-navigator__search-input: rgba(12, 12, 12, .3);
     --color-border__modal-navigator__search-input--focus: black;
     --color-background__modal-navigator__modal-nav-item--hover: rgba(100, 100, 100, .3);
-
-
-    /*  About Me / Projects Colors  */
-
-    --color-background__about-me: var(--color-gray-light3);
-    --color-background__projects: var(--color-gray-light3);
-    --color-text__project-details: white;
-    --color-background__project-details: var(--color-black-oil);
-    --color-background__project-card--transition: var(--color-yellow-main);
-    --color-text__project-card__h3: var(--color-yellow-js);
-    --color-background__project-card__h3: rgba(12, 12, 12, .7);
 
 
     /*  Experience Colors  */
@@ -563,7 +501,8 @@ p{
 }
 
 p::selection, h2::selection, h3::selection, h4::selection, span::selection{
-  background-color: var(--color-text-selection);
+  background-color: var(--color-background-text-selection);
+  color: var(--color-text-selection);;
 }
 
 span{
@@ -614,23 +553,6 @@ a:hover{
   padding: .125rem 0.255rem;
   border-radius: 0.2rem;
   color: white;
-}
-
-button.default-button{
-  background-color: var(--color-background__default-button--default);
-  padding: 0.5rem 1.25rem;
-  font-size: 0.875rem;
-  font-weight: bold;
-  border: 0.125rem solid var(--color-border__default-button--default);
-  color: var(--color-text__default-button--default);
-  cursor: pointer;
-  transition: all .1s ease-in;
-}
-
-button.default-button:hover{
-  background-color: var(--color-background__default-button--hover);
-  color: var(--color-text__default-button--hover);
-  border: 0.125rem solid var(--color-border__default-button--hover);
 }
 
 
@@ -782,119 +704,6 @@ body:not(:has( .modal.hidden )){
 }
 
 /*#endregion*/
-
-
-
-/*#region  LATESTS ARTICLES  */
-
-
-.latests-articles button.load-more-btn{
-  display: block;
-  margin: 1.25rem auto 0 auto;
-}
-
-/*#endregion */
-
-
-
-/*#region  ABOUT / PROJECTS */
-/*  ABOUT ME  */
-
-.about-me{
-  background-color: var(--color-background__about-me);
-  padding-top: 2.5rem;
-  padding-bottom: 2.5rem;
-}
-
-
-/*  PROJECTS  */
-
-.projects{
-  background-color: var(--color-background__projects);
-  padding-top: 2.5rem;
-  padding-bottom: 2.5rem;
-}
-
-.projects .projects-container{
-  display: flex;
-  flex-wrap: wrap;
-  gap: 3%;
-}
-
-.projects .project-card{
-  width: auto;
-  margin: 0.625rem 0;
-  min-width: 300px;
-  height: 12.5rem;
-  position: relative;
-  flex-grow: 1;
-  overflow: hidden;
-  cursor: pointer;
-}
-
-.project-card .project-details{
-  color: var(--color-text__project-details);
-  position: absolute;
-  z-index: 20;
-  transform: translateX(100%);
-  transition: transform .6s ease;
-  height: 100%;
-  width: 100%;
-  background-color: var(--color-background__project-details);
-  padding: 1.25rem;
-}
-
-.projects .project-card:hover .project-details{
-  transform: translate(0%);
-
-  h4{
-    color: var(--color-yellow-js);
-  }
-}
-
-.projects .project-card .project-card-transition{
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 11;
-  width: 100%;
-  height: 100%;
-  background-color: var(--color-background__project-card--transition);
-  transform: translateX(100%);
-  transition: all .4s ease-out;
-}
-
-.projects .project-card:hover .project-card-transition{
-  transform: translate(0%);
-}
-
-
-.projects .project-card h3{
-  position: absolute;
-  z-index: 2;
-  font-size: 3rem;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  color: var(--color-text__project-card__h3);
-  background-color: var(--color-background__project-card__h3);
-  backdrop-filter: blur(2px);
-}
-
-.projects .project-card img{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-/*#endregion */
 
 
 /*#region  WORK EXPERIENCE  */
@@ -1199,13 +1008,6 @@ body:not(:has( .modal.hidden )){
   height: auto;
 }
 
-.form-button-container #contact-submit-button{
-  font-size: 1.3rem;
-  display: block;
-  margin: 1.875rem auto;
-  padding: 1.5rem 2.6rem;
-}
-
 /*#endregion */
 
 
@@ -1235,14 +1037,6 @@ footer p{
 /*#region  ------ MEDIA QUERIES ------ */
 
 @media screen and ( width <= 850px ) {
-  .articles-container{
-    flex-direction: column;
-  }
-
-  .latests-articles .blog-post{
-    max-width: 100%;
-  }
-
   .education .education-item{
     flex-direction: column-reverse;
     padding: 1.25rem 2.1875rem;
@@ -1255,7 +1049,6 @@ footer p{
   .education-item .edu-item-content::before{
     height: 170%;
   }
-
 }
 
 @media screen and ( width <= 800px ) {
@@ -1326,25 +1119,25 @@ footer p{
 
 @media screen and ( width >= 1400px ){
   html{
-    font-size: 20px;
+    font-size: 16px;
   }
 }
 
 @media screen and ( width >= 1800px ){
   html{
-    font-size: 28px;
+    font-size: 16px;
   }
 }
 
 @media screen and ( width >= 2560px ){
   html{
-    font-size: 36px;
+    font-size: 22px;
   }
 }
 
 @media screen and ( width >= 3840px ){
   html{
-    font-size: 56px;
+    font-size: 28px;
   }
 }
 

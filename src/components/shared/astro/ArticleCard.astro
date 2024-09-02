@@ -9,13 +9,13 @@
   const { date, title, description, href } = Astro.props;
 ---
 
-<!-- <a href={href}> -->
-  <article class="blog-post">
+<a href={href} class="blog-post">
+  <article>
     <span>{ date }</span>
     <h4>{ title }</h4>
     <p>{ description }</p>
   </article>
-<!-- </a> -->
+</a>
 
 <style lang="scss">
   @mixin light-theme {
@@ -52,6 +52,8 @@
     padding: 1.25rem;
     cursor: pointer;
     transition: all .3s ease;
+    text-decoration: none;
+    color: var(--color-text__default);
   }
 
   .blog-post:hover{

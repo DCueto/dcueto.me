@@ -1,4 +1,6 @@
 ---
+import Button from "./Button.astro";
+
 ---
 
 <section class="contact-me wrap">
@@ -13,7 +15,7 @@
       <textarea name="message" id="contact-message" cols="30" rows="10" placeholder="Escribe tu mensaje"></textarea>
     </div>
     <div class="form-button-container">
-      <button type="submit" id="contact-submit-button" class="default-button">ENVIAR</button>
+      <Button size="large" text="ENVIAR" align='center'/>
     </div>
   </form>
 </section>

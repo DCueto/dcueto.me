@@ -28,12 +28,7 @@ export async function getStaticPaths() {
   return paths;
 }
 
-const { path, locale } = Astro.params;
-console.log( "path param", path );
-console.log("locale param", locale);
-
 const { blogPost } = Astro.props as Props;
-
 const { Content } = await blogPost.render();
 
 ---

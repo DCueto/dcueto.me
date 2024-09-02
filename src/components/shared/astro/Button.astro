@@ -1,0 +1,80 @@
+---
+type SizeButton = 'default' | 'large';
+type AlignButton = 'center' | 'left' | 'right';
+type TypeButton = 'button' | 'submit' | 'reset';
+
+type Props = {
+  size?: SizeButton;
+  type?: TypeButton;
+  align?: AlignButton;
+  text: string;
+}
+
+const { size = 'default', text = 'Button', align = 'center', type = 'button' } = Astro.props;
+---
+
+<button type={type} class=`${size} default-button ${align}`>{ text }</button>
+
+<style lang="scss">
+  @mixin light-theme {
+    --color-background__default-button--default: white;
+    --color-text__default-button--default: black;
+    --color-border__default-button--default: black;
+    --color-background__default-button--hover: var(--color-yellow-js);
+    --color-text__default-button--hover: black;
+    --color-border__default-button--hover: black;
+  }
+
+  @mixin dark-theme {
+    --color-background__default-button--default: black;
+    --color-text__default-button--default: white;
+    --color-border__default-button--default: white;
+    --color-background__default-button--hover: var(--color-yellow-js);
+    --color-text__default-button--hover: black;
+    --color-border__default-button--hover: black;
+  }
+
+  :root{
+    @include light-theme;
+  }
+
+  :root.dark{
+    @include dark-theme;
+  }
+
+  @media ( prefers-color-scheme: dark ) {
+    :root{
+      @include light-theme;
+    }
+
+    :root.dark{
+      @include dark-theme;
+    }
+  }
+
+  button.default-button{
+    background-color: var(--color-background__default-button--default);
+    padding: 0.5rem 1.25rem;
+    font-size: 0.875rem;
+    font-weight: bold;
+    border: 0.125rem solid var(--color-border__default-button--default);
+    color: var(--color-text__default-button--default);
+    cursor: pointer;
+    transition: all .1s ease-in;
+  }
+
+  button.default-button:hover{
+    background-color: var(--color-background__default-button--hover);
+    color: var(--color-text__default-button--hover);
+    border: 0.125rem solid var(--color-border__default-button--hover);
+  }
+  button.center{
+    display: block;
+    margin: 1.25rem auto;
+  }
+
+  button.large{
+    font-size: 1.3rem;
+    padding: 1.5rem 2.6rem;
+  }
+</style>
