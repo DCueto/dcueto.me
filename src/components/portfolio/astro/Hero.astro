@@ -2,25 +2,27 @@
 import DynamicText from "@components/shared/astro/DynamicText.astro";
 import CommandButton from "@components/shared/astro/CommandButton.astro";
 import KeyboardKey from "@components/shared/astro/KeyboardKey.astro";
-const profilePicture = 'images/profilePicture.jpg';
+// const profilePicture = 'images/profilePicture.jpg';
 
-const toBeTyped = [
-    'Desarrollador de Software',
-    'Entusiasta por el código',
-    'Desarrollador Frontend',
-    'Estudiante de Ingeniería de Software'
-  ];
+import { getTranslationValue, getTranslationArray } from "@utils/i18n";
+import type { Locale } from "@services/routing";
 
+const locale: Locale =  Astro.params.locale as Locale;
+
+const t = (key: string): string => locale ? getTranslationValue(locale, key) : getTranslationValue('en', key);
+const tArray = (key: string): string[] => locale ? getTranslationArray(locale, key) : getTranslationArray('en', key);
+
+const toBeTyped = tArray('hero.descriptions');
 ---
 
 <section class="hero">
   <div class="first-column">
-    <h5>Hola, soy</h5>
+    <h5>{t('hero.greeting')}</h5>
     <h1>Daniel <br>Cueto</h1>
 
-    <DynamicText content={toBeTyped} />
+    <DynamicText content={toBeTyped} textBefore={t('hero.descriptionPrefix')} />
 
-    <CommandButton textBefore="Presiona" textAfter="para empezar">
+    <CommandButton textBefore={t('hero.commandButton.textBefore')} textAfter={t('hero.commandButton.textAfter')}>
       <KeyboardKey iconClass="command-icon" key="⌘"></KeyboardKey>
       <KeyboardKey iconClass="key-icon" key="B"></KeyboardKey>
     </CommandButton>

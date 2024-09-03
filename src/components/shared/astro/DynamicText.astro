@@ -1,14 +1,15 @@
 ---
 type Props = {
   content: string[],
+  textBefore?: string,
 }
 
-const { content } = Astro.props;
+const { content, textBefore = 'A' } = Astro.props;
 const serializedContent = JSON.stringify(content);
 ---
 
 <div class="dinamic-role-text" data-content={serializedContent}>
-  <p>Un <span id="dinamic-label"></span><span class="cursor">&nbsp;</span></p>
+  <p>{textBefore} <span id="dinamic-label"></span><span class="cursor">&nbsp;</span></p>
 </div>
 
 <style lang="scss">

@@ -1,29 +1,24 @@
 ---
-import type { InferEntrySchema } from "astro:content";
+import type { CollectionEntry } from "astro:content";
 import ProjectCard from "./ProjectCard.astro";
 
 import { generateLink } from "@services/routing";
 import type { Locale } from "@services/routing";
-
-type Project = {
-  id: string;
-  slug: string;
-  body: string;
-  collection: "projects";
-  data: InferEntrySchema<"projects">
-};
+import { getTranslationValue } from "@utils/i18n";
 
 type Props = {
-  projects: Project[]
+  projects: CollectionEntry<'projects'>[]
 };
 
 const { projects } = Astro.props;
 const locale = Astro.params.locale as Locale;
 const { pathname } = Astro.url;
+
+const t = (key: string): string => locale ? getTranslationValue(locale, key) : getTranslationValue('en', key);
 ---
 
 <section class="projects wrap">
-  <h2>Proyectos</h2>
+  <h2>{ t('projects.title') }</h2>
   <div class="projects-container">
     {
       projects.map((project) => (
