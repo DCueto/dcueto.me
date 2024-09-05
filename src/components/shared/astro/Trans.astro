@@ -1,0 +1,31 @@
+---
+// Trans.astro
+
+// NOT WORKING AS I WANT -> TO BE REFACTORED
+
+import { getTranslationValue, replacePlaceholders } from '@utils/i18n.ts';
+import type { Locale } from '@services/routing';
+
+interface Props {
+  i18nKey: string;
+  locale: Exclude<Locale, undefined>;
+  children: any;
+}
+
+const { i18nKey, locale, children } = Astro.props;
+
+const template = getTranslationValue(locale, i18nKey);
+
+// Ensure children is an array
+const childrenArray = Array.isArray(children) ? children : [children];
+
+// Create a placeholders object from children
+const placeholders = childrenArray.reduce((acc, child, index) => {
+  acc[index] = child;
+  return acc;
+}, {});
+
+const htmlString = replacePlaceholders(locale, template, placeholders);
+---
+
+<div set:html={htmlString}></div>

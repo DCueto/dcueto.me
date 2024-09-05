@@ -25,6 +25,8 @@ export const WorkExperience = ({ tabs, experience }: Props) => {
     console.log( activeTab );
   }, [activeTab]);
 
+  const dateOptions: Intl.DateTimeFormatOptions = { month: 'short', year: 'numeric' };
+
   return (
     <div className="experience-container">
       <Tabs tabs={tabs} defaultActiveTab={activeTab} onTabChange={handleActiveTab}/>
@@ -39,7 +41,10 @@ export const WorkExperience = ({ tabs, experience }: Props) => {
                     <div className="experience-roles" key={key}>
                       <div className="experience-role">
                         <p className="title-role">{ position.role }</p>
-                        <span className="date-role">{ position.start_date.toISOString() } - { position.end_date?.toISOString() }</span>
+                        <span className="date-role">
+                          { data.language === 'es' ? position.start_date.toLocaleDateString('es-ES', dateOptions) : position.start_date.toLocaleDateString('en-US', dateOptions) }
+                          {' - '}
+                          { data.language === 'es' ? position.end_date?.toLocaleDateString('es-ES', dateOptions) : position.end_date?.toLocaleDateString('en-US', dateOptions) }</span>
                       </div>
                     </div>
                   ))

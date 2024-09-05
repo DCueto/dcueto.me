@@ -1,21 +1,25 @@
 ---
 import Button from "./Button.astro";
+import { getTranslationValue } from '@utils/i18n';
+import type { Locale } from '@services/routing';
 
+const locale = Astro.params.locale as Locale;
+const t = (key: string): string => locale ? getTranslationValue(locale, key) : getTranslationValue('en', key);
 ---
 
 <section class="contact-me wrap">
-  <h2>Contacta</h2>
+  <h2>{ t('contact.title') }</h2>
   <form class="contact-form" action="">
     <div class="form-content">
-      <input type="text" name="name" id="contact-name" placeholder="¿Cuál es tu nombre?">
-      <input type="email" name="email" id="contact-email" placeholder="¿Cuál es tu email?">
+      <input type="text" name="name" id="contact-name" placeholder={ t('contact.formName.placeholder') }>
+      <input type="email" name="email" id="contact-email" placeholder={ t('contact.formEmail.placeholder') }>
       <div class="input-subject-container">
-        <input type="text" name="asunto" id="contact-subject" placeholder="¿Cuál es tu asunto?">
+        <input type="text" name="asunto" id="contact-subject" placeholder={ t('contact.formSubject.placeholder') }>
       </div>
-      <textarea name="message" id="contact-message" cols="30" rows="10" placeholder="Escribe tu mensaje"></textarea>
+      <textarea name="message" id="contact-message" cols="30" rows="10" placeholder={ t('contact.formMessage.placeholder') }></textarea>
     </div>
     <div class="form-button-container">
-      <Button size="large" text="ENVIAR" align='center'/>
+      <Button size="large" text={ t('contact.formButton') } align='center'/>
     </div>
   </form>
 </section>

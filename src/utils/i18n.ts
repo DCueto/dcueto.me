@@ -81,3 +81,10 @@ export function getLangFromUrl(url: URL) {
 export function redirectToLang(lang: Locale, currentUrl: URL) {
   currentUrl.pathname = `/${lang}/${currentUrl.pathname.replace(/\/[a-z]{2}/, '')}`;
 }
+
+
+// NOT WORKING AS I WANT
+// Replaces placeholder to the value in the translation
+export function replacePlaceholders(locale: Exclude<Locale, undefined>, template: string, placeholders: Record<string, string>): string {
+  return template.replace(/{{(.*?)}}/g, (_, key) => placeholders[key.trim()] || getTranslationValue(locale, key.trim()) || '');
+}

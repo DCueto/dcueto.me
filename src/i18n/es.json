@@ -77,8 +77,8 @@
     "formButton": "Enviar"
   },
   "footer": {
-    "message1": "Si has llegado hasta aquí, me encantaría que me devolvieras un 'Hola' {{tweeting}} o enviándome un {{email}}",
-    "message2": "© 2024 — Sitio web diseñado y programado por {{name}} usando Astro, MDX y React.",
+    "message1": "Si has llegado hasta aquí, me encantaría que me devolvieras un 'Hola', <0>escribiéndome un tweet</0> o enviándome un <1>email</1>",
+    "message2": "© 2024 — Sitio web diseñado y programado por <0>Daniel Cueto</0> usando Astro, MDX y React.",
     "tweeting": "escribiéndome un tweet",
     "email": "email",
     "name": "Daniel Cueto"

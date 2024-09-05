@@ -16,20 +16,6 @@ const t = (key: string): string => locale ? getTranslationValue(locale, key) : g
 
 <section class="education wrap">
   <h2>{ t("education.title") }</h2>
-
-  <!-- <article class="education-item">
-    <div class="edu-item-data">
-      <span class="edu-item-location label1">{ locale === 'en' ? 'Anywhere' : 'Cualquier lugar' }</span>
-      <span class="edu-item-date">
-        { locale === 'en' ? 'Always' : 'Siempre' }
-      </span>
-    </div>
-    <div class="edu-item-content">
-      <h5 class="edu-item-title"><span class="yellow-bold">{ locale === 'en' ? 'Self-taught' : 'Autodidacta' }</span> — { locale === 'en' ? 'From each work, course, partner, book, article, meetup or experience' : 'De cada trabajo, curso, compañero/a, libro, artículo, meetup o experiencia' }</h5>
-      <p class="edu-item-description">{ locale === 'en' ? "That's how I learned 80% of what I know till this day. At this moment I'm learning:" : 'Así es cómo he aprendido el 80% de lo que sé hoy en día. En este momento estoy aprendiendo:' } <span>#ReactTestingLibrary</span> <span>#Performance</span> <span>#DesignSystems</span></p>
-    </div>
-  </article> -->
-
   {
     collection.map((entry) => (
       <EducationItem dataEntry={entry} />

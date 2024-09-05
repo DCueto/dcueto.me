@@ -77,10 +77,12 @@
     "formButton": "Send"
   },
   "footer": {
-    "message1": "If you've made it this far, I'd love for you to say 'Hello' back by {{tweeting}} me or sending me an {{email}}",
-    "message2": "© 2024 — Website designed and coded by {{name}} using Astro, MDX and React.",
+    "message1": "If you've made it this far, I'd love for you to say 'Hello' back by <0>tweeting</0> me or sending me an <1>email</1>",
+    "message2": "© 2024 — Website designed and coded by <0>Daniel Cueto</0> using Astro, MDX and React.",
     "tweeting": "tweeting",
+    "tweetingLink": "https://x.com/dcuetome",
     "email": "email",
+    "emailLink": "mailto:dcueto14.dev@gmail.com",
     "name": "Daniel Cueto"
   }
 }
