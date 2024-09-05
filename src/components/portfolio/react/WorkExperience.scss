@@ -1,0 +1,96 @@
+@mixin light-theme {
+  --color-background__experience-container: var(--color-black-oil);
+  --color-background__experience: white;
+  --color-border__experience-container: none;
+  --color-text__experience-container: white;
+  --color-text__experience__experience-roles: var(--color-yellow-main);
+  --color-text__experience__experience-roles__span: var(--color-yellow-light);
+  --color-background__experience-role__before: var(--color-yellow-main);
+  --color-background__experience-role__after: var(--color-yellow-main);
+}
+
+@mixin dark-theme {
+  --color-background__experience: var(--color-black-oil);
+  --color-background__experience-container: var(--color-black-oil);
+  --color-border__experience-container: white;
+  --color-text__experience-container: white;
+  --color-text__experience__experience-roles: var(--color-yellow-main);
+  --color-text__experience__experience-roles__span: var(--color-yellow-light);
+  --color-background__experience-role__before: var(--color-yellow-main);
+  --color-background__experience-role__after: var(--color-yellow-main);
+}
+
+:root{
+  @include light-theme;
+}
+
+:root.dark{
+  @include dark-theme;
+}
+
+@media ( prefers-color-scheme: dark ) {
+  :root{
+    @include light-theme;
+  }
+
+  :root.dark{
+    @include dark-theme;
+  }
+}
+
+.work-experience{
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+  background-color: var(--color-background__experience);
+}
+
+.experience-container{
+  width: 100%;
+  height: auto;
+  padding: 1.875rem 1.875rem;
+  background-color: var(--color-background__experience-container);
+  color: var(--color-text__experience-container);
+  border: 0.125rem solid var(--color-border__experience-container);
+}
+
+.work-experience .experience-container .experience-nav{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.875rem;
+  margin-bottom: 1.875rem;
+}
+
+.experience-content .experience-roles{
+  color: var(--color-text__experience__experience-roles);
+  margin: 1.875rem 0;
+}
+
+.experience-content .experience-roles span{
+  color: var(--color-text__experience__experience-roles__span);
+}
+
+.experience-content .experience-role{
+  position: relative;
+  margin-left: 1.875rem;
+}
+
+.experience-content .experience-role::before{
+  content: '';
+  position: absolute;
+  top: -10%;
+  left: -1.25rem;
+  height: 130%;
+  width: 0.125rem;
+  background-color: var(--color-background__experience-role__before);
+}
+
+.experience-content .experience-role::after{
+  content: '';
+  position: absolute;
+  top: 0.625rem;
+  left: -1.5rem;
+  width: 0.625rem;
+  height: 0.625rem;
+  background-color: var(--color-background__experience-role__after);
+  border-radius: 50%;
+}

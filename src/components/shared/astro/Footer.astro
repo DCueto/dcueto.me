@@ -6,10 +6,47 @@
   <p>&copy; 2024 — Web app diseñada y programada por <a href="#" target="_blank">Daniel Cueto</a> usando Angular.</p>
 </footer>
 
-<style>
-  footer {
-    padding: 3rem 0;
+<style lang="scss">
+
+  @mixin light-theme {
+    --color-background__footer: var(--color-yellow-soft);
+    --color-text__footer: black;
+  }
+
+  @mixin dark-theme {
+    --color-background__footer: var(--color-yellow-main);
+    --color-text__footer: black;
+  }
+
+  :root{
+    @include light-theme;
+  }
+
+  :root.dark{
+    @include dark-theme;
+  }
+
+  @media ( prefers-color-scheme: dark ) {
+    :root{
+      @include light-theme;
+    }
+
+    :root.dark{
+      @include dark-theme;
+    }
+  }
+
+  footer{
     text-align: center;
-    font-size: .9rem;
+    padding: 1.875rem 10%;
+    width: 100%;
+    background-color: var(--color-background__footer);
+  }
+
+  footer p{
+    font-weight: bold;
+    font-size: 0.875rem;
+    margin: 1.25rem 0;
+    color: var(--color-text__footer);
   }
 </style>

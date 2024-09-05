@@ -19,3 +19,128 @@ import Button from "./Button.astro";
     </div>
   </form>
 </section>
+
+
+<style lang="scss">
+
+  @mixin light-theme {
+    --color-background__contact-me: white;
+    --color-text__contact-me: var(--color-black-night);
+    --color-background__contact-form: white;
+    --color-border__contact-form: var(--color-black-night);
+  }
+
+  @mixin dark-theme {
+    --color-background__contact-me: var(--color-black-night);
+    --color-text__contact-me: white;
+    --color-background__contact-form: var(--color-black-night);
+    --color-border__contact-form: white;
+  }
+
+  :root{
+    @include light-theme;
+  }
+
+  :root.dark{
+    @include dark-theme;
+  }
+
+  @media ( prefers-color-scheme: dark ) {
+    :root{
+      @include light-theme;
+    }
+
+    :root.dark{
+      @include dark-theme;
+    }
+  }
+
+  .contact-me{
+    background-color: var(--color-background__contact-me);
+    padding-bottom: 2.5rem;
+    padding-top: 2.5rem;
+  }
+
+  .contact-form{
+    border: 0.0625rem solid var(--color-border__contact-form);
+  }
+
+  .contact-form .form-content{
+    display: flex;
+    flex-wrap: wrap;
+    background-color: var(--color-background__contact-me);
+  }
+
+  .form-content input:focus, .form-content textarea:focus{
+    outline: none !important;
+  }
+
+  .form-content input::placeholder, .form-content textarea::placeholder{
+    color: var(--color-text__contact-me);
+  }
+
+  .form-content input, .form-content textarea{
+    border: 0.0625rem solid var(--color-border__contact-form);
+    background-color: var(--color-background__contact-me);
+    padding: 0 0.625rem;
+    font-size: 1.25rem;
+    color: var(--color-text__contact-me);
+    font-weight: 500;
+    letter-spacing: -0.04rem;
+  }
+
+  .form-content input{
+    vertical-align: top;
+    font-family: var(--font-main);
+  }
+
+  .form-content textarea{
+    padding: 1.25rem 0.625rem;
+  }
+
+  .form-content #contact-name{
+    width: 45%;
+    height: 6.25rem;
+  }
+
+  .form-content #contact-email{
+    width: 55%;
+  }
+
+  .input-subject-container{
+    border: 0.0625rem solid var(--color-border__contact-form);
+    width: 40%;
+  }
+
+  .form-content #contact-subject{
+    width: 100%;
+    border: none;
+    padding: 1.25rem 0.625rem;
+  }
+
+  .form-content #contact-message{
+    width: 60%;
+  }
+
+  .contact-form .form-button-container{
+    border: 0.0625rem solid var(--color-border__contact-form);
+    height: auto;
+  }
+
+  @media screen and ( width <= 800px ) {
+    .contact-form .form-content{
+      flex-direction: column;
+    }
+
+    .form-content *{
+      width: 100% !important;
+      height: 5rem;
+    }
+
+    .form-content #contact-message{
+      height: 15.625rem;
+    }
+  }
+
+
+</style>

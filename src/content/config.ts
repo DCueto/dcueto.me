@@ -62,8 +62,8 @@ const experienceSchema = z.object({
 const educationSchema = z.object({
   institution: z.string(),
   degree: z.string(),
-  start_date: z.date(),
-  end_date: z.date().optional(),
+  start_date: z.date().or(z.string()),
+  end_date: z.date().or(z.string()).optional(),
   description: z.string().optional(),
   location: z.string().optional(),
   technologies: z.array(z.string()).optional(),

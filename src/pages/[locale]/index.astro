@@ -14,9 +14,10 @@ import ContactMe from "@components/shared/astro/ContactMe.astro";
 
 
 import { locales } from "@services/routing";
+import type { Locale } from "@services/routing";
 
 export async function getStaticPaths() {
-  return locales.map(locale => {
+  return locales.map((locale: Locale) => {
     return {
       params: { locale },
     }
@@ -58,7 +59,10 @@ const workExperience = await getWorkExperience();
 const getEducation = async () => {
 	return (await getCollection('education', (education) => education.data.language === locale))
 		// sort by graduation date
-		.sort((a, b) => b.data.start_date.valueOf() - a.data.start_date.valueOf());
+		.sort((a, b) => {
+			if ( typeof b.data.start_date === 'string' || typeof a.data.start_date === 'string' ) return -1;
+			return b.data.start_date.valueOf() - a.data.start_date.valueOf()
+		});
 }
 
 const education = await getEducation();
@@ -71,7 +75,7 @@ const education = await getEducation();
 	<AboutMe></AboutMe>
 	<Projects projects={latestsProjects}></Projects>
 	<WorkExperience experience={workExperience}></WorkExperience>
-	<Education education={education}></Education>
+	<Education collection={education}></Education>
 	<aside>
 		<SocialButtons></SocialButtons>
 		<ContactMe></ContactMe>

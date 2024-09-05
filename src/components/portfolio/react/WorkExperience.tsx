@@ -1,3 +1,5 @@
+import './WorkExperience.scss';
+
 import React, { useEffect, useRef, useState } from "react";
 import type { CollectionEntry } from 'astro:content'
 

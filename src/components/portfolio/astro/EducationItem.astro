@@ -1,53 +1,50 @@
 ---
-import type { Locale } from '@services/routing';
-import { getTranslationValue } from '@utils/i18n';
 import type { CollectionEntry } from 'astro:content';
-import EducationItem from './EducationItem.astro';
 
 type Props = {
-  collection: CollectionEntry<'education'>[]
+  dataEntry: CollectionEntry<'education'>
 }
 
-const { collection } = Astro.props;
+const { dataEntry: { data } } = Astro.props;
+const dateOptions: Intl.DateTimeFormatOptions = { month: 'short', year: 'numeric' };
 
-const locale = Astro.params.locale as Locale;
-const t = (key: string): string => locale ? getTranslationValue(locale, key) : getTranslationValue('en', key);
 ---
 
-<section class="education wrap">
-  <h2>{ t("education.title") }</h2>
-
-  <!-- <article class="education-item">
-    <div class="edu-item-data">
-      <span class="edu-item-location label1">{ locale === 'en' ? 'Anywhere' : 'Cualquier lugar' }</span>
-      <span class="edu-item-date">
-        { locale === 'en' ? 'Always' : 'Siempre' }
-      </span>
-    </div>
-    <div class="edu-item-content">
-      <h5 class="edu-item-title"><span class="yellow-bold">{ locale === 'en' ? 'Self-taught' : 'Autodidacta' }</span> — { locale === 'en' ? 'From each work, course, partner, book, article, meetup or experience' : 'De cada trabajo, curso, compañero/a, libro, artículo, meetup o experiencia' }</h5>
-      <p class="edu-item-description">{ locale === 'en' ? "That's how I learned 80% of what I know till this day. At this moment I'm learning:" : 'Así es cómo he aprendido el 80% de lo que sé hoy en día. En este momento estoy aprendiendo:' } <span>#ReactTestingLibrary</span> <span>#Performance</span> <span>#DesignSystems</span></p>
-    </div>
-  </article> -->
-
-  {
-    collection.map((entry) => (
-      <EducationItem dataEntry={entry} />
-    ))
-  }
-
-</section>
+<article class="education-item">
+  <div class="edu-item-data">
+    <span class="edu-item-location label1">{ data.location }</span>
+    <span class="edu-item-date">
+      {
+        data.language === 'es' && (data.start_date instanceof Date) ?
+        data.start_date.toLocaleDateString('es-ES', dateOptions) :
+        data.language === 'en' && (data.start_date instanceof Date) ?
+        data.start_date.toLocaleDateString('en-US', dateOptions) :
+        data.start_date
+      }
+      { data.end_date ? "-" : "" }
+      {
+        data.language === 'es' && (data.end_date instanceof Date) ?
+        data.end_date?.toLocaleDateString('es-ES', dateOptions) :
+        data.language === 'en' && (data.end_date instanceof Date) ?
+        data.end_date?.toLocaleDateString('en-US', dateOptions) :
+        data.end_date
+      }
+    </span>
+  </div>
+  <div class="edu-item-content">
+    <h5 class="edu-item-title"><span class="yellow-bold">{ data.institution }</span> — { data.degree }</h5>
+    <p class="edu-item-description">{ data.content && data.content !== '' ? data.content : data.description }</p>
+  </div>
+</article>
 
 
 <style lang="scss">
   @mixin light-theme {
-    --color-background__education: white;
     --color-background__education-item-content__after: var(--color-black-night);
     --color-background__education-item-content__before: var(--color-black-night);
   }
 
   @mixin dark-theme {
-    --color-background__education: var(--color-black-oil);
     --color-background__education-item-content__after: var(--color-yellow-main);
     --color-background__education-item-content__before: var(--color-yellow-main);
   }
@@ -70,13 +67,7 @@ const t = (key: string): string => locale ? getTranslationValue(locale, key) : g
     }
   }
 
-  .education{
-    padding-top: 2.5rem;
-    padding-bottom: 2.5rem;
-    background-color: var(--color-background__education);
-  }
-
-  .education .education-item{
+  .education-item{
     display: flex;
     justify-content: space-between;
     gap: 10%;
@@ -129,7 +120,7 @@ const t = (key: string): string => locale ? getTranslationValue(locale, key) : g
   }
 
   @media screen and ( width <= 850px ) {
-    .education .education-item{
+    .education-item{
       flex-direction: column-reverse;
       padding: 1.25rem 2.1875rem;
     }
