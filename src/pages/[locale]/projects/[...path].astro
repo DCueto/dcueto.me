@@ -36,10 +36,12 @@ const { Content } = await project.render();
 ---
 
 <BaseLayout title={ project.data.title } >
-  <h1>{ project.data.title }</h1>
-  <p>{ project.data.description }</p>
+  <div class="wrap">
+    <h1>{ project.data.title }</h1>
+    <p>{ project.data.description }</p>
 
-  <Content />
+    <Content />
+  </div>
 </BaseLayout>
 
 <style>

@@ -1,8 +1,13 @@
 ---
+import type { Locale } from '@services/routing';
+import { getTranslationValue } from '@utils/i18n';
+
+const locale = Astro.params.locale as Locale;
+const t = (key: string): string => locale ? getTranslationValue(locale, key) : getTranslationValue('en', key);
 ---
 
 <section class="education wrap">
-  <h2>Educación</h2>
+  <h2>{ t("education.title") }</h2>
   <article class="education-item">
     <div class="edu-item-data">
       <span class="edu-item-location label1">Barcelona</span>

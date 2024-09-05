@@ -40,14 +40,14 @@ const experienceSchema = z.object({
     description: z.string().optional(),
   })),
   location: z.string().optional(),
-  tecnologies: z.array(z.string()).optional(),
+  technologies: z.array(z.string()).optional(),
   skills: z.array(z.string()).optional(),
   website: z.string().optional(),
   logo: z.object({
     url: z.string(),
     alt: z.string().optional(),
   }).optional(),
-  start_date: z.date().optional(),
+  start_date: z.date(),
   end_date: z.date().optional(),
   images: z.array(z.object({
     url: z.string(),
@@ -55,6 +55,7 @@ const experienceSchema = z.object({
   })).optional(),
   related_posts: z.array(reference('blog')).optional(),
   language: z.enum(['en', 'es']),
+  content: z.string().optional(),
 });
 
 
@@ -65,7 +66,7 @@ const educationSchema = z.object({
   end_date: z.date().optional(),
   description: z.string().optional(),
   location: z.string().optional(),
-  tecnologies: z.array(z.string()).optional(),
+  technologies: z.array(z.string()).optional(),
   skills: z.array(z.string()).optional(),
   website: z.string().optional(),
   logo: z.object({
@@ -78,6 +79,7 @@ const educationSchema = z.object({
   })).optional(),
   related_posts: z.array(reference('blog')).optional(),
   language: z.enum(['en', 'es']),
+  content: z.string().optional(),
 });
 
 

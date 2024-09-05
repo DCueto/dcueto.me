@@ -1,7 +1,11 @@
 ---
 import ThemeToggler from "./ThemeToggler.astro";
 import NavBarItem from "@components/shared/astro/NavBarItem.astro";
+import { i18nConfig } from "astro.config.mjs";
+
+
 const logoImage = "/images/logo.svg";
+const locales = i18nConfig.locales;
 const locale = Astro.currentLocale;
 
 const { pathname } = new URL(Astro.request.url);
@@ -27,6 +31,15 @@ const navItems = [
           ))
         }
       </ul>
+
+      <select name="locale" id="locale" onchange="window.location.href = this.value;">
+        {
+          locales.map((loc) => (
+            <option value={`/${loc}/`} selected={loc === locale}>{loc.toUpperCase()}</option>
+          ))
+        }
+      </select>
+
       <div class="top-nav__icons">
         <i class="search-icon fa-solid fa-magnifying-glass"></i>
         <ThemeToggler />
@@ -120,6 +133,17 @@ header .top-nav{
 .top-nav i:hover{
   color: var(--color-text__nav-item__icon--hover);
   font-size: 1.25rem;
+}
+
+select#locale {
+  background-color: var(--color-background__header);
+  color: var(--color-text__nav-item__icon--default);
+  border: none;
+  // border: 0.125rem solid var(--color-text__nav-item__icon--default);
+  padding: 0.625rem;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: bold;
 }
 
 @media screen and ( width <= 500px ) {

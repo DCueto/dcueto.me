@@ -1,28 +1,52 @@
 ---
+import type { Locale } from '@services/routing';
+import { getTranslationValue } from '@utils/i18n';
+import type { CollectionEntry } from 'astro:content'
+import { WorkExperience as WorkExp } from '@components/portfolio/react/WorkExperience';
+import { Tabs } from '@components/shared/react/Tabs';
+import type { AstroComponentFactory } from 'astro/runtime/server/index.js';
+
+
+type Props = {
+  experience: CollectionEntry<'experience'>[]
+}
+
+const { experience } = Astro.props;
+
+// const dateOptions: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'short', year: 'numeric' };
+const locale = Astro.params.locale as Locale;
+// const { pathname } = Astro.url;
+
+const t = (key: string): string => locale ? getTranslationValue(locale, key) : getTranslationValue('en', key);
+
+const tabs = experience.map(({ data }) => data.company_name);
+let activeTab = tabs[0];
+
+const handleTabChange = (valueTab: string) => {
+  activeTab = valueTab;
+}
+
+type ExperienceContent = {
+  company_name: string;
+  Content: AstroComponentFactory;
+};
+
+const contents: ExperienceContent[] = await Promise.all(
+  experience.map( async ({ data, render }) => {
+    const { Content } = await render();
+    return {
+      company_name: data.company_name,
+      Content: Content
+    };
+  })
+);
+
 ---
 
 <section class="work-experience wrap">
-  <h2>Experiencia</h2>
-  <div class="experience-container">
-    <nav class="experience-nav">
-      <span class="tab-rounded active">Navitas</span>
-      <span class="tab-rounded">Smartcities Tgn</span>
-      <span class="tab-rounded">Freelancer</span>
-    </nav>
-    <article class="experience-content">
-      <h5>NAVITAS</h5>
-      <div class="experience-roles">
-        <div class="experience-role">
-          <p class="title-role">Desarrollador Frontend Jr.</p>
-          <span class="date-role">03/2015 - 11/2015</span>
-        </div>
-        <div class="experience-role">
-          <p class="title-role">Product Designer</p>
-          <span class="date-role">03/2015 - 11/2015</span>
-        </div>
-      </div>
-      <p class="experience-description">Lorem ipsum dolor sit amet consectetur. Mi senectus pharetra vel at ut nunc quam aliquam. Euismod accumsan vitae ornare nibh. Pellentesque euismod etiam elit placerat. Orci sollicitudin diam consectetur feugiat gravida tellus auctor.</p>
-    </article>
-  </div>
+  <h2>{ t('experience.title') }</h2>
+
+  <WorkExp tabs={tabs} experience={experience} client:idle>
+  </WorkExp>
 
 </section>

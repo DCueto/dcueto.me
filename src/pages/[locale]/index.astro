@@ -46,6 +46,23 @@ const getLatestsProjects = async () => {
 }
 
 const latestsProjects = await getLatestsProjects();
+
+const getWorkExperience = async () => {
+	return (await getCollection('experience', (workExp) => workExp.data.language === locale))
+		// sort by work started date
+		.sort((a, b) => b.data.start_date.valueOf() - a.data.start_date.valueOf());
+}
+
+const workExperience = await getWorkExperience();
+
+const getEducation = async () => {
+	return (await getCollection('education', (education) => education.data.language === locale))
+		// sort by graduation date
+		.sort((a, b) => b.data.start_date.valueOf() - a.data.start_date.valueOf());
+}
+
+const education = await getEducation();
+
 ---
 
 <BaseLayout title="dcueto.me - Portfolio">
@@ -53,8 +70,8 @@ const latestsProjects = await getLatestsProjects();
 	<LatestsArticles articles={latestsPosts}></LatestsArticles>
 	<AboutMe></AboutMe>
 	<Projects projects={latestsProjects}></Projects>
-	<WorkExperience></WorkExperience>
-	<Education></Education>
+	<WorkExperience experience={workExperience}></WorkExperience>
+	<Education education={education}></Education>
 	<aside>
 		<SocialButtons></SocialButtons>
 		<ContactMe></ContactMe>
