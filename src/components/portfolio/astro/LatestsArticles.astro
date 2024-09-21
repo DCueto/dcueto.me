@@ -41,7 +41,7 @@ const link = (page: Page, slug: string): string => generateLink(page, slug, path
     }
   </div>
 
-  <Button size="default" text={ t('articles.buttonAllArticles').toUpperCase() } align='center'/>
+  <a href={`/${locale}/blog`}><Button size="default" text={ t('articles.buttonAllArticles').toUpperCase() } align='center'/></a>
 </section>
 
 <style lang="scss">

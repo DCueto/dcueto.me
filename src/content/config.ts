@@ -28,6 +28,7 @@ const projectSchema = z.object({
   language: z.enum(['en', 'es']), // languages defined
   publication_date: z.date(),
   related_posts: z.array(reference('blog')).optional(),
+  href: z.string().optional()
 });
 
 
