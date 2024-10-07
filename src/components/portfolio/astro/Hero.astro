@@ -22,10 +22,10 @@ const toBeTyped = tArray('hero.descriptions');
 
     <DynamicText content={toBeTyped} textBefore={t('hero.descriptionPrefix')} />
 
-    <CommandButton textBefore={t('hero.commandButton.textBefore')} textAfter={t('hero.commandButton.textAfter')}>
+    <!-- <CommandButton textBefore={t('hero.commandButton.textBefore')} textAfter={t('hero.commandButton.textAfter')}>
       <KeyboardKey iconClass="command-icon" key="⌘"></KeyboardKey>
       <KeyboardKey iconClass="key-icon" key="B"></KeyboardKey>
-    </CommandButton>
+    </CommandButton> -->
   </div>
 
   <!-- <div class="second-column">
@@ -86,6 +86,10 @@ const toBeTyped = tArray('hero.descriptions');
   .hero figure img{
     width: 100%;
     border-radius: 50%;
+  }
+
+  .hero h5{
+    display: block;
   }
 
   @media screen and ( width <= 750px ) {

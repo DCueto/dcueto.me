@@ -1,11 +1,15 @@
 ---
-
+import mdxComponents from "@components/shared/astro/mdxComponents/mdxComponents.ts";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { getCollection, type CollectionEntry } from "astro:content";
+import type { Locale } from "@services/routing";
 
 interface Props {
   blogPost: CollectionEntry<'blog'>;
 }
+
+const locale = Astro.params.locale as Locale;
+const dateOptions: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'short', year: 'numeric' };
 
 export async function getStaticPaths() {
   const blogPosts = await getCollection("blog") as CollectionEntry<'blog'>[];
@@ -34,15 +38,190 @@ const { Content } = await blogPost.render();
 ---
 
 <BaseLayout title={ blogPost.data.title } >
-  <div class="wrap">
-    <h1>{ blogPost.data.title }</h1>
-    <p>{ blogPost.data.description }</p>
-    <Content />
+  <div class="page-base">
+    <section class=`cover ${ blogPost.data.image && 'full-cover' }`>
+      <div class="cover__text">
+        <p class="text__related">
+          <span class="related__date">
+            {
+              blogPost.data.language === 'en' ?
+              blogPost.data.publication_date.toLocaleDateString('en-US', dateOptions) :
+              blogPost.data.language === 'es' ?
+              blogPost.data.publication_date.toLocaleDateString('es-ES', dateOptions) :
+              blogPost.data.publication_date.toLocaleDateString('en-GB', dateOptions)
+            }
+          </span>
+          -- 
+          { blogPost.data.translated_post && 
+            <a href={ `/${locale == 'en' ? 'es' : 'en'}/blog/${blogPost.data.translated_post.slug}` } class="related__language">
+              {
+                locale == 'en'
+                ? 'Articulo disponible en Español' :
+                locale == 'es' ? 'Post available in English' :
+                ''
+              }
+            </a>
+          }
+        </p>
+        <h1 class="cover__title">{ blogPost.data.title }</h1>
+        <p class="cover__description">
+          { blogPost.data.description }
+        </p>
+      </div>
+      {
+        blogPost.data.image && (
+          <figure class="cover__img">
+            <img src={ (blogPost.data.image.url) } alt={ blogPost.data.image.alt } />
+          </figure>
+        )
+      }
+    </section>
+
+    <div class="wrap article-container">
+      <Content components={mdxComponents} />
+    </div>
   </div>
 </BaseLayout>
 
-<style>
+<style lang="scss">
+
+  @mixin light-theme {
+    --color-background__base: var(--color-white-pearl);
+  }
+
+  @mixin dark-theme {
+    --color-background__base: var(--color-black-gray);
+    --color-text__base: var(--color-gray-light);
+  }
+
+  :root{
+    @include light-theme;
+  }
+
+  :root.dark{
+    @include dark-theme;
+  }
+
+  @media ( prefers-color-scheme: dark ) {
+    :root{
+      @include light-theme;
+    }
+
+    :root.dark{
+      @include dark-theme;
+    }
+  }
+
   main {
     color: white;
   }
+
+  .page-base {
+    background-color: var(--color-background__base);
+    color: var(--color-text__base);
+    min-height: 100vh;
+    font-size: 19px;
+
+    // p, a {
+    //   font-size: 1.3rem;
+    //   line-height: 1.6;
+    // }
+  }
+
+  .cover__text{
+    .text__related {
+      margin: 0;
+      span{
+        font-size: 1rem;
+        color: var(--color-gray-dark4);
+        font-weight: 600;
+        margin: 1rem 0;
+        margin-bottom: 2.5rem;
+        text-align: left;
+      }
+    }
+    .cover__title{
+      font-size: 3rem;
+      font-weight: 700;
+      margin: 1rem 0;
+      margin-bottom: 2.5rem;
+      text-align: left;
+    }
+
+    .cover__description{
+      font-size: 0.9rem;
+      color: var(--color-gray-dark4);
+      // margin: 1rem 0;
+      margin-bottom: 2.5rem;
+      text-align: left;
+    }
+  }
+
+  .cover{
+    // background-color: var(--color-yellow-soft);
+    margin-bottom: 3rem;
+  }
+
+  .full-cover {
+    display: flex;
+    align-items: center;
+    // height: 40vh;
+
+    .cover__text{
+      width: 100%;
+      padding: 1rem;
+      padding-left: 10%;
+      padding-right: 2rem;
+      transition: linear all .3s;
+    }
+    .cover__img{
+      width: 100%;
+      align-self: flex-start;
+      // min-height: 100%;
+      height: 100%;
+
+      img{
+        // margin-top: .1rem;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+
+
+  @media screen and ( width >= 375px) {
+    .full-cover {
+      .cover__text{
+        padding-left: 1.7rem;
+      }
+    }
+  }
+
+  @media screen and ( width >= 768px) {
+    .full-cover {
+      .cover__text{
+        padding-left: 4%;
+      }
+    }
+  }
+
+  @media screen and ( width >= 992px) {
+    .full-cover {
+      .cover__text{
+        padding-left: 7%;
+      }
+    }
+  }
+
+  @media screen and ( width >= 1140px) {
+    .full-cover {
+      .cover__text{
+        padding-left: 10%;
+      }
+    }
+  }
+
+
+
 </style>

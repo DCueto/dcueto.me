@@ -4,12 +4,13 @@
     title: string;
     description: string;
     href: string;
+    size?: 'small' | 'medium' | 'large';
   };
 
-  const { date, title, description, href } = Astro.props;
+  const { date, title, description, href, size = 'small' } = Astro.props;
 ---
 
-<a href={href} class="blog-post">
+<a href={href} class=`blog-post ${size}`>
   <article>
     <span>{ date }</span>
     <h4>{ title }</h4>
@@ -21,11 +22,13 @@
   @mixin light-theme {
     --color-background__blog-post--hover: var(--color-gray-light);
     --color-text__blog-post--hover__h4: var(--color-yellow-darker);
+    --color-text__blog-post__p: var(--color-gray-dark4);
   }
 
   @mixin dark-theme {
     --color-background__blog-post--hover: var(--color-gray-dark);
     --color-text__blog-post--hover__h4: var(--color-yellow-darker);
+    --color-text__blog-post__p: var(--color-gray-light2);
   }
 
   :root{
@@ -47,7 +50,7 @@
   }
   
   .blog-post{
-    max-width: 45%;
+    max-width: 48%;
     margin: 0.625rem 0;
     padding: 1.25rem;
     cursor: pointer;
@@ -66,6 +69,19 @@
 
   .blog-post:hover h4{
     color: var(--color-text__blog-post--hover__h4);
+  }
+
+  .blog-post p{
+    font-weight: 500;
+    color: var(--color-text__blog-post__p);
+  }
+
+  .blog-post.medium h4 {
+    font-size: 1.8rem;
+  }
+
+  .blog-post.medium span {
+    font-size: .9rem;
   }
 
   @media screen and ( width <= 850px ) {

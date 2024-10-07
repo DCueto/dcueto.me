@@ -1,0 +1,18 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+type Props = HTMLAttributes<'h1'>;
+
+const { props } = Astro;
+---
+
+<h1 class="article-h1" {...props}>
+  <slot />
+</h1>
+
+<style>
+  .article-h1 {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+  }
+</style>

@@ -1,7 +1,12 @@
 ---
-import BaseLayout from '@layouts/BaseLayout.astro';
+import BlogLayout from '@layouts/BlogLayout.astro';
+import ArticleCard from '@components/shared/astro/ArticleCard.astro';
 import { getCollection } from 'astro:content';
 import { locales } from "@services/routing";
+import { generateLink } from '@services/routing';
+import { getTranslationValue } from "@utils/i18n";
+
+import type { Locale, Page } from '@services/routing';
 
 export async function getStaticPaths() {
   return locales.map(locale => {
@@ -12,50 +17,40 @@ export async function getStaticPaths() {
 }
 
 const { locale } = Astro.params;
+const { pathname } = Astro.url;
 
+const dateOptions: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'short', year: 'numeric' };
 const allBlogPosts = await getCollection('blog', (post) => post.data.language === locale);
+
+const link = (page: Page, slug: string): string => generateLink(page, slug, pathname, locale);
 ---
 
-<BaseLayout title="Welcome to Astro.">
-	<div class="wrap">
-		<h1>Blog</h1>
-		{
-			allBlogPosts.map(post => {
-				return (
-					<a href={`blog/${post.slug}`}>
-						<h2>{ post.data.title }</h2>
-						<p>{ post.data.description }</p>
-						<p>{ post.data.language }</p>
-					</a>
-				)
-			})
-		}
+<BlogLayout>
+	{
+		allBlogPosts.map(article => {
+			return (
+			<ArticleCard
+          date={
+            article.data.language === 'en'
+            ? article.data.publication_date.toLocaleDateString('en-US', dateOptions) :
+            article.data.language === 'es'
+            ? article.data.publication_date.toLocaleDateString('es-ES', dateOptions) :
+            article.data.publication_date.toLocaleDateString('en-GB', dateOptions)
+          }
+          title={article.data.title}
+          description={article.data.description}
+          href={ `blog/${article.slug}` }
+          size='medium'
+        />
+			)
+		})
+	}
+
+	<div slot="alt">
+		<!-- <p>THIS GOES ANYTHING ELSE</p> -->
 	</div>
-</BaseLayout>
+</BlogLayout>
 
 <style>
-	main {
-		margin: auto;
-		padding: 1rem;
-		width: 800px;
-		max-width: calc(100% - 2rem);
-		color: white;
-		font-size: 20px;
-		line-height: 1.6;
-	}
-	h1 {
-		font-size: 4rem;
-		font-weight: 700;
-		line-height: 1;
-		text-align: center;
-		margin-bottom: 1em;
-	}
-	a {
-		color: white;
-		text-decoration: none;
-	}
 
-	a:hover h2{
-		text-decoration: underline;
-	}
 </style>
