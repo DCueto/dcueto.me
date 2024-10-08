@@ -27,11 +27,17 @@ const t = (key: string): string => locale ? getTranslationValue(locale, key) : g
   @mixin light-theme {
     --color-background__footer: var(--color-yellow-soft);
     --color-text__footer: black;
+    --color-anchor__footer: var(--color-yellow-darkest);
+    --color-anchor-selection__footer: black;
+    --color-anchor-hover__footer: var(--color-black-night);
   }
 
   @mixin dark-theme {
-    --color-background__footer: var(--color-yellow-main);
+    --color-background__footer: var(--color-yellow-dark);
     --color-text__footer: black;
+    --color-anchor__footer: var(--color-yellow-darkest);
+    --color-anchor-selection__footer: var(--color-yellow-js);
+    --color-anchor-hover__footer: var(--color-black-night);
   }
 
   :root{
@@ -64,5 +70,20 @@ const t = (key: string): string => locale ? getTranslationValue(locale, key) : g
     font-size: 0.875rem;
     margin: 1.25rem 0;
     color: var(--color-text__footer);
+  }
+
+  footer a{
+    color: var(--color-anchor__footer);
+    // text-decoration: none;
+    // font-weight: bold;
+    // transition: all .2s ease-in-out;
+  }
+
+  footer a:hover{
+    color: var(--color-anchor-hover__footer);
+  }
+
+  footer a::selection{
+    color: var(--color-anchor-selection__footer);
   }
 </style>

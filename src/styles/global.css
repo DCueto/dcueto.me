@@ -13,7 +13,9 @@
   --color-yellow-js: #F7DF1E;
   --color-yellow-light: #FFF178;
   --color-yellow-soft: #FAF1C1;
+  --color-yellow-dark: #ecd423;
   --color-yellow-darker: #DEC81A;
+  --color-yellow-darkest: #8f730e;
 
   --color-black-oil: #0C0C0C;
   --color-black-obsidian: #0B1215;
@@ -25,6 +27,8 @@
   --color-gray-light: #F9F9F9;
   --color-gray-light2: #E7E7E7;
   --color-gray-light3: #ECECEC;
+  --color-gray-light4: #dadada;
+
   --color-gray-yellowed: #DCE0C3;
   --color-gray-brownie: #424834;
 
@@ -45,7 +49,7 @@
   --color-text-selection: var(--color-black-obsidian);
   --color-background-text-selection: var(--color-yellow-js);
   --color-span-default: var(--color-gray-brownie);
-  --color-anchor-default: var(--color-yellow-darker);
+  --color-anchor-default: var(--color-yellow-darkest);
   --color-anchor-selection: black;
   --color-anchor-hover: var(--color-black-night);
   --color-text__default: black;
@@ -67,6 +71,9 @@
   --color-border__tab-rounded--active: black;
   --color-text__tab-rounded-active: black;
 
+
+  /* mdxComponents */
+  --color-text__article: var(--color-gray-dark);
 }
 
 /* -----------  DARK MODE ------------ */
@@ -80,7 +87,7 @@
   --color-span-default: var(--color-gray-light3);
   --color-anchor-default: var(--color-yellow-darker);
   --color-anchor-selection: black;
-  --color-anchor-hover: var(--color-black-night);
+  --color-anchor-hover: var(--color-white-pearl);
   --color-text__default: white;
   --color-text--bold-1: var(--color-yellow-js);
 
@@ -123,7 +130,7 @@
     --color-span-default: var(--color-gray-light3);
     --color-anchor-default: var(--color-yellow-darker);
     --color-anchor-selection: black;
-    --color-anchor-hover: var(--color-black-night);
+    --color-anchor-hover: var(--color-white-pearl);
     --color-text__default: white;
     --color-text--bold-1: var(--color-yellow-js);
 
@@ -146,6 +153,10 @@
     --color-background__tab-rounded--active: var(--color-yellow-main);
     --color-border__tab-rounded--active: black;
     --color-text__tab-rounded-active: black;
+
+    /* mdxComponents */
+
+    --color-text__article: var(--color-gray-light);
   }
 
   :root{
@@ -155,7 +166,7 @@
     --color-text-selection: var(--color-black-obsidian);
     --color-background-text-selection: var(--color-yellow-js);
     --color-span-default: var(--color-gray-brownie);
-    --color-anchor-default: var(--color-yellow-darker);
+    --color-anchor-default: var(--color-yellow-darkest);
     --color-anchor-selection: black;
     --color-anchor-hover: var(--color-black-night);
     --color-text__default: black;
@@ -180,6 +191,9 @@
   }
 }
 
+:root{
+  --base-letter-spacing: -0.035em;
+}
 
 /*#endregion*/
 
@@ -206,13 +220,6 @@ main{
   flex-direction: column;
 }
 
-h1{
-  font-size: 4rem;
-  font-weight: bold;
-  margin: .5em 0;
-  display: block;
-}
-
 h1.page-title{
   font-size: 2.6rem;
   font-weight: 600;
@@ -220,7 +227,7 @@ h1.page-title{
   text-align: left;
 }
 
-h2{
+h2.underline-title{
   font-size: 1.5rem;
   font-weight: bold;
   margin: 1em 0;
@@ -239,10 +246,23 @@ h2{
   }
 }
 
-h2:hover{
+h2.underline-title:hover{
   &::after{
     width: 105%;
   }
+}
+
+h1{
+  font-size: 4rem;
+  font-weight: bold;
+  margin: .5em 0;
+  display: block;
+}
+
+h2{
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 1em 0;
 }
 
 h3{
@@ -281,7 +301,7 @@ p{
   line-height: 150%;
 }
 
-p::selection, h2::selection, h3::selection, h4::selection, span::selection{
+p::selection, h1::selection, h2::selection, h3::selection, h4::selection, h5::selection, span::selection{
   background-color: var(--color-background-text-selection);
   color: var(--color-text-selection);;
 }
@@ -294,7 +314,7 @@ span{
 a{
   font-size: 0.875rem;
   color: var(--color-anchor-default);
-  font-weight: bold;
+  /* font-weight: normal; */
   text-decoration: none;
 }
 
@@ -382,19 +402,83 @@ li {
 
 
 
+/* MDXCOMPONENTS - ARTICLES */
+
+.mdx-render{
+  font-size: 16px;
+}
+
+.mdx-render>:not(.article-image-container){
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mdx-render {
+  color: var(--color-text__article);
+  letter-spacing: -0.035em;
+
+  h1{
+    font-size: 2em;
+    font-weight: bold;
+    margin: .5em 0;
+    display: block;
+  }
+
+  h2{
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 1em 0;
+    margin-top: 1.5em;
+    display: block;
+  }
+
+  h3{
+    margin: .5em 0;
+    font-size: 1.375em;
+    font-weight: bold;
+    display: block;
+  }
+  
+  h4{
+    margin: .5em 0;
+    font-size: 1.125rem;
+    font-weight: bold;
+    display: block;
+  }
+  
+  h5{
+    margin: .5em 0;
+    font-size: 0.875rem;
+    font-weight: bold;
+    line-height: 120%;
+    display: block;
+  }
+  
+  h6{
+    margin: .5em 0;
+    font-size: 0.625rem;
+    font-weight: bold;
+    display: block;
+  }
+
+  p, a{
+    line-height: 1.6;
+  }
+
+  p{
+    font-weight: normal;
+    font-size: 1em;
+  }
+
+  a{
+    font-size: 1em;
+  }
+}
+
+
+
 /*#region  ------ MEDIA QUERIES ------ */
-
-@media screen and ( width <= 850px ) {
-
-}
-
-@media screen and ( width <= 800px ) {
-
-}
-
-@media screen and ( width <= 750px ) {
-
-}
 
 @media screen and ( width >= 375px) {
   .wrap {
@@ -405,6 +489,10 @@ li {
 @media screen and ( width >= 768px) {
   .wrap {
     padding: 0 4%;
+  }
+
+  .mdx-render{
+    font-size: 18px;
   }
 }
 
