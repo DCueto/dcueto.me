@@ -6,6 +6,9 @@
       "@components/*": [
         "src/components/*"
       ],
+      "@mdxComponents/*": [
+        "src/components/shared/astro/mdxComponents/*"
+      ],
       "@layouts/*": [
         "src/layouts/*"
       ],

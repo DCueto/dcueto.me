@@ -16,8 +16,6 @@ image: {
 }
 ---
 
-import ImageBox from "@components/shared/astro/mdxComponents/ImageBox.astro"
-
 # This is the first post of the blog
 
 Astro 2.0 has arrived with a *plethora of new features and improvements* that make building modern websites even more enjoyable. In this post, we'll explore some of the most exciting updates, including enhanced performance, new integrations, and improved developer experience.
@@ -25,8 +23,6 @@ Astro 2.0 has arrived with a *plethora of new features and improvements* that ma
 ## Enhanced Performance
 
 One of the key **highlights** of **Astro 2.0** is its *enhanced performance*. The new version introduces optimizations that significantly reduce build times and improve runtime performance. This means faster websites and a smoother development experience.
-
-test
 
 > Quote this as a blockquote
 
@@ -36,9 +32,7 @@ List of performance improvements:
 2. Improved runtime performance
 3. Reduced bundle sizes
 
-<ImageBox>
-  ![performance](/images/egor.jpg)
-</ImageBox>
+<Image src="/images/egor.jpg" alt="performance" />
 
 ## New Integrations
 
@@ -55,7 +49,7 @@ List of new integrations:
 - Angular
   - Angular Universal
 
-![integrations](https://kinsta.com/wp-content/uploads/2023/04/react-must-be-in-scope-when-using-jsx.jpg)
+<Image src="https://kinsta.com/wp-content/uploads/2023/04/react-must-be-in-scope-when-using-jsx.jpg" alt="integrations" />
 
 ## Improved Developer Experience
 
@@ -63,22 +57,55 @@ The developer experience has been a major focus in Astro 2.0. The new version in
 
 ### Code Experience
 
-```
-  @media screen and ( width >= 375px) {
-    .full-cover {
-      .cover__text{
-        padding-left: 1.7rem;
-      }
+```css
+@media screen and ( width >= 375px) {
+  .full-cover {
+    .cover__text{
+      padding-left: 1.7rem;
     }
   }
+}
 
-  @media screen and ( width >= 425px) {
-    .full-cover {
-      .cover__text{
-        width: 100%;
-      }
+@media screen and ( width >= 425px) {
+  .full-cover {
+    .cover__text{
+      width: 100%;
     }
   }
+}
+```
+
+```typescript
+interface Props {
+  blogPost: CollectionEntry<'blog'>;
+}
+
+const locale = Astro.params.locale as Locale;
+const dateOptions: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'short', year: 'numeric' };
+
+export async function getStaticPaths() {
+  const blogPosts = await getCollection("blog") as CollectionEntry<'blog'>[];
+
+  const paths = blogPosts.map((blogPost) => {
+    const url = `${blogPost.slug}`;
+    const locale = blogPost.data.language;
+
+    return {
+      params: {
+        locale,
+        path: url,
+      },
+      props: {
+        blogPost
+      }
+    }
+  });
+
+  return paths;
+}
+
+const { blogPost } = Astro.props as Props;
+const { Content } = await blogPost.render();
 ```
 
 ` const = 'Hello World' `
