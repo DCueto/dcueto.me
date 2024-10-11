@@ -226,6 +226,7 @@
 
 html{
   font-family: 'Source Code Pro', 'Oxygen Mono', 'Oxygen', 'sans-serif';
+  /* font-family: 'Space Mono', 'Roboto Mono', 'Source Code Pro', 'Oxygen Mono', 'monospace'; */
   font-size: 16px;
   color: var(--color-text__default);
 }
@@ -499,6 +500,7 @@ li {
 
   p, a, li{
     line-height: 1.8;
+    font-size: 1em;
   }
 
   p{
@@ -627,7 +629,7 @@ li {
   }
 
   .mdx-render{
-    font-size: 18px;
+    font-size: 19px;
   }
 }
 
