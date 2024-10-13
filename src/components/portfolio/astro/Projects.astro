@@ -18,7 +18,7 @@ const t = (key: string): string => locale ? getTranslationValue(locale, key) : g
 ---
 
 <section class="projects wrap">
-  <h2>{ t('projects.title') }</h2>
+  <h2 class="underline-title">{ t('projects.title') }</h2>
   <div class="projects-container">
     {
       projects.map((project) => (

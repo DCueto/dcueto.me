@@ -7,13 +7,22 @@ import Footer from "@components/shared/astro/Footer.astro";
 import ModalNavigator from "@components/shared/astro/ModalNavigator.astro";
 import ShiftThemeMode from "@components/shared/astro/ShiftThemeMode.astro";
 import { SEO } from "astro-seo";
+import SideNav from '@components/shared/react/SideNav';
+import SideNavItem from '@components/shared/react/SideNavItem';
 
 type Props = {
   title: string;
   description?: string;
 };
 
+const locale = Astro.currentLocale;
+const navItems = [
+  { text: "Home", href: `/${locale}/`, path: "" },
+  { text: "Blog", href: `/${locale}/blog`, path: "blog" },
+];
+
 const { title, description = "Daniel Cueto's portfolio" } = Astro.props;
+
 ---
 
 <html lang="en">
@@ -70,8 +79,15 @@ const { title, description = "Daniel Cueto's portfolio" } = Astro.props;
     <ShiftThemeMode />
   </head>
   <body>
-    <ModalNavigator />
+    <!-- <ModalNavigator /> -->
     <NavigationBar />
+    <SideNav client:idle>
+      {
+        navItems.map( ({ text, href }) => (
+          <SideNavItem client:visible href={href}>{ text }</SideNavItem>
+        ))
+      }
+    </SideNav>
     <main>
       <slot />
     </main>

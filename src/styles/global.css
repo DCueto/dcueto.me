@@ -11,6 +11,7 @@
   /*  Colors  */
   --color-yellow-main: #FFF643;
   --color-yellow-js: #F7DF1E;
+  --color-yellow-alt: #fae94f;
   --color-yellow-light: #FFF178;
   --color-yellow-soft: #FAF1C1;
   --color-yellow-dark: #ecd423;
@@ -55,7 +56,7 @@
   --color-anchor-selection: black;
   --color-anchor-hover: var(--color-black-night);
   --color-text__default: black;
-  --color-text--bold-1: var(--color-yellow-darker);
+  --color-text--bold-1: var(--color-yellow-darkest);
   --color-text__inline-code: var(--color-gray-dark);
   --color-background__inline-code: var(--color-gray-light2);
 
@@ -185,7 +186,7 @@
     --color-anchor-selection: black;
     --color-anchor-hover: var(--color-black-night);
     --color-text__default: black;
-    --color-text--bold-1: var(--color-yellow-darker);
+    --color-text--bold-1: var(--color-yellow-darkest);
     --color-text__inline-code: var(--color-gray-dark);
     --color-background__inline-code: var(--color-gray-light2);
 
@@ -225,7 +226,7 @@
 /*#region GENERAL STYLES */
 
 html{
-  font-family: 'Source Code Pro', 'Oxygen Mono', 'Oxygen', 'sans-serif';
+  font-family: 'Source Code Pro', 'Space Mono', 'Roboto Mono', 'Oxygen Mono', 'Oxygen', 'sans-serif';
   /* font-family: 'Space Mono', 'Roboto Mono', 'Source Code Pro', 'Oxygen Mono', 'monospace'; */
   font-size: 16px;
   color: var(--color-text__default);
@@ -367,6 +368,10 @@ li {
   transition: linear all .3s;
 }
 
+.wrap-content{
+  max-width: 1300px;
+}
+
 .hidden{
   display: none !important;
 }
@@ -436,7 +441,7 @@ li {
 }
 
 .mdx-render>:not(.article-image-container){
-  max-width: 700px;
+  max-width: 800px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -624,12 +629,17 @@ li {
 }
 
 @media screen and ( width >= 768px) {
+
+  html{
+    font-size: 18px;
+  }
+
   .wrap {
     padding: 0 4%;
   }
 
   .mdx-render{
-    font-size: 19px;
+    font-size: 1rem;
   }
 }
 
@@ -649,13 +659,21 @@ li {
 
 @media screen and ( width >= 1400px ){
   html{
-    font-size: 16px;
+    font-size: 19px;
+  }
+
+  .mdx-render>:not(.article-image-container){
+    max-width: 900px;
   }
 }
 
 @media screen and ( width >= 1800px ){
   html{
-    font-size: 16px;
+    font-size: 19px;
+  }
+
+  .mdx-render>:not(.article-image-container){
+    max-width: 1100px;
   }
 }
 
@@ -663,13 +681,20 @@ li {
   html{
     font-size: 22px;
   }
+
+  .mdx-render>:not(.article-image-container){
+    max-width: 1600px;
+  }
 }
 
 @media screen and ( width >= 3840px ){
   html{
     font-size: 28px;
   }
+
+  .mdx-render>:not(.article-image-container){
+    max-width: 2000px;
+  }
 }
 
 /*#endregion */
-

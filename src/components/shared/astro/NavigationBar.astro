@@ -2,6 +2,7 @@
 import ThemeToggler from "./ThemeToggler.astro";
 import NavBarItem from "@components/shared/astro/NavBarItem.astro";
 import { i18nConfig } from "astro.config.mjs";
+import BurgerMenuButton from "@components/shared/react/BurgerMenuButton";
 
 
 const logoImage = "/images/logo.svg";
@@ -44,6 +45,7 @@ const navItems = [
         <!-- UNCOMMENT LATER -->
         <!-- <i class="search-icon fa-solid fa-magnifying-glass"></i> -->
         <ThemeToggler />
+        <BurgerMenuButton client:idle />
       </div>
     </div>
   </nav>
@@ -110,7 +112,7 @@ header .top-nav{
 }
 
 .top-nav .top-nav__right ul{
-  display: flex;
+  display: none;
   justify-content: space-evenly;
   gap: 0.9375rem;
 }
@@ -118,7 +120,7 @@ header .top-nav{
 .top-nav .top-nav__icons {
   display: flex;
   align-items: center;
-  gap: .5rem;
+  gap: 0.9375rem;
 }
 
 .top-nav i{
@@ -145,10 +147,18 @@ select#locale {
   font-weight: bold;
 }
 
-@media screen and ( width <= 500px ) {
+// button.burgerMenu{
+//   display: flex;
+// }
+
+@media screen and ( width > 767px ) {
   .top-nav .top-nav__right ul{
-    display: none !important;
+    display: flex !important;
   }
+
+  // button.burgerMenu{
+  //   display: none;
+  // }
 }
 
 </style>

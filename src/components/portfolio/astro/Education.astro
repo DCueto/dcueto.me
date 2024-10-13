@@ -15,7 +15,7 @@ const t = (key: string): string => locale ? getTranslationValue(locale, key) : g
 ---
 
 <section class="education wrap">
-  <h2>{ t("education.title") }</h2>
+  <h2 class="underline-title">{ t("education.title") }</h2>
   {
     collection.map((entry) => (
       <EducationItem dataEntry={entry} />

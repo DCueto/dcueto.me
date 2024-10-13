@@ -215,8 +215,8 @@
 
     if ( commandStart ) commandStart.addEventListener( 'click', showsModal );
     
-    searchIcon.addEventListener( 'click', showsModal );
-    closeModalIcon.addEventListener( 'click', hideModal );
+    searchIcon && searchIcon.addEventListener( 'click', showsModal );
+    closeModalIcon && closeModalIcon.addEventListener( 'click', hideModal );
 
     modal.addEventListener('click', ( e ) => {
       e.stopPropagation();

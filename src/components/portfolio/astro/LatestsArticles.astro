@@ -21,7 +21,7 @@ const link = (page: Page, slug: string): string => generateLink(page, slug, path
 ---
 
 <section class="latests-articles wrap">
-  <h2>{ t('articles.title') }</h2>
+  <h2 class="underline-title">{ t('articles.title') }</h2>
   <div class="articles-container">
     {
       articles.map((article) => (
