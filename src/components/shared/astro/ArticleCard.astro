@@ -1,0 +1,100 @@
+---
+  type Props = {
+    date: string;
+    title: string;
+    description: string;
+    href: string;
+    size?: 'small' | 'medium' | 'large';
+    image?: string;
+  };
+
+  const { date, image, title, description, href, size = 'small' } = Astro.props;
+---
+
+<a href={href} class=`blog-post ${size}`>
+  <article>
+    <span>{ date }</span>
+    <!-- { image && <img class="blog-post__image" src={image} alt={title} /> } -->
+    <h4>{ title }</h4>
+    <p>{ description }</p>
+  </article>
+</a>
+
+<style lang="scss">
+  @mixin light-theme {
+    --color-background__blog-post--hover: var(--color-gray-light);
+    --color-text__blog-post--hover__h4: var(--color-yellow-darker);
+    --color-text__blog-post__p: var(--color-gray-dark4);
+  }
+
+  @mixin dark-theme {
+    --color-background__blog-post--hover: var(--color-gray-dark);
+    --color-text__blog-post--hover__h4: var(--color-yellow-darker);
+    --color-text__blog-post__p: var(--color-gray-light2);
+  }
+
+  :root{
+    @include light-theme;
+  }
+
+  :root.dark{
+    @include dark-theme;
+  }
+
+  @media ( prefers-color-scheme: dark ) {
+    :root{
+      @include light-theme;
+    }
+
+    :root.dark{
+      @include dark-theme;
+    }
+  }
+  
+  .blog-post{
+    max-width: 48%;
+    margin: 0.625rem 0;
+    padding: 1.25rem;
+    cursor: pointer;
+    transition: all .3s ease;
+    text-decoration: none;
+    color: var(--color-text__default);
+    
+    &__image{
+      width: 100%;
+      max-height: 300px;
+      object-fit: cover;
+    }
+  }
+
+  .blog-post:hover{
+    background-color: var(--color-background__blog-post--hover);
+  }
+
+  .blog-post h4{
+    transition: all .3s ease;
+  }
+
+  .blog-post:hover h4{
+    color: var(--color-text__blog-post--hover__h4);
+  }
+
+  .blog-post p{
+    font-weight: 500;
+    color: var(--color-text__blog-post__p);
+  }
+
+  .blog-post.medium h4 {
+    font-size: 1.8rem;
+  }
+
+  .blog-post.medium span {
+    font-size: .9rem;
+  }
+
+  @media screen and ( width <= 850px ) {
+    .blog-post{
+      max-width: 100%;
+    }
+  }
+</style>

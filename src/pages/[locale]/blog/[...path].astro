@@ -1,0 +1,292 @@
+---
+import ProgressBarScrolled from "@components/shared/astro/ProgressBarScrolled.astro";
+import { mdxComponents } from "@components/shared/astro/mdxComponents/mdxComponents.ts";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+import type { Locale } from "@services/routing";
+
+interface Props {
+  blogPost: CollectionEntry<'blog'>;
+}
+
+const locale = Astro.params.locale as Locale;
+const dateOptions: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'short', year: 'numeric' };
+
+export async function getStaticPaths() {
+  const blogPosts = await getCollection("blog") as CollectionEntry<'blog'>[];
+
+  const paths = blogPosts.map((blogPost) => {
+    const url = `${blogPost.slug}`;
+    const locale = blogPost.data.language;
+
+    return {
+      params: {
+        locale,
+        path: url,
+      },
+      props: {
+        blogPost
+      }
+    }
+  });
+
+  return paths;
+}
+
+const { blogPost } = Astro.props as Props;
+const { Content } = await blogPost.render();
+
+---
+
+<BaseLayout title={ blogPost.data.title } >
+  <div class="page-base">
+    <section class=`cover ${ blogPost.data.image ? 'full-cover' : 'only-text-cover wrap'}`>
+      <div class="cover__text">
+        <p class="text__related">
+          <span class="related__date">
+            {
+              blogPost.data.language === 'en' ?
+              blogPost.data.publication_date.toLocaleDateString('en-US', dateOptions) :
+              blogPost.data.language === 'es' ?
+              blogPost.data.publication_date.toLocaleDateString('es-ES', dateOptions) :
+              blogPost.data.publication_date.toLocaleDateString('en-GB', dateOptions)
+            }
+          </span>
+          -- 
+          { blogPost.data.translated_post && 
+            <a href={ `/${locale == 'en' ? 'es' : 'en'}/blog/${blogPost.data.translated_post.slug}` } class="related__language">
+              {
+                locale == 'en'
+                ? 'Articulo disponible en Español' :
+                locale == 'es' ? 'Post available in English' :
+                ''
+              }
+            </a>
+          }
+        </p>
+        <h1 class="cover__title">{ blogPost.data.title }</h1>
+        <p class="cover__description">
+          { blogPost.data.description }
+        </p>
+      </div>
+      {
+        blogPost.data.image && (
+          <figure class="cover__img">
+            <img src={ (blogPost.data.image.url) } alt={ blogPost.data.image.alt } />
+          </figure>
+        )
+      }
+    </section>
+    <ProgressBarScrolled />
+    <!-- <div class="progress-bar-container">
+    </div> -->
+    
+
+    <div class="wrap article-container mdx-render">
+      <Content components={mdxComponents} />
+    </div>
+  </div>
+</BaseLayout>
+
+<style lang="scss">
+
+  @mixin light-theme {
+    --color-background__base: var(--color-white-pearl);
+    --color-text__base: var(--color-gray-dark);
+    --color-text__cover__title: var(--color-gray-dark);
+    --color-text__cover__description: var(--color-gray-dark4);
+    --color-text__cover__date: var(--color-gray-dark2);
+  }
+
+  @mixin dark-theme {
+    --color-background__base: var(--color-black-gray);
+    --color-text__base: var(--color-gray-light);
+    --color-text__cover__title: white;
+    --color-text__cover__description: var(--color-gray-light4);
+    --color-text__cover__date: var(--color-gray-light3);
+  }
+
+  :root{
+    @include light-theme;
+  }
+
+  :root.dark{
+    @include dark-theme;
+  }
+
+  @media ( prefers-color-scheme: dark ) {
+    :root{
+      @include light-theme;
+    }
+
+    :root.dark{
+      @include dark-theme;
+    }
+  }
+
+  main {
+    color: white;
+  }
+
+  .page-base {
+    background-color: var(--color-background__base);
+    color: var(--color-text__base);
+    min-height: 100vh;
+    font-size: 16px;
+  }
+
+  .cover{
+    // background-color: var(--color-yellow-soft);
+    margin-bottom: 3rem;
+    font-family: 'Space Mono', 'Roboto Mono', 'Source Code Pro', 'Oxygen Mono', 'monospace';
+
+    .cover__text {
+      transition: linear all .3s;
+      font-size: .9rem;
+      width: 100%;
+      .text__related {
+        margin: 0;
+        font-size: .9em;
+        span{
+          font-size: 1.05em;
+          color: var(--color-text__cover__date);
+          font-weight: 600;
+          margin: 1rem 0;
+          margin-bottom: 2.5rem;
+          text-align: left;
+        }
+        a.related__language{
+          font-weight: 700;
+          font-size: 1em;
+        }
+      }
+
+      .cover__title{
+        font-size: 3em;
+        font-weight: 600;
+        margin-top: .5rem;
+        margin-bottom: 1rem;
+        text-align: left;
+        line-height: 1.3;
+        color: var(--color-text__cover__title);
+        letter-spacing: -0.015em;
+      }
+
+      .cover__description{
+        font-size: 1.10em;
+        color: var(--color-text__cover__description);
+        margin-bottom: 0;
+        text-align: left;
+        letter-spacing: -0.025em;
+      }
+    }
+  }
+  .full-cover {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    // height: 40vh;
+
+    .cover__text{
+      padding: 1.6rem;
+      padding-left: 10%;
+      padding-right: 2rem;
+      margin: 0 auto;
+
+      .cover__title{
+        margin-top: .1rem;
+        margin-bottom: 1rem;
+      }
+    }
+    .cover__img{
+      width: 100%;
+      align-self: flex-start;
+      // min-height: 100%;
+      height: 100%;
+
+      img{
+        // margin-top: .1rem;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+
+  .only-text-cover {
+    padding-top: 2rem;
+  }
+
+  .article-container {
+    padding-top: .5rem;
+    margin-bottom: 10rem;
+    max-width: 1300px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+
+  @media screen and ( width >= 375px) {
+    .full-cover {
+      .cover__text{
+        padding-left: 1.7rem;
+      }
+    }
+  }
+
+  @media screen and ( width >= 425px) {
+    .full-cover {
+      .cover__text{
+        width: 100%;
+      }
+    }
+  }
+
+  @media screen and ( width >= 650px) {
+    .full-cover {
+      .cover__text{
+        width: 80%;
+      }
+    }
+  }
+
+  @media screen and ( width >= 768px) {
+    .full-cover {
+      .cover__text{
+        padding-left: 4%;
+        width: 60%;
+      }
+    }
+
+    .cover{
+      .cover__text{
+        font-size: 1rem;
+      }
+
+      .cover__description{
+        font-size: 1.1em;
+      }
+    }
+  }
+
+  @media screen and ( width >= 992px) {
+    .full-cover {
+      flex-direction: row;
+      .cover__text{
+        padding-left: 7%;
+        width: 100%;
+      }
+    }
+  }
+
+  @media screen and ( width >= 1140px) {
+    .full-cover {
+      .cover__text{
+        padding-left: 10%;
+      }
+    }
+  }
+
+
+
+</style>

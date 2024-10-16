@@ -1,0 +1,25 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+type Props = HTMLAttributes<"image" | "img">;
+
+const { props } = Astro;
+---
+
+<div class="article-image-container">
+  <img class="article-image" {...props} />
+</div>
+
+
+<style>
+  .article-image-container{
+    margin: 2rem 0;
+  }
+  .article-image {
+    width: 100%;
+  }
+
+  img{
+    width: 100%;
+  }
+</style>

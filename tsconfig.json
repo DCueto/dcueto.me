@@ -3,10 +3,32 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@components/*": ["src/components/*"],
-      "@layouts/*": ["src/layouts/*"],
-      "@utils/*": ["src/utils/*"],
-      "@i18n/*": ["src/i18n/*"],
-    }
+      "@components/*": [
+        "src/components/*"
+      ],
+      "@mdxComponents/*": [
+        "src/components/shared/astro/mdxComponents/*"
+      ],
+      "@layouts/*": [
+        "src/layouts/*"
+      ],
+      "@utils/*": [
+        "src/utils/*"
+      ],
+      "@i18n/*": [
+        "src/i18n/*"
+      ],
+      "@services/*": [
+        "src/services/*"
+      ],
+      "@public/*": [
+        "public/*"
+      ],
+      "@stores/*": [
+        "src/stores/*"
+      ],
+    },
+    "jsx": "react-jsx",
+    "jsxImportSource": "react"
   }
 }

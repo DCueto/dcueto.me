@@ -1,0 +1,47 @@
+---
+import { getTranslationValue } from "@utils/i18n";
+import type { Locale } from '@services/routing';
+
+const locale = Astro.params.locale as Locale;
+const t = (key: string): string => locale ? getTranslationValue(locale, key) : getTranslationValue('en', key);
+---
+
+<section class="about-me wrap">
+  <h2 class="underline-title">{ t('about.title') }</h2>
+  <p>{ t('about.description') }</p>
+</section>
+
+
+<style lang="scss">
+  @mixin light-theme {
+    --color-background__about-me: var(--color-gray-light3);
+  }
+
+  @mixin dark-theme {
+    --color-background__about-me: var(--color-gray-dark);
+  }
+
+  :root{
+    @include light-theme;
+  }
+
+  :root.dark{
+    @include dark-theme;
+  }
+
+  @media ( prefers-color-scheme: dark ) {
+    :root{
+      @include light-theme;
+    }
+
+    :root.dark{
+      @include dark-theme;
+    }
+  }
+
+  .about-me{
+    background-color: var(--color-background__about-me);
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
+</style>

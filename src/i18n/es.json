@@ -1,0 +1,86 @@
+{
+  "nav": {
+    "home": "Home",
+    "blog": "Blog",
+    "projects": "Proyectos",
+    "contact": "Contáctame",
+    "about": "Sobre mí",
+    "modalNav": {
+      "navigationLabel": "Navegación",
+      "articlesLabel": "Artículos",
+      "inputSearch": "Inserta un comando o tu búsqueda..."
+    }
+  },
+  "hero": {
+    "greeting": "Hola, soy",
+    "name": "Daniel Cueto",
+    "descriptionPrefix": "Un",
+    "descriptions": [
+      "Desarrollador de Software",
+      "Entusiasta por el código",
+      "Desarrollador Frontend",
+      "Estudiante de Ingeniería de Software"
+    ],
+    "commandButton": {
+      "textBefore": "Presiona",
+      "textAfter": "para empezar"
+    }
+  },
+  "articles": {
+    "title": "Artículos",
+    "subtitle": "Aquí puedes encontrar algunos de mis artículos",
+    "readMore": "Leer más",
+    "buttonAllArticles": "Ver todos los artículos"
+  },
+  "about": {
+    "title": "Sobre Mí",
+    "subtitle": "Aquí puedes encontrar información sobre mí",
+    "description": "Desarrollador web con +1 de un año de experiencia. Especialización destacada en la parte frontend y sólida comprensión de las mejores prácticas de diseño UX/UI. Mi curiosidad e iniciativa me encaminó a la pasión autodidacta por la programación que me proporciona una gran adaptabilidad a nuevas tecnologías. La formación adquirida mediante los bootcamps me ha proporcionado una base robusta para abordar desafíos técnicos y destacar mis habilidades en el análisis y resolución de problemas. Metódico y enfocado al desarrollo de productos depurados mediante testing y dando gran énfasis al detalle. Mi experiencia previa en el desarrollo de aplicaciones iOS me proporcionó una visión global de la arquitectura de software. Disfruto de tomar decisiones en equipo y asumir riesgos si la situación lo require en pos de encontrar mejores soluciones. Soy una persona empática que le gusta conectar con las personas. Disfruto trabajar en proyectos que puedan contribuir positivamente a las personas. Todo esto me permite trasladar las necesidades del usuario hacia el software."
+  },
+  "projects": {
+    "title": "Proyectos",
+    "subtitle": "Aquí puedes encontrar algunos de mis proyectos",
+    "buttonAllProjects": "Ver todos los proyectos"
+  },
+  "experience": {
+    "title": "Experiencia",
+    "subtitle": "Aquí puedes encontrar algo de mi experiencia"
+  },
+  "education": {
+    "title": "Educación",
+    "subtitle": "Aquí puedes encontrar algo de mi educación"
+  },
+  "socialButtons": {
+    "github": "Github",
+    "linkedin": "Linkedin",
+    "x": "X",
+    "email": "Email"
+  },
+  "contact": {
+    "title": "Contacto",
+    "formName": {
+      "label": "Nombre",
+      "placeholder": "¿Cuál es tu nombre?"
+    },
+    "formEmail": {
+      "label": "Correo Electrónico",
+      "placeholder": "¿Cuál es tu email?"
+    },
+    "formSubject": {
+      "label": "Asunto",
+      "placeholder": "¿Cuál es el asunto?"
+    },
+    "formMessage": {
+      "label": "Mensaje",
+      "placeholder": "Escribe tu mensaje"
+    },
+    "formButton": "Enviar"
+  },
+  "footer": {
+    "message1": "Si has llegado hasta aquí, me encantaría que me devolvieras un 'Hola', <0>escribiéndome un tweet</0> o enviándome un <1>email</1>",
+    "message2": "© 2024 — Sitio web diseñado y programado por <0>Daniel Cueto</0> usando Astro, MDX y React.",
+    "tweeting": "escribiéndome un tweet",
+    "email": "email",
+    "name": "Daniel Cueto"
+  }
+}

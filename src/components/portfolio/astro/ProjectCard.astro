@@ -1,0 +1,254 @@
+---
+import Tag from '@components/shared/astro/Tag.astro';
+import CarouselSimple from '@components/shared/react/CarouselSimple';
+import CarrouselSimple from '@components/shared/astro/CarrouselSimple.astro';
+import { Image } from 'astro:assets';
+
+type ImageContent = {
+  image: {
+    src: string;
+    width: number;
+    height: number;
+    format: "png" | "jpg" | "jpeg" | "tiff" | "webp" | "gif" | "svg" | "avif";
+  };
+  alt?: string;
+}
+
+type AstroImage = {
+  src: string;
+  width: number;
+  height: number;
+  format: "png" | "jpg" | "jpeg" | "tiff" | "webp" | "gif" | "svg" | "avif";
+}
+
+type Props = {
+  title: string;
+  description?: string;
+  tags?: string[];
+  image: AstroImage;
+  href: string;
+  images?: ImageContent[];
+  repoLink?: string;
+  demoLink?: string;
+  link?: string;
+}
+
+type CarouselImage = {
+  src: string;
+  alt: string;
+}
+
+const { title, description, tags, image, href, images, repoLink, demoLink, link } = Astro.props;
+
+const carouselImages = images?.map((image) : CarouselImage => ({
+  src: image.image.src,
+  alt: image.alt || title
+}));
+---
+
+<article class="project-card">
+  <!-- <h3 class="project-title">{ title }</h3> -->
+  {
+    images ?
+      // <CarouselSimple images={ carouselImages as CarouselImage[] }></CarouselSimple> :
+      <CarrouselSimple images={ images } title={ title } /> :
+      <Image src={ image } alt={ title } class="project-img" />
+  }
+  <div class="project-details">
+    <h4>{ title }</h4>
+    <p>{ description }</p>
+    <div class="project-tags">
+      {
+        tags?.map((tag) => (
+          <Tag content={ tag } />
+        ))
+      }
+    </div>
+    <div class="project-links">
+      {
+        repoLink && <a href={ repoLink } class="project-link repo-link" target="_blank">Code</a>
+      }
+      {
+        demoLink && <a href = { demoLink } class="project-link demo-link" target="_blank">Demo</a>
+      }
+      {
+        link && <a href = { link } class="project-link" target="_blank">Link</a>
+      }
+    </div>
+  </div>
+  <div class="project-card-transition"></div>
+</article>
+
+
+<style lang="scss">
+  @mixin light-theme {
+    --color-text__project-details: white;
+    --color-background__project-details: var(--color-black-oil);
+    --color-background__project-card--transition: var(--color-yellow-main);
+    --color-text__project-card__h3: var(--color-yellow-js);
+    --color-background__project-card__h3: rgba(12, 12, 12, .7);
+  }
+
+  @mixin dark-theme {
+    --color-text__project-details: white;
+    --color-background__project-details: var(--color-black-oil);
+    --color-background__project-card--transition: var(--color-yellow-main);
+    --color-text__project-card__h3: var(--color-yellow-js);
+    --color-background__project-card__h3: rgba(12, 12, 12, .7);
+  }
+
+  :root{
+    @include light-theme;
+  }
+
+  :root.dark{
+    @include dark-theme;
+  }
+
+  @media ( prefers-color-scheme: dark ) {
+    :root{
+      @include light-theme;
+    }
+
+    :root.dark{
+      @include dark-theme;
+    }
+  }
+
+  .project-card{
+    width: auto;
+    margin: 0.625rem 0;
+    min-width: 100%;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    background-color: var(--color-yellow-main);
+    aspect-ratio: 4 / 2;
+    transition: all .6s ease;
+    border: 2px solid black;
+  }
+
+  .project-card .project-details{
+    color: var(--color-text__project-details);
+    position: absolute;
+    z-index: 20;
+    transform: translateX(100%);
+    transition: all .6s ease;
+    height: 40%;
+    min-height: 250px;
+    width: 100%;
+    bottom: 0;
+    background-color: var(--color-background__project-details);
+    padding: 1.25rem;
+
+    h4{
+      font-size: 150%;
+    }
+
+    p {
+      font-size: 100%;
+    }
+
+    .project-tags{
+      .tag{
+        font-size: 90%;
+      }
+    }
+  }
+
+  .project-card:hover{
+    aspect-ratio: 4 / 3.5;
+    .project-details{
+      transform: translate(0%);
+      h4{
+        color: var(--color-yellow-js);
+      }
+    }
+
+    img{
+      height: 60%;
+    }
+
+    .carousel-simple{
+      height: 200px !important;
+      background-color: black !important;
+    }
+  }
+
+  .carousel-simple:hover{
+    height: 200px !important;
+  }
+
+  .project-card .project-card-transition{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 11;
+    width: 100%;
+    height: 40%;
+    background-color: var(--color-background__project-card--transition);
+    transform: translateX(100%);
+    transition: all .4s ease-out;
+  }
+
+  .project-card:hover .project-card-transition{
+    transform: translate(0%);
+  }
+
+
+  .project-card h3{
+    position: absolute;
+    z-index: 2;
+    font-size: 2.5rem;
+    margin: 0;
+    padding: 2rem;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 40%;
+    bottom: 0;
+    color: var(--color-text__project-card__h3);
+    background-color: var(--color-background__project-card__h3);
+    backdrop-filter: blur(2px);
+  }
+
+  .project-card img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: all .4s ease-in;
+  }
+
+  .project-card .project-tags{
+    display: flex;
+    gap: 0.8rem;
+  }
+
+  @media screen and ( width > 1400px ){
+    .project-card{
+      min-width: 48%;
+      
+      .project-details{
+        h4{
+          font-size: 1.3rem;
+        }
+        p{
+          font-size: 80%;
+        }
+
+        .project-tags{
+          .tag{
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+    
+  }
+
+</style>

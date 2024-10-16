@@ -1,0 +1,96 @@
+---
+import '../styles/reset.css';
+import '../styles/global.css';
+
+import NavigationBar from "@components/shared/astro/NavigationBar.astro";
+import Footer from "@components/shared/astro/Footer.astro";
+import ModalNavigator from "@components/shared/astro/ModalNavigator.astro";
+import ShiftThemeMode from "@components/shared/astro/ShiftThemeMode.astro";
+import { SEO } from "astro-seo";
+import SideNav from '@components/shared/react/SideNav';
+import SideNavItem from '@components/shared/react/SideNavItem';
+
+type Props = {
+  title: string;
+  description?: string;
+};
+
+const locale = Astro.currentLocale;
+const navItems = [
+  { text: "Home", href: `/${locale}/`, path: "" },
+  { text: "Blog", href: `/${locale}/blog`, path: "blog" },
+];
+
+const { title, description = "Daniel Cueto's portfolio" } = Astro.props;
+
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description}>
+    <title>{ title }</title>
+
+    <SEO
+      title={ title }
+      description={ description }
+      openGraph={{
+        basic: {
+          title,
+          type: "website",
+          image: "/images/logo.svg"
+        },
+      }}
+      twitter={{
+        creator: "@dcuetome"
+      }}
+      extend={{
+        meta: [
+          {
+            name: "twitter:image",
+            content: "/images/logo.svg"
+          },
+          {
+            name: "twitter:title",
+            content: "@dcuetome",
+          },
+          {
+            name: "twitter:description",
+            content: description
+          }
+        ]
+      }}
+    />
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Oxygen+Mono&family=Oxygen:wght@300;400;700&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <script is:inline src="https://kit.fontawesome.com/13f6ec1123.js" crossorigin="anonymous"></script>
+
+    <ShiftThemeMode />
+  </head>
+  <body>
+    <!-- <ModalNavigator /> -->
+    <NavigationBar />
+    <SideNav client:idle>
+      {
+        navItems.map( ({ text, href }) => (
+          <SideNavItem client:visible href={href}>{ text }</SideNavItem>
+        ))
+      }
+    </SideNav>
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

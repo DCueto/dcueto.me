@@ -1,0 +1,76 @@
+---
+const locale = Astro.currentLocale;
+const { pathname } = new URL(Astro.request.url);
+const currentPath = pathname.split("/").pop();
+
+type Props = {
+  text: string;
+  href: string;
+  path: string;
+}
+
+const { text, href, path } = Astro.props;
+---
+
+<li class={`nav-item ${ currentPath === path ? 'active' : '' }`}>
+  <a href={href}>{text}</a>
+</li>
+
+
+<style lang="scss">
+
+  @mixin light-theme {
+    --color-text__nav-item__anchor--active: black;
+    --color-text__nav-item__anchor--default: black;
+    --color-border__nav-item__anchor--hover: black;
+    --color-background__nav-item__anchor--hover: black;
+    --color-text__nav-item__anchor--hover: white;
+  }
+
+  @mixin dark-theme {
+    --color-text__nav-item__anchor--active: black;
+    --color-text__nav-item__anchor--default: black;
+    --color-border__nav-item__anchor--hover: black;
+    --color-background__nav-item__anchor--hover: black;
+    --color-text__nav-item__anchor--hover: white;
+  }
+
+  :root{
+    @include light-theme;
+  }
+
+  :root.dark{
+    @include dark-theme;
+  }
+
+  @media ( prefers-color-scheme: dark ) {
+    :root{
+      @include light-theme;
+    }
+
+    :root.dark{
+      @include dark-theme;
+    }
+  }
+
+  .nav-item a{
+    font-size: 1rem;
+    padding: 0.625rem;
+    text-decoration: none;
+    color: var(--color-text__nav-item__anchor--default);
+    transition: all .2s ease-in-out;
+    font-weight: 700;
+  }
+
+  .nav-item.active a{
+    border: 0.125rem solid var(--color-text__nav-item__anchor--active);
+  }
+
+  .nav-item a:hover{
+    background-color: var(--color-background__nav-item__anchor--hover);
+    border: 0.125rem solid var(--color-border__nav-item__anchor--hover);
+    color: var(--color-text__nav-item__anchor--hover);
+    /* color: white; */
+  }
+
+</style>

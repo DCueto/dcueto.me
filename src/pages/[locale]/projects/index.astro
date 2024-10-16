@@ -1,0 +1,61 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { locales } from "@services/routing";
+
+export async function getStaticPaths() {
+  return locales.map(locale => {
+    return {
+      params: { locale },
+    }
+  });
+}
+
+const { locale } = Astro.params;
+
+const allProjects = await getCollection('projects', (project) => project.data.language === locale);
+---
+
+<BaseLayout title="Welcome to Astro.">
+	<div class="wrap">
+		<h1>Projects</h1>
+		{
+			allProjects.map(project => {
+				return (
+					<a href={`projects/${project.slug}`}>
+						<h2>{ project.data.title }</h2>
+						<p>{ project.data.description }</p>
+						<p>{ project.data.language }</p>
+					</a>
+				)
+			})
+		}
+	</div>
+</BaseLayout>
+
+<style>
+	main {
+		margin: auto;
+		padding: 1rem;
+		width: 800px;
+		max-width: calc(100% - 2rem);
+		color: white;
+		font-size: 20px;
+		line-height: 1.6;
+	}
+	h1 {
+		font-size: 4rem;
+		font-weight: 700;
+		line-height: 1;
+		text-align: center;
+		margin-bottom: 1em;
+	}
+	a {
+		color: white;
+		text-decoration: none;
+	}
+
+	a:hover h2{
+		text-decoration: underline;
+	}
+</style>

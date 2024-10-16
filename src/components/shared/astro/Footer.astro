@@ -1,0 +1,89 @@
+---
+import type { Locale } from '@services/routing';
+import { getTranslationValue } from '@utils/i18n';
+import Trans from '@components/shared/astro/Trans.astro';
+
+const locale = Astro.params.locale as Locale;
+const t = (key: string): string => locale ? getTranslationValue(locale, key) : getTranslationValue('en', key);
+---
+{ locale === 'es' ?
+  (
+    <footer>
+      <p>Si has llegado hasta aquí, me encantaría que me devolvieras un "Hola", escribiéndome un <a href="https://x.com/DCuetoMe" target="_blank">tweet</a>, o enviándome un <a href="mailto:dcueto14.dev@gmail.com" target="_blank">email</a>.</p>
+      <p>&copy; 2024 — Web app diseñada y programada por <a href="#" target="_blank">Daniel Cueto</a> usando Astro y React.</p>
+    </footer>
+  )
+  :
+  (
+    <footer>
+      <p>If you've made it this far, I'd love for you to say "Hello" back by writing me a <a href="https://x.com/DCuetoMe" target="_blank">tweet</a>, or sending me an <a href="mailto:dcueto14.dev@gmail.com" target="_blank">email</a>.</p>
+      <p>&copy; 2024 — Web app designed and programmed by <a href="#" target="_blank">Daniel Cueto</a> using Astro & React.</p>
+    </footer>
+  )
+}
+
+<style lang="scss">
+
+  @mixin light-theme {
+    --color-background__footer: var(--color-yellow-soft);
+    --color-text__footer: black;
+    --color-anchor__footer: var(--color-yellow-darkest);
+    --color-anchor-selection__footer: black;
+    --color-anchor-hover__footer: var(--color-black-night);
+  }
+
+  @mixin dark-theme {
+    --color-background__footer: var(--color-yellow-dark);
+    --color-text__footer: black;
+    --color-anchor__footer: var(--color-yellow-darkest);
+    --color-anchor-selection__footer: var(--color-yellow-js);
+    --color-anchor-hover__footer: var(--color-black-night);
+  }
+
+  :root{
+    @include light-theme;
+  }
+
+  :root.dark{
+    @include dark-theme;
+  }
+
+  @media ( prefers-color-scheme: dark ) {
+    :root{
+      @include light-theme;
+    }
+
+    :root.dark{
+      @include dark-theme;
+    }
+  }
+
+  footer{
+    text-align: center;
+    padding: 1.875rem 10%;
+    width: 100%;
+    background-color: var(--color-background__footer);
+  }
+
+  footer p{
+    font-weight: bold;
+    font-size: 0.875rem;
+    margin: 1.25rem 0;
+    color: var(--color-text__footer);
+  }
+
+  footer a{
+    color: var(--color-anchor__footer);
+    // text-decoration: none;
+    // font-weight: bold;
+    // transition: all .2s ease-in-out;
+  }
+
+  footer a:hover{
+    color: var(--color-anchor-hover__footer);
+  }
+
+  footer a::selection{
+    color: var(--color-anchor-selection__footer);
+  }
+</style>

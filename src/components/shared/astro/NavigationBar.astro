@@ -1,0 +1,174 @@
+---
+import ThemeToggler from "./ThemeToggler.astro";
+import NavBarItem from "@components/shared/astro/NavBarItem.astro";
+import { i18nConfig } from "astro.config.mjs";
+import BurgerMenuButton from "@components/shared/react/BurgerMenuButton";
+
+
+const logoImage = "/images/logo.svg";
+const locales = i18nConfig.locales;
+const locale = Astro.currentLocale;
+
+const { pathname } = new URL(Astro.request.url);
+const currentPath = pathname.split("/").pop();
+
+const navItems = [
+  { text: "Home", href: `/${locale}/`, path: "" },
+  { text: "Blog", href: `/${locale}/blog`, path: "blog" },
+];
+---
+
+<header>
+  <nav class="top-nav wrap">
+
+    <a href={`/${locale}/`}>
+      <img src={logoImage} class="logo-dcueto" alt="logo dcueto" />
+    </a>
+    <div class="top-nav__right">
+      <ul>
+        {
+          navItems.map((item) => (
+            <NavBarItem text={item.text} href={item.href} path={item.path} />
+          ))
+        }
+      </ul>
+
+      <select name="locale" id="locale" onchange="window.location.href = this.value;">
+        {
+          locales.map((loc) => (
+            <option value={`/${loc}/`} selected={loc === locale}>{loc.toUpperCase()}</option>
+          ))
+        }
+      </select>
+
+      <div class="top-nav__icons">
+        <!-- UNCOMMENT LATER -->
+        <!-- <i class="search-icon fa-solid fa-magnifying-glass"></i> -->
+        <ThemeToggler />
+        <BurgerMenuButton client:idle />
+      </div>
+    </div>
+  </nav>
+</header>
+
+<style lang="scss">
+
+  @mixin light-theme {
+    --color-background__header: var(--color-yellow-js);
+    --color-text__nav-item__icon--default: black;
+    --color-text__nav-item__icon--hover: white;
+  }
+
+  @mixin dark-theme {
+    --color-background__header: var(--color-yellow-dark);
+    --color-text__nav-item__icon--default: black;
+    --color-text__nav-item__icon--hover: white;
+  }
+
+  :root{
+    @include light-theme;
+  }
+
+  :root.dark{
+    @include dark-theme;
+  }
+
+  @media ( prefers-color-scheme: dark ) {
+    :root{
+      @include light-theme;
+    }
+
+    :root.dark{
+      @include dark-theme;
+    }
+  }
+
+
+
+header{
+  width: 100%;
+  background-color: var(--color-background__header);
+  height: 4.875rem;
+}
+
+header .top-nav{
+  // margin: 0 auto;
+  width: 100%;
+  height: inherit;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.top-nav .logo-dcueto, .top-nav a{
+  height: 96%;
+}
+
+.top-nav .top-nav__right{
+  display: flex;
+  justify-content: space-evenly;
+  gap: 0.9375rem;
+  align-items: center;
+}
+
+.top-nav .top-nav__right ul{
+  display: none;
+  justify-content: space-evenly;
+  gap: 0.9375rem;
+}
+
+.top-nav .top-nav__icons {
+  display: flex;
+  align-items: center;
+  gap: 0.9375rem;
+}
+
+.top-nav i{
+  font-size: 1.25rem;
+  margin: 0 0.5rem;
+  cursor: pointer;
+  transition: all .1s ease-in;
+  color: var(--color-text__nav-item__icon--default);
+}
+
+.top-nav i:hover{
+  color: var(--color-text__nav-item__icon--hover);
+  font-size: 1.25rem;
+}
+
+select#locale {
+  background-color: var(--color-background__header);
+  color: var(--color-text__nav-item__icon--default);
+  border: none;
+  // border: 0.125rem solid var(--color-text__nav-item__icon--default);
+  padding: 0.625rem;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+// button.burgerMenu{
+//   display: flex;
+// }
+
+@media screen and ( width > 767px ) {
+  .top-nav .top-nav__right ul{
+    display: flex !important;
+  }
+
+  // button.burgerMenu{
+  //   display: none;
+  // }
+}
+
+</style>
+
+<script>
+  const { pathname } = window.location;
+  console.log( pathname );
+  const activeNavigationElement = document.querySelector(`nav a[href="${pathname}"]`);
+
+  if (activeNavigationElement) {
+    activeNavigationElement.classList.add("active");
+  }
+</script>

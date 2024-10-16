@@ -1,0 +1,166 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+type Props = {
+  dataEntry: CollectionEntry<'education'>
+}
+
+const { dataEntry: { data } } = Astro.props;
+const dateOptions: Intl.DateTimeFormatOptions = { month: 'short', year: 'numeric' };
+
+---
+
+<article class="education-item">
+  <div class="edu-item-data">
+    <span class="edu-item-location label1">{ data.location }</span>
+    <span class="edu-item-date">
+      {
+        data.language === 'es' && (data.start_date instanceof Date) ?
+        data.start_date.toLocaleDateString('es-ES', dateOptions) :
+        data.language === 'en' && (data.start_date instanceof Date) ?
+        data.start_date.toLocaleDateString('en-US', dateOptions) :
+        data.start_date
+      }
+      { data.end_date ? "-" : "" }
+      {
+        data.language === 'es' && (data.end_date instanceof Date) ?
+        data.end_date?.toLocaleDateString('es-ES', dateOptions) :
+        data.language === 'en' && (data.end_date instanceof Date) ?
+        data.end_date?.toLocaleDateString('en-US', dateOptions) :
+        data.end_date
+      }
+    </span>
+  </div>
+  <div class="edu-item-content">
+    <h5 class="edu-item-title"><span class="yellow-bold">{ data.institution }</span> — { data.degree }</h5>
+    <p class="edu-item-description">{ data.content && data.content !== '' ? data.content : data.description }</p>
+  </div>
+</article>
+
+
+<style lang="scss">
+  @mixin light-theme {
+    --color-background__education-item-content__after: var(--color-black-night);
+    --color-background__education-item-content__before: var(--color-black-night);
+    --color-text__education-item-date: var(--color-gray-dark);
+  }
+
+  @mixin dark-theme {
+    --color-background__education-item-content__after: var(--color-yellow-main);
+    --color-background__education-item-content__before: var(--color-yellow-main);
+    --color-text__education-item-date: var(--color-gray-light);
+  }
+
+  :root{
+    @include light-theme;
+  }
+
+  :root.dark{
+    @include dark-theme;
+  }
+
+  @media ( prefers-color-scheme: dark ) {
+    :root{
+      @include light-theme;
+    }
+
+    :root.dark{
+      @include dark-theme;
+    }
+  }
+
+  .education-item{
+    display: flex;
+    // justify-content: space-between;
+    gap: 4rem;
+    padding-left: 1.75rem;
+    position: relative;
+  }
+
+  .education-item .edu-item-data{
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 1rem 0;
+    position: relative;
+    min-width: 150px;
+    max-width: 150px;
+  }
+
+  .education-item .edu-item-content{
+    max-width: 75%;
+    min-width: 75%;
+    position: relative;
+    padding: 1rem 0;
+  }
+
+  .education-item::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0.125rem;
+    height: 100%;
+    background-color: var(--color-background__education-item-content__before);
+  }
+
+
+  .education-item:last-of-type::before{
+    height: 70%;
+  }
+
+
+  .education-item::after{
+    content: '';
+    position: absolute;
+    top: 15%;
+    left: -0.25rem;
+    width: 0.625rem;
+    height: 0.625rem;
+    background-color: var(--color-background__education-item-content__after);
+    border-radius: 50%;
+  }
+
+  .education-item .edu-item-content p{
+    line-height: 130%;
+  }
+
+  .education-item .edu-item-date{
+    font-size: .75rem;
+    font-weight: 500;
+    line-height: 1.3;
+    color: var(--color-text__education-item-date);
+  }
+
+  @media screen and ( width <= 850px ) {
+    .education-item{
+      flex-direction: column;
+      padding: 1.25rem 2.1875rem;
+      gap: 0;
+    }
+
+    .education-item .edu-item-content{
+      max-width: none;
+    }
+
+    .education-item .edu-item-data{
+      max-width: none;
+      flex-direction: row;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .education-item .edu-item-content::before{
+      height: 170%;
+    }
+
+    .education-item:last-of-type::before{
+      height: 90%;
+    }
+
+    .education-item::after{
+      top: 15%;
+    }
+  }
+</style>

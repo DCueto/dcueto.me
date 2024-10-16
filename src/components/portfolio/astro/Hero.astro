@@ -1,0 +1,100 @@
+---
+import DynamicText from "@components/shared/astro/DynamicText.astro";
+import CommandButton from "@components/shared/astro/CommandButton.astro";
+import KeyboardKey from "@components/shared/astro/KeyboardKey.astro";
+// const profilePicture = 'images/profilePicture.jpg';
+
+import { getTranslationValue, getTranslationArray } from "@utils/i18n";
+import type { Locale } from "@services/routing";
+
+const locale: Locale =  Astro.params.locale as Locale;
+
+const t = (key: string): string => locale ? getTranslationValue(locale, key) : getTranslationValue('en', key);
+const tArray = (key: string): string[] => locale ? getTranslationArray(locale, key) : getTranslationArray('en', key);
+
+const toBeTyped = tArray('hero.descriptions');
+---
+
+<section class="hero">
+  <div class="first-column">
+    <h5>{t('hero.greeting')}</h5>
+    <h1>Daniel <br>Cueto</h1>
+
+    <DynamicText content={toBeTyped} textBefore={t('hero.descriptionPrefix')} />
+
+    <!-- <CommandButton textBefore={t('hero.commandButton.textBefore')} textAfter={t('hero.commandButton.textAfter')}>
+      <KeyboardKey iconClass="command-icon" key="⌘"></KeyboardKey>
+      <KeyboardKey iconClass="key-icon" key="B"></KeyboardKey>
+    </CommandButton> -->
+  </div>
+
+  <!-- <div class="second-column">
+    <figure class="hero-picture">
+      <img src={ profilePicture } />
+    </figure>
+  </div> -->
+
+</section>
+
+
+<style lang="scss">
+
+  @mixin light-theme {
+    --color-background__hero: var(--color-yellow-main);
+    --color-text__hero: black;
+  }
+
+  @mixin dark-theme {
+    --color-background__hero: var(--color-yellow-main);
+    --color-text__hero: black;
+  }
+
+  :root{
+    @include light-theme;
+  }
+
+  :root.dark{
+    @include dark-theme;
+  }
+
+  @media ( prefers-color-scheme: dark ) {
+    :root{
+      @include light-theme;
+    }
+
+    :root.dark{
+      @include dark-theme;
+    }
+  }
+
+  .hero{
+    padding: 3.125rem 10%;
+    background-color: var(--color-background__hero);
+    display: flex;
+    justify-content: space-between;
+    color: var(--color-text__hero);
+  }
+  .hero .second-column{
+    flex-grow: 1;
+  }
+
+  .hero figure{
+    max-width: 18.75rem;
+    margin-left: auto;
+  }
+
+  .hero figure img{
+    width: 100%;
+    border-radius: 50%;
+  }
+
+  .hero h5{
+    display: block;
+  }
+
+  @media screen and ( width <= 750px ) {
+    .hero-picture{
+      display: none;
+    }
+  }
+</style>

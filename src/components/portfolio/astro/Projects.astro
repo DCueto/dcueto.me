@@ -1,0 +1,88 @@
+---
+import type { CollectionEntry } from "astro:content";
+import ProjectCard from "./ProjectCard.astro";
+
+import { generateLink } from "@services/routing";
+import type { Locale } from "@services/routing";
+import { getTranslationValue } from "@utils/i18n";
+
+type Props = {
+  projects: CollectionEntry<'projects'>[]
+};
+
+const { projects } = Astro.props;
+const locale = Astro.params.locale as Locale;
+const { pathname } = Astro.url;
+
+const t = (key: string): string => locale ? getTranslationValue(locale, key) : getTranslationValue('en', key);
+---
+
+<section class="projects wrap">
+  <h2 class="underline-title">{ t('projects.title') }</h2>
+  <div class="projects-container">
+    {
+      projects.map((project) => (
+        <ProjectCard
+          title={project.data.title}
+          description={project.data.description}
+          tags={project.data.tags}
+          image={project.data.image}
+          href={ project.data.href ? project.data.href : generateLink("projects", project.slug, pathname, locale)}
+          { ...(project.data.images && { images: project.data.images }) }
+        />
+      ))
+    }
+  </div>
+</section>
+
+
+<style lang="scss">
+  @mixin light-theme {
+    --color-background__projects: var(--color-gray-light3);
+    --color-text__project-details: white;
+    --color-background__project-details: var(--color-black-oil);
+    --color-background__project-card--transition: var(--color-yellow-main);
+    --color-text__project-card__h3: var(--color-yellow-js);
+    --color-background__project-card__h3: rgba(12, 12, 12, .7);
+  }
+
+  @mixin dark-theme {
+    --color-background__projects: var(--color-gray-dark);
+    --color-text__project-details: white;
+    --color-background__project-details: var(--color-black-oil);
+    --color-background__project-card--transition: var(--color-yellow-main);
+    --color-text__project-card__h3: var(--color-yellow-js);
+    --color-background__project-card__h3: rgba(12, 12, 12, .7);
+  }
+
+  :root{
+    @include light-theme;
+  }
+
+  :root.dark{
+    @include dark-theme;
+  }
+
+  @media ( prefers-color-scheme: dark ) {
+    :root{
+      @include light-theme;
+    }
+
+    :root.dark{
+      @include dark-theme;
+    }
+  }
+
+  .projects{
+    background-color: var(--color-background__projects);
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .projects .projects-container{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3%;
+    height: 100%;
+  }
+</style>

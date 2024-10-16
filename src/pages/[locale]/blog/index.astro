@@ -1,0 +1,57 @@
+---
+import BlogLayout from '@layouts/BlogLayout.astro';
+import ArticleCard from '@components/shared/astro/ArticleCard.astro';
+import { getCollection } from 'astro:content';
+import { locales } from "@services/routing";
+import { generateLink } from '@services/routing';
+import { getTranslationValue } from "@utils/i18n";
+
+import type { Locale, Page } from '@services/routing';
+
+export async function getStaticPaths() {
+  return locales.map(locale => {
+    return {
+      params: { locale },
+    }
+  });
+}
+
+const { locale } = Astro.params;
+const { pathname } = Astro.url;
+
+const dateOptions: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'short', year: 'numeric' };
+const allBlogPosts = await getCollection('blog', (post) => post.data.language === locale);
+
+const link = (page: Page, slug: string): string => generateLink(page, slug, pathname, locale);
+---
+
+<BlogLayout>
+	{
+		allBlogPosts.map(article => {
+			return (
+			<ArticleCard
+          date={
+            article.data.language === 'en'
+            ? article.data.publication_date.toLocaleDateString('en-US', dateOptions) :
+            article.data.language === 'es'
+            ? article.data.publication_date.toLocaleDateString('es-ES', dateOptions) :
+            article.data.publication_date.toLocaleDateString('en-GB', dateOptions)
+          }
+          title={article.data.title}
+          description={article.data.description}
+          href={ `blog/${article.slug}` }
+          size='medium'
+          {...article.data.image && { image: article.data.image.url }}
+        />
+			)
+		})
+	}
+
+	<div slot="alt">
+		<!-- <p>THIS GOES ANYTHING ELSE</p> -->
+	</div>
+</BlogLayout>
+
+<style>
+
+</style>

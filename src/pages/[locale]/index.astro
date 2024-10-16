@@ -1,0 +1,110 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+import Hero from "@components/portfolio/astro/Hero.astro";
+import LatestsArticles from "@components/portfolio/astro/LatestsArticles.astro";
+import AboutMe from "@components/portfolio/astro/AboutMe.astro";
+import Projects from "@components/portfolio/astro/Projects.astro";
+import WorkExperience from "@components/portfolio/astro/WorkExperience.astro";
+import Education from "@components/portfolio/astro/Education.astro";
+
+import SocialButtons from "@components/shared/astro/SocialButtons.astro";
+import ContactMe from "@components/shared/astro/ContactMe.astro";
+
+
+import { locales } from "@services/routing";
+import type { Locale } from "@services/routing";
+
+export async function getStaticPaths() {
+  return locales.map((locale: Locale) => {
+    return {
+      params: { locale },
+    }
+  });
+}
+const { locale } = Astro.params;
+
+const MAX_POSTS = 4;
+const MAX_PROJECTS = 10;
+
+const getLatestsPosts = async () => {
+	return (await getCollection('blog', (post) => post.data.language === locale))
+		// sort by publication date
+		.sort((a, b) => b.data.publication_date.valueOf() - a.data.publication_date.valueOf())
+		//limit to 4 posts max
+		.slice(0, MAX_POSTS);
+}
+
+const latestsPosts = await getLatestsPosts();
+
+const getLatestsProjects = async () => {
+	return (await getCollection('projects', (project) => project.data.language === locale))
+		// sort by publication date
+		.sort((a, b) => b.data.publication_date.valueOf() - a.data.publication_date.valueOf())
+		//limit to 4 posts max
+		.slice(0, MAX_PROJECTS);
+}
+
+const latestsProjects = await getLatestsProjects();
+
+const getWorkExperience = async () => {
+	return (await getCollection('experience', (workExp) => workExp.data.language === locale))
+		// sort by work started date
+		.sort((a, b) => b.data.start_date.valueOf() - a.data.start_date.valueOf());
+}
+
+const workExperience = await getWorkExperience();
+
+const getEducation = async () => {
+	return (await getCollection('education', (education) => education.data.language === locale))
+		// sort by graduation date
+		.sort((a, b) => {
+			if ( typeof b.data.start_date === 'string' || typeof a.data.start_date === 'string' ) return -1;
+			return b.data.start_date.valueOf() - a.data.start_date.valueOf()
+		});
+}
+
+const education = await getEducation();
+
+---
+
+<BaseLayout title="dcueto.me - Portfolio">
+	<Hero></Hero>
+	<LatestsArticles articles={latestsPosts}></LatestsArticles>
+	<AboutMe></AboutMe>
+	<Projects projects={latestsProjects}></Projects>
+	<WorkExperience experience={workExperience}></WorkExperience>
+	<Education collection={education}></Education>
+	<aside>
+		<SocialButtons></SocialButtons>
+		<ContactMe></ContactMe>
+	</aside>
+</BaseLayout>
+
+<style>
+	main {
+		margin: auto;
+		padding: 1rem;
+		width: 800px;
+		max-width: calc(100% - 2rem);
+		color: white;
+		font-size: 20px;
+		line-height: 1.6;
+	}
+	h1 {
+		font-size: 4rem;
+		font-weight: 700;
+		line-height: 1;
+		text-align: center;
+		margin-bottom: 1em;
+	}
+	a {
+		color: white;
+		text-decoration: none;
+	}
+
+	a:hover h2{
+		text-decoration: underline;
+	}
+</style>

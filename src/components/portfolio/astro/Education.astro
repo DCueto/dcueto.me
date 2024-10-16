@@ -1,0 +1,64 @@
+---
+import type { Locale } from '@services/routing';
+import { getTranslationValue } from '@utils/i18n';
+import type { CollectionEntry } from 'astro:content';
+import EducationItem from './EducationItem.astro';
+
+type Props = {
+  collection: CollectionEntry<'education'>[]
+}
+
+const { collection } = Astro.props;
+
+const locale = Astro.params.locale as Locale;
+const t = (key: string): string => locale ? getTranslationValue(locale, key) : getTranslationValue('en', key);
+---
+
+<section class="education wrap">
+  <h2 class="underline-title">{ t("education.title") }</h2>
+  {
+    collection.map((entry) => (
+      <EducationItem dataEntry={entry} />
+    ))
+  }
+
+</section>
+
+
+<style lang="scss">
+  @mixin light-theme {
+    --color-background__education: white;
+    --color-background__education-item-content__after: var(--color-black-night);
+    --color-background__education-item-content__before: var(--color-black-night);
+  }
+
+  @mixin dark-theme {
+    --color-background__education: var(--color-black-oil);
+    --color-background__education-item-content__after: var(--color-yellow-main);
+    --color-background__education-item-content__before: var(--color-yellow-main);
+  }
+
+  :root{
+    @include light-theme;
+  }
+
+  :root.dark{
+    @include dark-theme;
+  }
+
+  @media ( prefers-color-scheme: dark ) {
+    :root{
+      @include light-theme;
+    }
+
+    :root.dark{
+      @include dark-theme;
+    }
+  }
+
+  .education{
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+    background-color: var(--color-background__education);
+  }
+</style>

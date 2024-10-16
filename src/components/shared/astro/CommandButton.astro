@@ -1,0 +1,56 @@
+---
+type Props = {
+  textBefore?: string,
+  textAfter?: string,
+}
+
+const { textBefore = '', textAfter = '' } = Astro.props;
+---
+
+<div class="command-info">
+  <p>{textBefore} <slot /> {textAfter}</p>
+</div>
+
+<style lang="scss">
+  @mixin light-theme {
+    --color-background__command-info--hover: var(--color-yellow-soft);
+  }
+
+  @mixin dark-theme {
+    --color-background__command-info--hover: #F4DC1B;
+  }
+
+  :root{
+    @include light-theme;
+  }
+
+  :root.dark{
+    @include dark-theme;
+  }
+
+  @media ( prefers-color-scheme: dark ) {
+    :root{
+      @include light-theme;
+    }
+
+    :root.dark{
+      @include dark-theme;
+    }
+  }
+
+  .command-info p{
+    font-weight: bold;
+    font-size: 1.25rem;
+  }
+
+  .command-info{
+    cursor: pointer;
+    padding: 0.0625rem 0.625rem;
+    border-radius: 0.3125rem;
+    transition: all .3s ease;
+
+    &:hover{
+      background-color: var(--color-background__command-info--hover)
+    }
+  }
+</style>

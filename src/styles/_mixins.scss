@@ -1,0 +1,28 @@
+// mixins.scss
+@use "sass:map";
+
+@mixin apply-theme($theme) {
+  @each $key, $value in $theme {
+    --#{key}: #{$value};
+  }
+}
+
+@mixin include-theme-colors($light-theme, $dark-theme) {
+  :root {
+    @include apply-theme($light-theme);
+  }
+
+  :root.dark {
+    @include apply-theme($dark-theme);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      @include apply-theme($light-theme);
+    }
+
+    :root.dark {
+      @include apply-theme($dark-theme);
+    }
+  }
+}

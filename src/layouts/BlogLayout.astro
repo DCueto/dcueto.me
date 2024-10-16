@@ -1,0 +1,90 @@
+---
+import BaseLayout from "./BaseLayout.astro"
+---
+
+<BaseLayout title="DCueto's blog">
+  <div class="page-base">
+    <header>
+      <h1 class="page-title wrap">Blog ✍️</h1>
+    </header>
+    <div class="wrap blog-container">
+      <section class="blog-articles">
+        <slot />
+      </section>
+      <section>
+        <slot name="alt" />
+      </section>
+    </div>
+  </div>
+</BaseLayout>
+
+
+<style lang="scss">
+
+  @mixin light-theme {
+    --color-background__base: var(--color-white-pearl);
+  }
+
+  @mixin dark-theme {
+    --color-background__base: var(--color-black-gray);
+  }
+
+  :root{
+    @include light-theme;
+  }
+
+  :root.dark{
+    @include dark-theme;
+  }
+
+  @media ( prefers-color-scheme: dark ) {
+    :root{
+      @include light-theme;
+    }
+
+    :root.dark{
+      @include dark-theme;
+    }
+  }
+
+  main {
+		margin: auto;
+		padding: 1rem;
+		width: 800px;
+		max-width: calc(100% - 2rem);
+		color: white;
+		font-size: 20px;
+		line-height: 1.6;
+	}
+
+  .page-base {
+    background-color: var(--color-background__base);
+    min-height: 100vh;
+  }
+
+	// a {
+	// 	color: white;
+	// 	text-decoration: none;
+	// }
+
+	// a:hover h2{
+	// 	text-decoration: underline;
+	// }
+
+  .blog-container{
+    padding: 0 8.8%;
+  }
+
+  .blog-articles {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 3%;
+  }
+
+  @media screen and ( width <= 850px ) {
+    .blog-articles{
+      flex-direction: column;
+    }
+  }
+</style>
