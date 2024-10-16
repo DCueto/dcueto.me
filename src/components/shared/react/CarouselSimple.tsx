@@ -3,7 +3,7 @@ import './CarouselSimple.scss';
 
 type Image = {
   src: string;
-  alt: string;
+  alt?: string;
 }
 
 type Props = {
@@ -16,6 +16,7 @@ const CarouselSimple = ({ images }: Props) => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const moveNextSlide = () => {
+    console.log('moveNextSlide');
     if (currentSlide === images.length - 1) {
       setCurrentSlide(0);
       return;
@@ -25,6 +26,7 @@ const CarouselSimple = ({ images }: Props) => {
   };
 
   const movePrevSlide = () => {
+    console.log('movePrevSlide');
     if (currentSlide === 0) {
       setCurrentSlide(images.length - 1);
       return;
@@ -40,8 +42,8 @@ const CarouselSimple = ({ images }: Props) => {
       <button className="next" onClick={() => moveNextSlide() }><i className="fa-solid fa-angle-right"></i></button>
       {
         images.map((image, i) => (
-          <div className={`carousel-simple__slide ${ currentSlide === i && 'active' }`} data-id={i}>
-            <img src={image.src} alt={image.alt} />
+          <div key={i} className={`carousel-simple__slide ${ currentSlide === i && 'active' }`} data-id={i}>
+            <img src={image.src} alt={image.alt && image.alt} />
           </div>
         ))
       }

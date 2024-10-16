@@ -1,38 +1,83 @@
 ---
 import Tag from '@components/shared/astro/Tag.astro';
+import CarouselSimple from '@components/shared/react/CarouselSimple';
+import CarrouselSimple from '@components/shared/astro/CarrouselSimple.astro';
+import { Image } from 'astro:assets';
+
+type ImageContent = {
+  image: {
+    src: string;
+    width: number;
+    height: number;
+    format: "png" | "jpg" | "jpeg" | "tiff" | "webp" | "gif" | "svg" | "avif";
+  };
+  alt?: string;
+}
+
+type AstroImage = {
+  src: string;
+  width: number;
+  height: number;
+  format: "png" | "jpg" | "jpeg" | "tiff" | "webp" | "gif" | "svg" | "avif";
+}
 
 type Props = {
   title: string;
   description?: string;
   tags?: string[];
-  image?: {
-    url: string;
-    alt?: string;
-  };
+  image: AstroImage;
   href: string;
+  images?: ImageContent[];
+  repoLink?: string;
+  demoLink?: string;
+  link?: string;
 }
 
-const { title, description, tags, image = { url: 'images/mobdalaImg.jpeg', alt: 'project image' }, href } = Astro.props;
+type CarouselImage = {
+  src: string;
+  alt: string;
+}
+
+const { title, description, tags, image, href, images, repoLink, demoLink, link } = Astro.props;
+
+const carouselImages = images?.map((image) : CarouselImage => ({
+  src: image.image.src,
+  alt: image.alt || title
+}));
 ---
 
-<a href={ href } class="project-card">
-  <article>
-    <!-- <h3 class="project-title">{ title }</h3> -->
-    <img src={ image.url } alt={ image.alt } class="project-img">
-    <div class="project-details">
-      <h4>{ title }</h4>
-      <p>{ description }</p>
-      <div class="project-tags">
-        {
-          tags?.map((tag) => (
-            <Tag content={ tag } />
-          ))
-        }
-      </div>
+<article class="project-card">
+  <!-- <h3 class="project-title">{ title }</h3> -->
+  {
+    images ?
+      // <CarouselSimple images={ carouselImages as CarouselImage[] }></CarouselSimple> :
+      <CarrouselSimple images={ images } title={ title } /> :
+      <Image src={ image } alt={ title } class="project-img" />
+  }
+  <div class="project-details">
+    <h4>{ title }</h4>
+    <p>{ description }</p>
+    <div class="project-tags">
+      {
+        tags?.map((tag) => (
+          <Tag content={ tag } />
+        ))
+      }
     </div>
-    <div class="project-card-transition"></div>
-  </article>
-</a>
+    <div class="project-links">
+      {
+        repoLink && <a href={ repoLink } class="project-link repo-link" target="_blank">Code</a>
+      }
+      {
+        demoLink && <a href = { demoLink } class="project-link demo-link" target="_blank">Demo</a>
+      }
+      {
+        link && <a href = { link } class="project-link" target="_blank">Link</a>
+      }
+    </div>
+  </div>
+  <div class="project-card-transition"></div>
+</article>
 
 
 <style lang="scss">
@@ -73,13 +118,14 @@ const { title, description, tags, image = { url: 'images/mobdalaImg.jpeg', alt: 
   .project-card{
     width: auto;
     margin: 0.625rem 0;
-    min-width: 500px;
-    height: 600px;
+    min-width: 100%;
     position: relative;
-    flex-grow: 1;
     overflow: hidden;
     cursor: pointer;
     background-color: var(--color-yellow-main);
+    aspect-ratio: 4 / 2;
+    transition: all .6s ease;
+    border: 2px solid black;
   }
 
   .project-card .project-details{
@@ -87,17 +133,33 @@ const { title, description, tags, image = { url: 'images/mobdalaImg.jpeg', alt: 
     position: absolute;
     z-index: 20;
     transform: translateX(100%);
-    transition: transform .6s ease;
+    transition: all .6s ease;
     height: 40%;
+    min-height: 250px;
     width: 100%;
     bottom: 0;
     background-color: var(--color-background__project-details);
     padding: 1.25rem;
+
+    h4{
+      font-size: 150%;
+    }
+
+    p {
+      font-size: 100%;
+    }
+
+    .project-tags{
+      .tag{
+        font-size: 90%;
+      }
+    }
   }
 
-  .project-card:hover{ 
+  .project-card:hover{
+    aspect-ratio: 4 / 3.5;
     .project-details{
-    transform: translate(0%);
+      transform: translate(0%);
       h4{
         color: var(--color-yellow-js);
       }
@@ -106,6 +168,15 @@ const { title, description, tags, image = { url: 'images/mobdalaImg.jpeg', alt: 
     img{
       height: 60%;
     }
+
+    .carousel-simple{
+      height: 200px !important;
+      background-color: black !important;
+    }
+  }
+
+  .carousel-simple:hover{
+    height: 200px !important;
   }
 
   .project-card .project-card-transition{
@@ -156,6 +227,28 @@ const { title, description, tags, image = { url: 'images/mobdalaImg.jpeg', alt: 
   .project-card .project-tags{
     display: flex;
     gap: 0.8rem;
+  }
+
+  @media screen and ( width > 1400px ){
+    .project-card{
+      min-width: 48%;
+      
+      .project-details{
+        h4{
+          font-size: 1.3rem;
+        }
+        p{
+          font-size: 80%;
+        }
+
+        .project-tags{
+          .tag{
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+    
   }
 
 </style>

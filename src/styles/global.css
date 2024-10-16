@@ -698,3 +698,13 @@ li {
 }
 
 /*#endregion */
+
+
+.project-card:hover{
+
+  .carousel-simple{
+    transition: all .4s ease-in;
+    height: 60%;
+  }
+
+}

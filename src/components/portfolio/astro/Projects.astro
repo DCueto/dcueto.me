@@ -28,6 +28,7 @@ const t = (key: string): string => locale ? getTranslationValue(locale, key) : g
           tags={project.data.tags}
           image={project.data.image}
           href={ project.data.href ? project.data.href : generateLink("projects", project.slug, pathname, locale)}
+          { ...(project.data.images && { images: project.data.images }) }
         />
       ))
     }
@@ -82,5 +83,6 @@ const t = (key: string): string => locale ? getTranslationValue(locale, key) : g
     display: flex;
     flex-wrap: wrap;
     gap: 3%;
+    height: 100%;
   }
 </style>

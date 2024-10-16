@@ -1,4 +1,5 @@
 import { z, defineCollection, reference } from 'astro:content';
+import type { ImageFunction } from 'astro:content';
 
 const blogSchema = z.object({
   title: z.string(),
@@ -17,18 +18,25 @@ const blogSchema = z.object({
   related_posts: z.array(reference('blog')).optional(),
 });
 
-const projectSchema = z.object({
+const projectSchema = ({ image }: { image: ImageFunction }) => z.object({
   title: z.string(),
   description: z.string(),
   tags: z.array(z.string()).optional(),
-  image: z.object({
-    url: z.string(),
-    alt: z.string().optional(),
-  }).optional(),
+  image: image(),
   language: z.enum(['en', 'es']), // languages defined
   publication_date: z.date(),
   related_posts: z.array(reference('blog')).optional(),
-  href: z.string().optional()
+  href: z.string().optional(),
+  images: z.array(z.object(
+    {
+      image: image(),
+      alt: z.string().optional(),
+    }
+  )).optional(),
+  featured: z.boolean().optional(),
+  code_repo: z.string().optional(),
+  demo: z.string().optional(),
+  link: z.string().optional(),
 });
 
 

@@ -9,6 +9,10 @@
   display: flex;
 }
 
+.carousel-simple:hover{
+  height: 60%;
+}
+
 .carousel-simple > button{
   background-color: unset;
   position: absolute;
@@ -38,11 +42,12 @@
 button i{
   font-size: 30px;
   color: rgba(255, 255, 255, .4);
+  color: black;
 }
 
-button i:hover{
-  color: rgba(255, 255, 255, 1);
-}
+// button i:hover{
+//   color: rgba(255, 255, 255, 1);
+// }
 
 .carousel-simple > div{
   flex-shrink: 0;
