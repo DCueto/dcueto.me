@@ -231,6 +231,7 @@ html{
   font-size: 16px;
   color: var(--color-text__default);
   letter-spacing: 0.035rem;
+  scroll-behavior: smooth;
 }
 
 body{

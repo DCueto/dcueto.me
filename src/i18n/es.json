@@ -24,7 +24,8 @@
     "commandButton": {
       "textBefore": "Presiona",
       "textAfter": "para empezar"
-    }
+    },
+    "contact": "Contáctame"
   },
   "articles": {
     "title": "Artículos",

@@ -1,5 +1,5 @@
 ---
-type SizeButton = 'default' | 'large';
+type SizeButton = 'default' | 'large' | 'small';
 type AlignButton = 'center' | 'left' | 'right';
 type TypeButton = 'button' | 'submit' | 'reset';
 
@@ -58,8 +58,8 @@ const { size = 'default', text = 'Button', align = 'center', type = 'button', hr
 
   button.default-button, a.default-button{
     background-color: var(--color-background__default-button--default);
-    padding: 0.5rem 1.25rem;
-    font-size: 0.875rem;
+    padding: 1rem 1.50rem;
+    font-size: 0.9rem;
     font-weight: bold;
     border: 0.125rem solid var(--color-border__default-button--default);
     color: var(--color-text__default-button--default);
@@ -78,6 +78,11 @@ const { size = 'default', text = 'Button', align = 'center', type = 'button', hr
   button.center, a.center{
     display: block;
     margin: 1.25rem auto;
+  }
+
+  button.small, a.small{
+    font-size: 0.875rem;
+    padding: 0.5rem 1.25rem;
   }
 
   button.large, a.large{
