@@ -25,6 +25,8 @@ const { images, title } = Astro.props;
 
 
 <div class="carousel-simple">
+  <carousel-simple></carousel-simple>
+
   <button class="prev"><i class="fa-solid fa-angle-left"></i></button>
   <button class="next"><i class="fa-solid fa-angle-right"></i></button>
   {
@@ -38,6 +40,17 @@ const { images, title } = Astro.props;
 
 
 <script>
+  class CarouselSimple extends HTMLElement{
+    
+    constructor(){
+      super();
+      console.log("Custom Element inicializado: ", this);
+    }
+  }
+
+  customElements.define('carousel-simple', CarouselSimple);
+
+
   const prevSlideButtonEl = document.querySelector('.carousel-simple .prev');
   const nextSlideButtonEl = document.querySelector('.carousel-simple .next');
 

@@ -38,8 +38,8 @@ const CarouselSimple = ({ images }: Props) => {
 
   return (
     <div className="carousel-simple">
-      <button className="prev" onClick={ () => movePrevSlide() }><i className="fa-solid fa-angle-left"></i></button>
-      <button className="next" onClick={() => moveNextSlide() }><i className="fa-solid fa-angle-right"></i></button>
+      <button className="prev" onClick={ movePrevSlide }><i className="fa-solid fa-angle-left"></i></button>
+      <button className="next" onClick={ moveNextSlide }><i className="fa-solid fa-angle-right"></i></button>
       {
         images.map((image, i) => (
           <div key={i} className={`carousel-simple__slide ${ currentSlide === i && 'active' }`} data-id={i}>
