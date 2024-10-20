@@ -1,7 +1,6 @@
 ---
 import Tag from '@components/shared/astro/Tag.astro';
 import CarouselSimple from '@components/shared/react/CarouselSimple';
-import CarrouselSimple from '@components/shared/astro/CarrouselSimple.astro';
 import { Image } from 'astro:assets';
 
 type ImageContent = {
@@ -50,8 +49,7 @@ const carouselImages = images?.map((image) : CarouselImage => ({
   <!-- <h3 class="project-title">{ title }</h3> -->
   {
     images ?
-      // <CarouselSimple images={ carouselImages as CarouselImage[] }></CarouselSimple> :
-      <CarrouselSimple images={ images } title={ title } /> :
+      <CarouselSimple client:visible images={ carouselImages as CarouselImage[] }></CarouselSimple> :
       <Image src={ image } alt={ title } class="project-img" />
   }
   <div class="project-details">
@@ -119,27 +117,29 @@ const carouselImages = images?.map((image) : CarouselImage => ({
     width: auto;
     margin: 0.625rem 0;
     min-width: 100%;
-    position: relative;
-    overflow: hidden;
     cursor: pointer;
     background-color: var(--color-yellow-main);
-    aspect-ratio: 4 / 2;
+    aspect-ratio: 16 / 9;
     transition: all .6s ease;
-    border: 2px solid black;
+    border: 3px solid black;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, .2);
+    position: relative;
+    overflow: hidden;
   }
+
 
   .project-card .project-details{
     color: var(--color-text__project-details);
     position: absolute;
     z-index: 20;
-    transform: translateX(100%);
     transition: all .6s ease;
-    height: 40%;
-    min-height: 250px;
-    width: 100%;
     bottom: 0;
     background-color: var(--color-background__project-details);
     padding: 1.25rem;
+    width: 100%;
+    height: 50%;
+    transform: translateY(100%);
+    overflow-y: scroll;
 
     h4{
       font-size: 150%;
@@ -157,7 +157,7 @@ const carouselImages = images?.map((image) : CarouselImage => ({
   }
 
   .project-card:hover{
-    aspect-ratio: 4 / 3.5;
+    aspect-ratio: 16 / 24;
     .project-details{
       transform: translate(0%);
       h4{
@@ -166,17 +166,8 @@ const carouselImages = images?.map((image) : CarouselImage => ({
     }
 
     img{
-      height: 60%;
+      height: 50%;
     }
-
-    .carousel-simple{
-      height: 200px !important;
-      background-color: black !important;
-    }
-  }
-
-  .carousel-simple:hover{
-    height: 200px !important;
   }
 
   .project-card .project-card-transition{
@@ -184,10 +175,8 @@ const carouselImages = images?.map((image) : CarouselImage => ({
     bottom: 0;
     left: 0;
     z-index: 11;
-    width: 100%;
-    height: 40%;
     background-color: var(--color-background__project-card--transition);
-    transform: translateX(100%);
+    transform: translateY(100%);
     transition: all .4s ease-out;
   }
 
@@ -226,14 +215,32 @@ const carouselImages = images?.map((image) : CarouselImage => ({
 
   .project-card .project-tags{
     display: flex;
+    flex-wrap: wrap;
     gap: 0.8rem;
   }
 
-  @media screen and ( width > 1400px ){
+  @media screen and ( width > 600px ){
+    .project-card:hover{
+      aspect-ratio: 16 / 13.5;
+    }
+  }
+
+  @media screen and ( width > 1120px ){
+
+    .project-card:nth-child(even){
+      transform-origin: right top;
+    }
+    .project-card:nth-child(odd){
+      transform-origin: left top;
+    }
     .project-card{
       min-width: 48%;
-      
+      position: relative;
+      overflow: hidden;
       .project-details{
+        transform: translateY(100%);
+        height: 100%;
+        width: 40%;
         h4{
           font-size: 1.3rem;
         }
@@ -247,8 +254,68 @@ const carouselImages = images?.map((image) : CarouselImage => ({
           }
         }
       }
+
+      .project-card-transition{
+        width: 40%;
+        height: 100%;
+      }
     }
     
+
+    .project-card:hover{
+      height: 50%;
+      transform: scale(2.06);
+      aspect-ratio: 4 / 1.6;
+      zoom: 50%;
+      z-index: 1000;
+
+      img{
+        height: 100%;
+        width: 60%;
+        position: absolute;
+        top: 0;
+        right: 0;
+        transition: all .4s ease-in;
+      }
+
+      .carousel-simple{
+        max-height: none;
+        background-color: black !important;
+        height: 100%;
+        width: 60%;
+        position: absolute;
+        top: 0;
+        right: 0;
+        transition: all .4s ease-in;
+      }
+    }
   }
 
+</style>
+
+
+<style is:global>
+
+
+  .project-card:hover{
+    .carousel-simple{
+      height: 50%;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      right: 0;
+      transition: all .4s ease-in;
+    }
+  }
+
+  @media screen and ( width > 1120px ){
+    .project-card:hover{
+      .carousel-simple{
+        height: 100%;
+        width: 60%;
+        position: absolute;
+        transition: all .4s ease-in;
+      }
+    }
+  }
 </style>

@@ -700,11 +700,15 @@ li {
 /*#endregion */
 
 
-.project-card:hover{
+/* .project-card:hover{
 
   .carousel-simple{
+    height: 100%;
+    width: 60%;
+    position: absolute;
+    top: 0;
+    right: 0;
     transition: all .4s ease-in;
-    height: 60%;
   }
 
-}
+} */
