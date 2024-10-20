@@ -126,12 +126,6 @@ const carouselImages = images?.map((image) : CarouselImage => ({
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, .2);
     position: relative;
     overflow: hidden;
-
-    .project-links{
-      display: flex;
-      gap: 1rem;
-      margin: 1rem 0;
-    }
   }
 
 
@@ -147,6 +141,8 @@ const carouselImages = images?.map((image) : CarouselImage => ({
     height: 50%;
     transform: translateY(100%);
     overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
 
     h4{
       font-size: 150%;
@@ -157,9 +153,17 @@ const carouselImages = images?.map((image) : CarouselImage => ({
     }
 
     .project-tags{
+      margin-bottom: 1rem;
       .tag{
         font-size: 90%;
       }
+    }
+
+    .project-links{
+      display: flex;
+      gap: 1rem;
+      margin: 1rem 0;
+      margin-top: auto;
     }
   }
 
@@ -216,7 +220,7 @@ const carouselImages = images?.map((image) : CarouselImage => ({
     object-fit: cover;
     position: absolute;
     top: 0;
-    left: 0;
+    right: 0;
     transition: all .4s ease-in;
   }
 
@@ -321,6 +325,16 @@ const carouselImages = images?.map((image) : CarouselImage => ({
         height: 100%;
         width: 60%;
         position: absolute;
+        transition: all .4s ease-in;
+      }
+
+      > img{
+        height: 100%;
+        width: 60%;
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: unset;
         transition: all .4s ease-in;
       }
     }

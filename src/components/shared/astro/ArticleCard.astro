@@ -53,8 +53,7 @@
   
   .blog-post{
     max-width: 48%;
-    margin: 0.625rem 0;
-    padding: 1.25rem;
+    margin: 1rem 0;
     cursor: pointer;
     transition: all .3s ease;
     text-decoration: none;
@@ -95,6 +94,13 @@
   @media screen and ( width <= 850px ) {
     .blog-post{
       max-width: 100%;
+    }
+  }
+
+  @media screen and ( width > 767px ){
+    .blog-post{
+      margin: 0.625rem 0;
+      padding: 1.25rem;
     }
   }
 </style>

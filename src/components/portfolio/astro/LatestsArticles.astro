@@ -41,8 +41,7 @@ const link = (page: Page, slug: string): string => generateLink(page, slug, path
       ))
     }
   </div>
-
-  <a href={`/${locale}/blog`}><Button size="default" text={ t('articles.buttonAllArticles').toUpperCase() } align='center'/></a>
+  <Button size="default" text={ t('articles.buttonAllArticles').toUpperCase()} href={`/${locale}/blog`} align='center'/>
 </section>
 
 <style lang="scss">
@@ -88,6 +87,12 @@ const link = (page: Page, slug: string): string => generateLink(page, slug, path
   @media screen and ( width <= 850px ) {
     .articles-container{
       flex-direction: column;
+    }
+  }
+
+  @media screen and ( width < 767px ){
+    a.default-button{
+      width: 100% !important;
     }
   }
 </style>
