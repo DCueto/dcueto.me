@@ -330,15 +330,13 @@ p::selection, h1::selection, h2::selection, h3::selection, h4::selection, h5::se
   color: var(--color-text-selection);;
 }
 
-/* :not(code)>span{
-  font-size: 0.875rem;
-  color: var(--color-span-default);
-} */
+em{
+  font-style: italic;
+}
 
-/* span{
-  font-size: 0.75rem;
-  color: var(--color-span-default);
-} */
+strong{
+  font-weight: bold;
+}
 
 a{
   font-size: 0.875rem;
@@ -363,6 +361,11 @@ ul {
 li {
   margin: .5rem 0;
 }
+
+/* p, a, li{
+  line-height: 1.8;
+  font-size: 1em;
+} */
 
 .wrap{
   padding: 0 10%;

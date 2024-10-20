@@ -8,7 +8,7 @@ const t = (key: string): string => locale ? getTranslationValue(locale, key) : g
 
 <section class="about-me wrap">
   <h2 class="underline-title">{ t('about.title') }</h2>
-  <p>{ t('about.description') }</p>
+  <p class="about-me__description" set:html={ t('about.description') }></p>
 </section>
 
 
@@ -43,5 +43,13 @@ const t = (key: string): string => locale ? getTranslationValue(locale, key) : g
     background-color: var(--color-background__about-me);
     padding-top: 2.5rem;
     padding-bottom: 2.5rem;
+  }
+</style>
+
+
+<style is:global>
+  .about-me p{
+    font-size: .95em;
+    line-height: 1.75;
   }
 </style>
