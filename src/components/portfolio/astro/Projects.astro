@@ -19,14 +19,6 @@ const t = (key: string): string => locale ? getTranslationValue(locale, key) : g
 
 <section class="projects wrap">
   <h2 class="underline-title">{ t('projects.title') }</h2>
-  <!-- <div class="grid-projects">
-    <div class="grid-projects__project"></div>
-    <div class="grid-projects__project"></div>
-    <div class="grid-projects__project"></div>
-    <div class="grid-projects__project"></div>
-    <div class="grid-projects__project"></div>
-    <div class="grid-projects__project"></div>
-  </div> -->
   <div class="projects-container">
     {
       projects.map((project) => (
@@ -37,6 +29,9 @@ const t = (key: string): string => locale ? getTranslationValue(locale, key) : g
           image={project.data.image}
           href={ project.data.href ? project.data.href : generateLink("projects", project.slug, pathname, locale)}
           { ...(project.data.images && { images: project.data.images }) }
+          { ...(project.data.code_repo && { repoLink: project.data.code_repo }) }
+          { ...(project.data.demo && { demoLink: project.data.demo }) }
+          { ...(project.data.link && { link: project.data.link }) }
         />
       ))
     }
