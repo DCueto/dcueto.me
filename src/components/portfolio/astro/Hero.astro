@@ -1,5 +1,6 @@
 ---
 import DynamicText from "@components/shared/astro/DynamicText.astro";
+import CustomButton from "@components/shared/astro/CustomButton.astro";
 import CommandButton from "@components/shared/astro/CommandButton.astro";
 import KeyboardKey from "@components/shared/astro/KeyboardKey.astro";
 // const profilePicture = 'images/profilePicture.jpg';
@@ -22,6 +23,15 @@ const toBeTyped = tArray('hero.descriptions');
 
     <DynamicText content={toBeTyped} textBefore={t('hero.descriptionPrefix')} />
 
+    <div class="contact-info">
+      <a class="contact-button" href="#contactMe"><span class="contact-button__text">{t('hero.contact')}</span> <i class="fa-regular fa-paper-plane contact-button__icon"></i></a>
+      <div class="contact-info__links">
+        <a class="links__item" href="https://github.com/DCueto" target="_blank"><i class="fa-brands fa-github"></i></a>
+        <a class="links__item" href="https://linkedin.com/in/dcuetome/" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a class="links__item" href="https://x.com/dcuetome" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+      </div>
+    </div>
+
     <!-- <CommandButton textBefore={t('hero.commandButton.textBefore')} textAfter={t('hero.commandButton.textAfter')}>
       <KeyboardKey iconClass="command-icon" key="⌘"></KeyboardKey>
       <KeyboardKey iconClass="key-icon" key="B"></KeyboardKey>
@@ -29,9 +39,6 @@ const toBeTyped = tArray('hero.descriptions');
   </div>
 
   <!-- <div class="second-column">
-    <figure class="hero-picture">
-      <img src={ profilePicture } />
-    </figure>
   </div> -->
 
 </section>
@@ -92,9 +99,117 @@ const toBeTyped = tArray('hero.descriptions');
     display: block;
   }
 
-  @media screen and ( width <= 750px ) {
-    .hero-picture{
-      display: none;
+  .contact-info{
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+
+    .contact-button{
+      color: black;
+      font-weight: bold;
+      padding: 0.8rem 1.5rem;
+      border-radius: 0.25rem;
+      border: 0.15rem solid black;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: all .2s ease-in;
+
+      .contact-button__text{
+        margin-right: 0.5rem;
+      }
+
+      .contact-button__icon{
+        color: black;
+        font-size: 1.15rem;
+        animation: 1s ease-in-out infinite alternate-reverse contact-move;
+        transition: all .2s ease-in;
+      }
+
+      &:hover{
+        background-color: black;
+        color: var(--color-yellow-main);
+        color: white;
+
+        .contact-button__icon{
+          color: var(--color-yellow-main);
+          color: white;
+        }
+      }
+    }
+
+    .contact-info__links{
+      display: flex;
+      font-size: 1rem;
+      gap: .25rem;
+      .links__item{
+        color: black;
+        font-size: 1.25rem;
+        transition: all .2s ease-in;
+        cursor: pointer;
+        padding: .75rem;
+        border-radius: .25rem;
+
+        &:hover{
+          background-color: var(--color-black-night);
+          color: var(--color-yellow-main);
+          color: white;
+
+          i{
+            animation: .5s ease-in-out infinite alternate pulse;
+          }
+        }
+      }
     }
   }
+
+  @keyframes contact-move {
+    0% {
+      transform: translateY(-0.15rem);
+    }
+    100% {
+      transform: translateY(0.15rem);
+    }
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+
+    100% {
+      transform: scale(1.05);
+    }
+  }
+
+
+@media screen and (width < 520px){
+
+  .hero{
+    padding: 1.7rem;
+  }
+  .first-column{
+    width: 100%;
+  }
+
+  .contact-button{
+    width: 100%;
+  }
+
+  .contact-info{
+    .contact-info__links{
+      width: 100%;
+      justify-content: center;
+      .links__item{
+        font-size: 1.5rem;
+        padding: 1rem;
+      }
+    }
+  }
+
+  
+}
 </style>

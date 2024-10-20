@@ -9,7 +9,7 @@ const locale = Astro.params.locale as Locale;
 const t = (key: string): string => locale ? getTranslationValue(locale, key) : getTranslationValue('en', key);
 ---
 
-<section class="contact-me wrap">
+<section class="contact-me wrap" id="contactMe">
   <h2>{ t('contact.title') }</h2>
 
   <ContactForm />

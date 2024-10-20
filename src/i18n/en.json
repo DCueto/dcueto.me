@@ -24,7 +24,8 @@
     "commandButton": {
       "textBefore": "Press",
       "textAfter": "to start"
-    }
+    },
+    "contact": "Message"
   },
   "articles": {
     "title": "Articles",
