@@ -115,7 +115,7 @@ const carouselImages = images?.map((image) : CarouselImage => ({
   }
 
   .project-card{
-    width: auto;
+    width: 100%;
     margin: 0.625rem 0;
     min-width: 100%;
     cursor: pointer;
@@ -143,6 +143,14 @@ const carouselImages = images?.map((image) : CarouselImage => ({
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    &::-webkit-scrollbar {
+      display: none;
+    }
 
     h4{
       font-size: 150%;
@@ -246,6 +254,7 @@ const carouselImages = images?.map((image) : CarouselImage => ({
     }
     .project-card{
       min-width: 48%;
+      width: 48%;
       position: relative;
       overflow: hidden;
       .project-details{
