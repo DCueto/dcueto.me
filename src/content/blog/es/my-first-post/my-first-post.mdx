@@ -10,10 +10,7 @@ publication_year: "2024"
 publication_month: "08"
 publication_day: "28"
 translated_post: "my-first-post"
-image: {
-  url: "/images/coding.jpg",
-  alt: "Coding on a laptop"
-}
+image: "./images/coding.jpg"
 ---
 
 # Este es el primer post del blog
@@ -32,7 +29,9 @@ Lista de mejoras de rendimiento:
 2. Mejor rendimiento en tiempo de ejecución
 3. Tamaños de bundle reducidos
 
-<Image src="/images/egor.jpg" alt="rendimiento" />
+import egorImage from './images/egor.jpg';
+
+<Image src={ egorImage.src } alt="rendimiento" />
 
 ## Nuevas Integraciones
 
