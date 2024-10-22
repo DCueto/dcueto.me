@@ -1,14 +1,11 @@
 import { z, defineCollection, reference } from 'astro:content';
 import type { ImageFunction } from 'astro:content';
 
-const blogSchema = z.object({
+const blogSchema = ({image}: {image: ImageFunction }) => z.object({
   title: z.string(),
   description: z.string(),
   tags: z.array(z.string()).optional(),
-  image: z.object({
-    url: z.string(),
-    alt: z.string().optional(),
-  }).optional(),
+  image: image().optional(),
   language: z.enum(['en', 'es']), // languages defined
   translated_post: reference("blog").optional(),
   publication_date: z.date(),

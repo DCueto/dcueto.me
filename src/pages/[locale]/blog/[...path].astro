@@ -72,7 +72,7 @@ const { Content } = await blogPost.render();
       {
         blogPost.data.image && (
           <figure class="cover__img">
-            <img src={ (blogPost.data.image.url) } alt={ blogPost.data.image.alt } />
+            <img src={ (blogPost.data.image.src) } alt={ blogPost.data.title } />
           </figure>
         )
       }
@@ -162,7 +162,7 @@ const { Content } = await blogPost.render();
       }
 
       .cover__title{
-        font-size: 3em;
+        font-size: 2.5em;
         font-weight: 600;
         margin-top: .5rem;
         margin-bottom: 1rem;
