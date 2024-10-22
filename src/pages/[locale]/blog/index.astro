@@ -41,7 +41,7 @@ const link = (page: Page, slug: string): string => generateLink(page, slug, path
           description={article.data.description}
           href={ `blog/${article.slug}` }
           size='medium'
-          {...article.data.image && { image: article.data.image.url }}
+          {...article.data.image && { image: article.data.image.src }}
         />
 			)
 		})
