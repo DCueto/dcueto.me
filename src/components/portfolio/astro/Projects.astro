@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import ProjectCard from "./ProjectCard.astro";
+// import ProjectCard from "./ProjectCard.astro";
+import ProjectCard from "@components/portfolio/react/ProjectCard";
 
 import { generateLink } from "@services/routing";
 import type { Locale } from "@services/routing";
@@ -22,17 +23,18 @@ const t = (key: string): string => locale ? getTranslationValue(locale, key) : g
   <div class="projects-container">
     {
       projects.map((project) => (
-        <ProjectCard
-          title={project.data.title}
-          description={project.data.description}
-          tags={project.data.tags}
-          image={project.data.image}
-          href={ project.data.href ? project.data.href : generateLink("projects", project.slug, pathname, locale)}
-          { ...(project.data.images && { images: project.data.images }) }
-          { ...(project.data.code_repo && { repoLink: project.data.code_repo }) }
-          { ...(project.data.demo && { demoLink: project.data.demo }) }
-          { ...(project.data.link && { link: project.data.link }) }
-        />
+        // <ProjectCard
+        //   title={project.data.title}
+        //   description={project.data.description}
+        //   tags={project.data.tags}
+        //   image={project.data.image}
+        //   href={ project.data.href ? project.data.href : generateLink("projects", project.slug, pathname, locale)}
+        //   { ...(project.data.images && { images: project.data.images }) }
+        //   { ...(project.data.code_repo && { repoLink: project.data.code_repo }) }
+        //   { ...(project.data.demo && { demoLink: project.data.demo }) }
+        //   { ...(project.data.link && { link: project.data.link }) }
+        // />
+        <ProjectCard client:visible project={project} />
       ))
     }
   </div>
