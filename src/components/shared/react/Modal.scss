@@ -12,18 +12,46 @@
 }
 
 .modal-container{
+  display: flex;
+  flex-direction: column;
   background-color: white;
   padding: 1.2rem;
   border: 0.125rem solid var(--color-black-oil);
   position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.modal-content{
+  height: 100%;
+}
+
+.modal-top{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
 }
 
 .close-button{
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
+  margin-left: auto;
   cursor: pointer;
   background-color: white;
   border: 2px solid var(--color-black-oil);
   font-size: 1.5rem;
+}
+
+@media screen and ( width > 600px ){
+  .modal-container{
+    width: 80%;
+    height: 80%;
+  }
+}
+
+
+@media screen and ( width > 1120px ){
+  .modal-container{
+    width: 70%;
+    height: 70%;
+  }
 }
