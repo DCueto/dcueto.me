@@ -60,5 +60,9 @@ export default defineConfig({
     mdx(), 
   ],
   i18n: i18nConfig,
-  markdown: markdownConfig
+  markdown: markdownConfig,
+  // 301 makes Astro emit an instant meta refresh (302 waits 2 seconds)
+  redirects: {
+    '/': { status: 301, destination: `/${i18nConfig.defaultLocale}/` },
+  },
 });
