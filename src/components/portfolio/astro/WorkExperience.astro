@@ -4,7 +4,6 @@ import { getTranslationValue } from '@utils/i18n';
 import type { CollectionEntry } from 'astro:content'
 import { WorkExperience as WorkExp } from '@components/portfolio/react/WorkExperience';
 import { Tabs } from '@components/shared/react/Tabs';
-import type { AstroComponentFactory } from 'astro/runtime/server/index.js';
 
 
 type Props = {
@@ -25,21 +24,6 @@ let activeTab = tabs[0];
 const handleTabChange = (valueTab: string) => {
   activeTab = valueTab;
 }
-
-type ExperienceContent = {
-  company_name: string;
-  Content: AstroComponentFactory;
-};
-
-const contents: ExperienceContent[] = await Promise.all(
-  experience.map( async ({ data, render }) => {
-    const { Content } = await render();
-    return {
-      company_name: data.company_name,
-      Content: Content
-    };
-  })
-);
 
 ---
 

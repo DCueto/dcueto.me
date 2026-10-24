@@ -11,12 +11,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-Personal portfolio + blog for Daniel Cueto, live at https://dcueto.me (custom domain via `CNAME`). Static site built with **Astro 4** (static output, no SSR adapter), with **MDX** content, **React** islands and **SCSS**. Bilingual: English (`en`) and Spanish (`es`).
+Personal portfolio + blog for Daniel Cueto, live at https://dcueto.me (custom domain via `CNAME`). Static site built with **Astro 7** (static output, no SSR adapter), with **MDX** content, **React** islands and **SCSS**. Bilingual: English (`en`) and Spanish (`es`).
 
 ## Commands
 
 ```bash
-npm run dev       # dev server, exposed on the LAN (--host)
+npm run dev       # dev server, exposed on the LAN (--host). Needs Node >= 22.23.4 (Astro 7)
 npm start         # dev server, localhost only
 npm run build     # astro check (type-check .astro/.ts + content schemas) then astro build → dist/
 npm run preview   # serve the built dist/
@@ -29,14 +29,15 @@ Env vars (in `.env`, gitignored): `PUBLIC_EMAILJS_APIKEY`, `PUBLIC_EMAILJS_SERVI
 ## Architecture
 
 ### i18n and routing
-- Locales are configured in `astro.config.mjs` (`i18nConfig`: default `en`, `prefixDefaultLocale: true`, `es` falls back to `en`) **and** duplicated as the `Locale` type / `locales` array in `src/services/routing.ts`. Adding a locale means touching both, plus `src/i18n/<locale>.json`, `src/utils/i18n.ts` and the `language` enum in every content schema.
+- Locales are configured in `astro.config.mjs` (`i18nConfig`: default `en`, `prefixDefaultLocale: true`, no `fallback` — it made every `[locale]` route conflict with itself) **and** duplicated as the `Locale` type / `locales` array in `src/services/routing.ts`. Adding a locale means touching both, plus `src/i18n/<locale>.json`, `src/utils/i18n.ts` and the `language` enum in every content schema.
 - Every route lives under `src/pages/[locale]/` and uses `getStaticPaths()` to emit one page per locale. There is no root page: `/` is a `redirects` entry in `astro.config.mjs` (status 301, so the generated meta refresh is instant — 302 would add a 2s delay).
-- UI strings come from `src/i18n/{en,es}.json` via the custom helpers in `src/utils/i18n.ts`: `getTranslationValue(locale, 'dot.path.key')` for strings and `getTranslationArray` for arrays (each throws if used on the wrong type). `astro-i18next` is installed as an integration but the code uses these custom helpers, not i18next. `replacePlaceholders` / `Trans.astro` are marked by the author as not working correctly.
+- UI strings come from `src/i18n/{en,es}.json` via the custom helpers in `src/utils/i18n.ts`: `getTranslationValue(locale, 'dot.path.key')` for strings and `getTranslationArray` for arrays (each throws if used on the wrong type). `replacePlaceholders` / `Trans.astro` are marked by the author as not working correctly.
 - `generateLink()` in `routing.ts` builds locale-prefixed links to `blog` / `projects` entries.
 
-### Content collections (`src/content/config.ts`)
-Four collections: `blog`, `projects`, `experience`, `education`. Content is organized as `src/content/<collection>/<locale>/...`, but the locale is determined by the **`language` frontmatter field** (pages filter with `getCollection(name, e => e.data.language === locale)`), not by the folder. Detail pages (`[locale]/projects/[...path].astro`, `[locale]/blog/[...path].astro`) build their URLs from the entry `slug`, which is set explicitly in frontmatter — slugs must be unique across both languages (e.g. projects use `en-…` prefixes).
-- `blog.translated_post` and `related_posts` are `reference('blog')` fields pointing to another entry's slug.
+### Content collections (`src/content.config.ts`)
+Four collections: `blog`, `projects`, `experience`, `education`. Content is organized as `src/content/<collection>/<locale>/...`, but the locale is determined by the **`language` frontmatter field** (pages filter with `getCollection(name, e => e.data.language === locale)`), not by the folder. Each collection uses a `glob()` loader over `src/content/<collection>/**/*.mdx`; the glob loader uses the frontmatter `slug` as the entry `id` (there is no `entry.slug`; render with `render(entry)` from `astro:content`). Zod is imported from `astro/zod`. Detail pages (`[locale]/projects/[...path].astro`, `[locale]/blog/[...path].astro`) build their URLs from `entry.id`, which comes from the `slug` set explicitly in frontmatter — slugs must be unique across both languages (e.g. projects use `en-…` prefixes).
+- `blog.translated_post` and `related_posts` are `reference('blog')` fields pointing to another entry's id (= its frontmatter `slug`).
+- Frontmatter is parsed by a strict YAML parser: in multi-line quoted strings (e.g. `content:` in `experience`), the closing quote must be indented more than the key.
 - `projects` require `image`; images live next to the MDX in an `images/` folder and are referenced with relative paths so Astro's `image()` helper optimizes them.
 - `experience` and `education` are MDX entries consumed as data on the home page (`[locale]/index.astro`), which assembles all sections (Hero, latest articles, projects, work experience, education, contact).
 

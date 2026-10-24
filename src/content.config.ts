@@ -1,5 +1,7 @@
-import { z, defineCollection, reference } from 'astro:content';
+import { defineCollection, reference } from 'astro:content';
 import type { ImageFunction } from 'astro:content';
+import { glob } from 'astro/loaders';
+import { z } from 'astro/zod';
 
 const blogSchema = ({image}: {image: ImageFunction }) => z.object({
   title: z.string(),
@@ -91,22 +93,22 @@ const educationSchema = z.object({
 
 
 const project = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.mdx', base: './src/content/projects' }),
   schema: projectSchema,
 });
 
 const blog = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.mdx', base: './src/content/blog' }),
   schema: blogSchema,
 });
 
 const experience = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.mdx', base: './src/content/experience' }),
   schema: experienceSchema,
 });
 
 const education = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.mdx', base: './src/content/education' }),
   schema: educationSchema,
 });
 
