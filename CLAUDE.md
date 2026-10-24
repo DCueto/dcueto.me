@@ -27,6 +27,8 @@ There is no test suite and no linter. `pnpm build` is the verification step: `as
 
 pnpm settings live in `pnpm-workspace.yaml`: dependency install scripts are blocked unless listed in `allowBuilds` (a new one fails `pnpm install` with `ERR_PNPM_IGNORED_BUILDS` — review its script before allowing it), and `trustPolicy: no-downgrade` is on.
 
+Deployed on Vercel. The Node version comes from `engines.node` in `package.json` (overrides the project setting). Vercel only honors `"packageManager"` when the project env var `ENABLE_EXPERIMENTAL_COREPACK=1` is set; without it, a `lockfileVersion: '9.0'` lockfile gets pnpm 9/10.
+
 Env vars (in `.env`, gitignored): `PUBLIC_EMAILJS_APIKEY`, `PUBLIC_EMAILJS_SERVICE_ID`, `PUBLIC_EMAILJS_TEMPLATE_ID` — used client-side by `ContactForm.astro` to POST to the EmailJS REST API. The `PUBLIC_` prefix means they're inlined into the browser bundle.
 
 ## Architecture
