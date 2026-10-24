@@ -1,7 +1,7 @@
 import en from '../i18n/en.json';
 import es from '../i18n/es.json';
 import type { Locale } from '@services/routing';
-import { i18nConfig } from 'astro.config.mjs';
+import { i18nConfig } from '@i18n/config.mjs';
 
 type TranslationValue = string | string[] | Translations;
 

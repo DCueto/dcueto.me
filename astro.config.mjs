@@ -2,14 +2,8 @@ import { defineConfig } from 'astro/config';
 import mdx from "@astrojs/mdx";
 import react from "@astrojs/react";
 import AutoImport from 'astro-auto-import';
+import { i18nConfig } from "./src/i18n/config.mjs";
 
-export const i18nConfig = {
-  defaultLocale: 'en',
-  locales: ['en', 'es'],
-  routing: {
-    prefixDefaultLocale: true
-  },
-};
 
 export const markdownConfig = {
   syntaxHighlight: 'shiki',

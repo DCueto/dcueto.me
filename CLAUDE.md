@@ -16,20 +16,23 @@ Personal portfolio + blog for Daniel Cueto, live at https://dcueto.me (custom do
 ## Commands
 
 ```bash
-npm run dev       # dev server, exposed on the LAN (--host). Needs Node >= 22.23.4 (Astro 7)
-npm start         # dev server, localhost only
-npm run build     # astro check (type-check .astro/.ts + content schemas) then astro build → dist/
-npm run preview   # serve the built dist/
+pnpm install      # package manager is pnpm (pinned in package.json "packageManager"); never use npm
+pnpm dev          # dev server, exposed on the LAN (--host). Needs Node >= 22.23.4 (Astro 7)
+pnpm start        # dev server, localhost only
+pnpm build        # astro check (type-check .astro/.ts + content schemas) then astro build → dist/
+pnpm preview      # serve the built dist/ (runs in background; stop with `pnpm astro preview stop`)
 ```
 
-There is no test suite and no linter. `npm run build` is the verification step: `astro check` fails on TypeScript errors and on content frontmatter that doesn't match the Zod schemas.
+There is no test suite and no linter. `pnpm build` is the verification step: `astro check` fails on TypeScript errors and on content frontmatter that doesn't match the Zod schemas.
+
+pnpm settings live in `pnpm-workspace.yaml`: dependency install scripts are blocked unless listed in `allowBuilds` (a new one fails `pnpm install` with `ERR_PNPM_IGNORED_BUILDS` — review its script before allowing it), and `trustPolicy: no-downgrade` is on.
 
 Env vars (in `.env`, gitignored): `PUBLIC_EMAILJS_APIKEY`, `PUBLIC_EMAILJS_SERVICE_ID`, `PUBLIC_EMAILJS_TEMPLATE_ID` — used client-side by `ContactForm.astro` to POST to the EmailJS REST API. The `PUBLIC_` prefix means they're inlined into the browser bundle.
 
 ## Architecture
 
 ### i18n and routing
-- Locales are configured in `astro.config.mjs` (`i18nConfig`: default `en`, `prefixDefaultLocale: true`, no `fallback` — it made every `[locale]` route conflict with itself) **and** duplicated as the `Locale` type / `locales` array in `src/services/routing.ts`. Adding a locale means touching both, plus `src/i18n/<locale>.json`, `src/utils/i18n.ts` and the `language` enum in every content schema.
+- Locales are configured in `src/i18n/config.mjs` (`i18nConfig`, imported by `astro.config.mjs` and by site code — never import `astro.config.mjs` from `src/`, it bundles the whole build toolchain: default `en`, `prefixDefaultLocale: true`, no `fallback` — it made every `[locale]` route conflict with itself) **and** duplicated as the `Locale` type / `locales` array in `src/services/routing.ts`. Adding a locale means touching both, plus `src/i18n/<locale>.json`, `src/utils/i18n.ts` and the `language` enum in every content schema.
 - Every route lives under `src/pages/[locale]/` and uses `getStaticPaths()` to emit one page per locale. There is no root page: `/` is a `redirects` entry in `astro.config.mjs` (status 301, so the generated meta refresh is instant — 302 would add a 2s delay).
 - UI strings come from `src/i18n/{en,es}.json` via the custom helpers in `src/utils/i18n.ts`: `getTranslationValue(locale, 'dot.path.key')` for strings and `getTranslationArray` for arrays (each throws if used on the wrong type). `replacePlaceholders` / `Trans.astro` are marked by the author as not working correctly.
 - `generateLink()` in `routing.ts` builds locale-prefixed links to `blog` / `projects` entries.
