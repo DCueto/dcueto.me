@@ -378,8 +378,6 @@ const t = (key: string): string => locale ? getTranslationValue(locale, key) : g
       const emailjs_serviceid = import.meta.env.PUBLIC_EMAILJS_SERVICE_ID as string;
       const emailjs_templateid = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID as string;
 
-      console.log( emailjs_apikey, emailjs_serviceid, emailjs_templateid );
-
       const dataEmailjs = {
         service_id: emailjs_serviceid,
         template_id: emailjs_templateid,
