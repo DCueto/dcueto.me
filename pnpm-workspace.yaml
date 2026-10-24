@@ -1,0 +1,13 @@
+# pnpm settings for this project (pnpm reads project settings from this file).
+# pnpm 12 defaults already block dependency install scripts, skip versions
+# newer than 1 day (minimumReleaseAge) and block git/tarball sub-dependencies.
+
+# Fail the install if a package's publish trust level drops vs. earlier versions
+# (a common sign of a hijacked package).
+trustPolicy: no-downgrade
+
+# Dependency install scripts we've reviewed (anything not listed is blocked).
+allowBuilds:
+  # Its script only compiles from source when asked to; the prebuilt binary
+  # comes from @parcel/watcher-<platform> instead.
+  '@parcel/watcher': false

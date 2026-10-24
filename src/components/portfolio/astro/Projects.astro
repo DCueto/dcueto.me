@@ -28,7 +28,7 @@ const t = (key: string): string => locale ? getTranslationValue(locale, key) : g
         //   description={project.data.description}
         //   tags={project.data.tags}
         //   image={project.data.image}
-        //   href={ project.data.href ? project.data.href : generateLink("projects", project.slug, pathname, locale)}
+        //   href={ project.data.href ? project.data.href : generateLink("projects", project.id, pathname, locale)}
         //   { ...(project.data.images && { images: project.data.images }) }
         //   { ...(project.data.code_repo && { repoLink: project.data.code_repo }) }
         //   { ...(project.data.demo && { demoLink: project.data.demo }) }

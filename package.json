@@ -2,6 +2,10 @@
   "name": "density-debris",
   "type": "module",
   "version": "0.0.1",
+  "packageManager": "pnpm@12.15.0",
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
     "dev": "astro dev --host",
     "start": "astro dev",
@@ -10,21 +14,20 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.3",
-    "@astrojs/mdx": "^3.1.5",
-    "@astrojs/react": "^3.6.2",
-    "@nanostores/react": "^0.8.0",
-    "@types/react": "^18.3.5",
-    "@types/react-dom": "^18.3.0",
-    "astro": "^4.14.6",
-    "astro-auto-import": "^0.4.3",
-    "astro-embed": "^0.7.4",
-    "astro-i18next": "^1.0.0-beta.21",
-    "astro-seo": "^0.8.4",
-    "nanostores": "^0.11.3",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "sass": "^1.77.8",
-    "typescript": "^5.5.4"
+    "@astrojs/check": "^0.9.12",
+    "@astrojs/mdx": "^8.1.1",
+    "@astrojs/react": "^7.1.1",
+    "@nanostores/react": "^2.0.1",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "astro": "^7.4.2",
+    "astro-auto-import": "^0.6.0",
+    "astro-embed": "^0.14.0",
+    "astro-seo": "^1.2.0",
+    "nanostores": "^1.5.5",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "sass": "^1.106.1",
+    "typescript": "^6.0.3"
   }
 }

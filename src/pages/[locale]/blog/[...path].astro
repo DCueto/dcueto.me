@@ -2,7 +2,7 @@
 import ProgressBarScrolled from "@components/shared/astro/ProgressBarScrolled.astro";
 import { mdxComponents } from "@components/shared/astro/mdxComponents/mdxComponents.ts";
 import BaseLayout from "@layouts/BaseLayout.astro";
-import { getCollection, type CollectionEntry } from "astro:content";
+import { getCollection, render, type CollectionEntry } from "astro:content";
 import type { Locale } from "@services/routing";
 
 interface Props {
@@ -16,7 +16,7 @@ export async function getStaticPaths() {
   const blogPosts = await getCollection("blog") as CollectionEntry<'blog'>[];
 
   const paths = blogPosts.map((blogPost) => {
-    const url = `${blogPost.slug}`;
+    const url = `${blogPost.id}`;
     const locale = blogPost.data.language;
 
     return {
@@ -34,7 +34,7 @@ export async function getStaticPaths() {
 }
 
 const { blogPost } = Astro.props as Props;
-const { Content } = await blogPost.render();
+const { Content } = await render(blogPost);
 
 ---
 
@@ -54,7 +54,7 @@ const { Content } = await blogPost.render();
           </span>
           -- 
           { blogPost.data.translated_post && 
-            <a href={ `/${locale == 'en' ? 'es' : 'en'}/blog/${blogPost.data.translated_post.slug}` } class="related__language">
+            <a href={ `/${locale == 'en' ? 'es' : 'en'}/blog/${blogPost.data.translated_post.id}` } class="related__language">
               {
                 locale == 'en'
                 ? 'Articulo disponible en Español' :

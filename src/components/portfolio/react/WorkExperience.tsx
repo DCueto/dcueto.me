@@ -32,7 +32,7 @@ export const WorkExperience = ({ tabs, experience }: Props) => {
       <Tabs tabs={tabs} defaultActiveTab={activeTab} onTabChange={handleActiveTab}/>
 
         {
-          experience.map(({ data, render }, key) => (
+          experience.map(({ data }, key) => (
             data.company_name === activeTab && (
               <article className="experience-content" key={key}>
                 <h5>{ data.company_name }</h5>

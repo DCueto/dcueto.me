@@ -22,7 +22,7 @@ const allProjects = await getCollection('projects', (project) => project.data.la
 		{
 			allProjects.map(project => {
 				return (
-					<a href={`projects/${project.slug}`}>
+					<a href={`projects/${project.id}`}>
 						<h2>{ project.data.title }</h2>
 						<p>{ project.data.description }</p>
 						<p>{ project.data.language }</p>

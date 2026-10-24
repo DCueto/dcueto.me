@@ -1,19 +1,9 @@
 import { defineConfig } from 'astro/config';
 import mdx from "@astrojs/mdx";
 import react from "@astrojs/react";
-import astroI18next from "astro-i18next";
 import AutoImport from 'astro-auto-import';
+import { i18nConfig } from "./src/i18n/config.mjs";
 
-export const i18nConfig = {
-  defaultLocale: 'en',
-  locales: ['en', 'es'],
-  routing: {
-    prefixDefaultLocale: true
-  },
-  fallback: {
-    es: 'en'
-  }
-};
 
 export const markdownConfig = {
   syntaxHighlight: 'shiki',
@@ -48,8 +38,7 @@ export const markdownConfig = {
 // https://astro.build/config
 export default defineConfig({
   integrations: [
-    react(), 
-    astroI18next(), 
+    react(),
     AutoImport({
       imports: [
         "./src/components/shared/astro/mdxComponents/Image.astro",
@@ -61,6 +50,8 @@ export default defineConfig({
   ],
   i18n: i18nConfig,
   markdown: markdownConfig,
+  // Astro 7 defaults to 'jsx', which drops whitespace between inline tags
+  compressHTML: true,
   // 301 makes Astro emit an instant meta refresh (302 waits 2 seconds)
   redirects: {
     '/': { status: 301, destination: `/${i18nConfig.defaultLocale}/` },
